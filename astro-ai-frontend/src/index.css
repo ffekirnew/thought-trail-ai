@@ -1,0 +1,36 @@
+form {
+  width: 100%;
+}
+
+.scrollable {
+  scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+    width: 0.3rem;
+    color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 100vw;
+}
+
+:hover::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+:hover::-webkit-scrollbar-track {
+    background: #8e8e8e49;
+    border-radius: 100vw;
+}
+
+:hover::-webkit-scrollbar-thumb {
+    background: rgb(112, 111, 111);
+    border-radius: 100vw;
+}
