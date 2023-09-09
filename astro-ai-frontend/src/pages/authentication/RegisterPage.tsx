@@ -1,9 +1,7 @@
-import astronaut_running from '../../assets/astronaut_running.mp4';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FieldValue, FieldValues, useForm } from 'react-hook-form';
-import Authentication from '../../components/authentication/Authentication';
+import { FieldValues, useForm } from 'react-hook-form';
 import InputField from '../../components/authentication/InputForm';
 import { Text, Heading, Button, VStack } from '@chakra-ui/react';
 

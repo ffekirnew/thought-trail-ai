@@ -9,7 +9,6 @@ import AuthenticationPage from "./pages/authentication/AuthenticationPage";
 import SecondBrainPage from "./pages/second-brain/SecondBrainPage";
 import KnowledgePage from "./pages/second-brain/KnowledgePage";
 import KnowledgeDetailPage from "./pages/second-brain/KnowledgeDetailPage";
-import AddKnowledge from "./components/chat-page/AddKnowledge";
 import AddNewNotePage from "./pages/second-brain/AddNewNotePage";
 
 const router = createBrowserRouter([

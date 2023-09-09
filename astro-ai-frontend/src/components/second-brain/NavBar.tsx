@@ -4,7 +4,7 @@ import { Image, HStack, Button, Text } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import ColorModeSwitch from '../shared/ColorModeSwitch';
 import SearchBox from './SearchBox';
-import { BsPlus, BsSend } from 'react-icons/bs';
+import { BsPlus } from 'react-icons/bs';
 
 const NavBar = () => {
   const navigate = useNavigate();

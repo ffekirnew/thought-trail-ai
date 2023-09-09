@@ -1,5 +1,4 @@
-import { Box, Button, Flex, Spacer, Text } from '@chakra-ui/react'
-import React from 'react'
+import { Button, Flex, Spacer, Text } from '@chakra-ui/react'
 import { BsPlus } from 'react-icons/bs'
 
 const AddKnowledge = () => {

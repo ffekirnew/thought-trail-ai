@@ -1,6 +1,5 @@
 import { Button, Flex, Spacer, Text } from '@chakra-ui/react'
-import React, { ReactNode } from 'react'
-import { BsHouse } from 'react-icons/bs'
+import { ReactNode } from 'react'
 
 interface Props {
   text: string;

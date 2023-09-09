@@ -1,5 +1,4 @@
-import { Box, Heading, ImageProps, Image, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import { Heading, Image, Text, VStack } from '@chakra-ui/react'
 import { FeatureDescription } from './FeaturesGrid'
 
 interface Props {

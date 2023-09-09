@@ -1,6 +1,5 @@
 import { Input, InputGroup, InputRightElement, Kbd } from '@chakra-ui/react'
 import { useRef } from 'react'
-import { BsChevronDown, BsSearch } from 'react-icons/bs'
 
 
 const SearchBox = () => {

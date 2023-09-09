@@ -1,6 +1,5 @@
 import { Menu, MenuButton, Button, MenuList, MenuItem } from '@chakra-ui/react'
-import React from 'react'
-import { BsChevronDown, BsThreeDots } from 'react-icons/bs'
+import { BsThreeDots } from 'react-icons/bs'
 
 const EditMenu = () => {
   return <Menu>

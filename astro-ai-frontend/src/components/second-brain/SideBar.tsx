@@ -1,5 +1,5 @@
-import { Box, Button, Flex, Spacer, VStack, Text } from '@chakra-ui/react'
-import { BsGraphUpArrow, BsHourglass, BsHouse, BsListTask, BsNodePlus, BsSuitDiamond } from 'react-icons/bs'
+import { Button, Flex, Spacer, VStack } from '@chakra-ui/react'
+import { BsGraphUpArrow, BsHouse, BsListTask, BsNodePlus, BsSuitDiamond } from 'react-icons/bs'
 import SideBarOption from './SideBarOption'
 import { useNavigate } from 'react-router-dom'
 

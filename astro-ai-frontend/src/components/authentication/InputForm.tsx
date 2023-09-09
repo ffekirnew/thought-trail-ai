@@ -1,7 +1,7 @@
-import { Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, InputGroup, InputRightElement, Text } from '@chakra-ui/react';
+import { Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
-import { BsEyeFill, BsEyeSlash, BsEyeSlashFill } from 'react-icons/bs';
+import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 
 interface Props {
   label: string;

@@ -1,5 +1,5 @@
 import logo from '../../assets/react.svg';
-import { Flex, HStack, StackDivider, Button, Image, Text } from '@chakra-ui/react';
+import { Flex, HStack, StackDivider, Image, Text } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import ColorModeSwitch from '../shared/ColorModeSwitch';
 

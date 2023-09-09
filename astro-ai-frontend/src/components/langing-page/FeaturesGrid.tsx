@@ -1,5 +1,4 @@
 import { ImageProps, SimpleGrid } from '@chakra-ui/react';
-import React from 'react';
 import FeatureCard from './FeatureCard';
 
 export interface FeatureDescription {

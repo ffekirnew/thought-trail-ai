@@ -1,4 +1,4 @@
-import { Text, VStack, StackDivider, Divider } from "@chakra-ui/react"
+import { Text, VStack, Divider } from "@chakra-ui/react"
 import NavBar from "../components/langing-page/NavBar"
 import Hero from "../components/langing-page/Hero"
 import FeaturesGrid from "../components/langing-page/FeaturesGrid"

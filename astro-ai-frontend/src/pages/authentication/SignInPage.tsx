@@ -1,4 +1,3 @@
-import astronaut_running from '../../assets/astronaut_running.mp4';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
