@@ -13,7 +13,6 @@ const Hero = () => {
         <Button paddingX={5} borderRadius={'full'} variant={'solid'} colorScheme='blue'>Get Started</Button>
         <Button paddingX={5} borderRadius={'full'} variant={'outline'}>Why Astro?</Button>
         <Button paddingX={5} borderRadius={'full'} variant={'outline'}>View on GitHub</Button>
-        <Button paddingX={5} borderRadius={'full'} variant={'outline'}>Check my other projects</Button>
       </HStack>
     </VStack>
     <VStack>
