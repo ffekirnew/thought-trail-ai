@@ -1,6 +1,6 @@
 import userAvatar from '../../assets/user_avatar.png';
 import logo from '../../assets/logo.svg';
-import { Image, HStack, Button, Text, Divider } from '@chakra-ui/react';
+import { Image, HStack, Button, Text } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import ColorModeSwitch from '../shared/ColorModeSwitch';
 import SearchBox from './SearchBox';

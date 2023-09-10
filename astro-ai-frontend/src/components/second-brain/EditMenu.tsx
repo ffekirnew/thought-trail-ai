@@ -3,8 +3,8 @@ import React from 'react'
 import { BsThreeDots } from 'react-icons/bs'
 
 const EditMenu = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef()
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
   return <><Menu>
   <MenuButton as={Button} variant={'ghost'}>
@@ -31,14 +31,14 @@ const EditMenu = () => {
           <AlertDialogHeader>Delete this note?</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            You will not be able to undo this action.
+            You will not be able to recover this note.
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button ref={cancelRef} onClick={onClose}>
-              No
+              Cancel
             </Button>
             <Button colorScheme='red' ml={3}>
-              Yes
+              Confirm Delete
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>
