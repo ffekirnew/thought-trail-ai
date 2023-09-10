@@ -58,7 +58,14 @@ const FeaturesGrid = () => {
       body: 'Feature 6 body',
     },
   ];
-  return <SimpleGrid columns={3} gap={5} width={'100%'} paddingX={40}>
+  return <SimpleGrid columns={{
+      lg: 3,
+      md: 2,
+      base: 1,
+    }}
+    gap={5}
+    width={'100%'}
+    paddingX={{ base: 10, lg: 40 }}>
     { features.map((feature, index) => <FeatureCard key={index} feature={feature} />) }
   </SimpleGrid>
 }

@@ -79,7 +79,7 @@ const RegisterPage = () => {
           error={errors.passwordConfirmation && errors.passwordConfirmation.message}
           disabled={false}
         />
-        <Button type={'submit'} colorScheme='blue' disabled={false} borderRadius={'full'} size={'lg'}>
+        <Button type={'submit'} background='brand.primary' disabled={false} borderRadius={'full'} size={'lg'}>
           <Text fontWeight={'bold'}>
            Register 
           </Text>
@@ -87,7 +87,7 @@ const RegisterPage = () => {
         </VStack>
       </form>
       <Text fontSize={'md'}>
-        Already have an account? <Button colorScheme='blue' variant={'link'} onClick={() => history('/auth/sign-in')}>Sign In!</Button>
+        Already have an account? <Button color='brand.secondary' variant={'link'} onClick={() => history('/auth/sign-in')}>Sign In!</Button>
       </Text>
     </VStack>
 };

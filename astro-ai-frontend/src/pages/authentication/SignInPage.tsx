@@ -22,7 +22,7 @@ const SignInPage = () => {
   }
 
   return <VStack gap={10} align={'left'} padding={10} width={'100%'}>
-      <Heading>Sign in to Astro AI</Heading>
+      <Heading>Sign in to ThoughtTrail</Heading>
       <form onSubmit={handleSubmit(onSignIn)}>
         <VStack align={'left'} gap={2}>
         <InputField
@@ -43,7 +43,7 @@ const SignInPage = () => {
           error={errors.password && errors.password.message}
           disabled={false}
         />
-        <Button type={'submit'} colorScheme='blue' disabled={false} borderRadius={'full'} size={'lg'}>
+        <Button type={'submit'} background='brand.primary' disabled={false} borderRadius={'full'} size={'lg'}>
           <Text fontWeight={'bold'}>
            Sign In 
           </Text>
@@ -51,7 +51,7 @@ const SignInPage = () => {
         </VStack>
       </form>
       <Text fontSize={'md'}>
-        Don't have an account? <Button colorScheme='blue' variant={'link'} onClick={() => navigate('/auth/register')}>Register!</Button>
+        Don't have an account? <Button color='brand.secondary' variant={'link'} onClick={() => navigate('/auth/register')}>Register!</Button>
       </Text>
     </VStack>
 };

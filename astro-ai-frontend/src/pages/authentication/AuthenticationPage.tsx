@@ -1,4 +1,4 @@
-import { Box, HStack, VStack } from '@chakra-ui/react';
+import { Box, HStack, Show, VStack } from '@chakra-ui/react';
 import NavBar from '../../components/authentication/NavBar';
 import { Outlet } from 'react-router-dom';
 import './AuthenticationPage.css'
@@ -9,7 +9,9 @@ const AuthenticationPage = () => {
       <NavBar />
       <Outlet />
     </VStack>
-    <Box height={'100vh'} width={'150%'} className='illustration'></Box>
+    <Show above={'lg'}>
+      <Box height={'100vh'} width={'100%'} className='illustration'></Box>
+    </Show>
   </HStack>
 }
 

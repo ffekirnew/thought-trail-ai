@@ -13,7 +13,7 @@ const SecondBrainPage = () => {
     }}
     templateColumns={{
       base: "1fr",
-      lg: "300px auto"
+      lg: "250px auto"
     }}
     templateRows={"60px auto"}
     gap={5}

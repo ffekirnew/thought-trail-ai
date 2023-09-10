@@ -9,7 +9,7 @@ const SearchBox = () => {
       event.preventDefault()
       // use the search
     }}>
-    <InputGroup>
+    <InputGroup outline={'brand.primary'}>
       <Input ref={searchBoxRef} placeholder='Search anything from what you know...' borderRadius={10} variant={'filled'}/>
       <InputRightElement width={'7rem'} justifyContent={'center'} alignItems={'center'}>
         <span><Kbd>CTRL</Kbd> + <Kbd>K</Kbd></span>

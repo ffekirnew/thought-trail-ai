@@ -1,26 +1,14 @@
 .logo {
-  /* background: #61DAFB; */
-  border-radius: 50%;
-  animation: rotateAndShadow 8s linear infinite; /* Adjust the animation duration and timing function as needed */
-  position: relative;
+    animation: levitate 2s infinite alternate; 
 }
 
-.logo::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  /* filter: blur(3.5rem); */
-}
-
-@keyframes rotateAndShadow {
+@keyframes levitate {
   0% {
-    transform: rotate(0deg);
+    transform: translateY(0);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translateY(-20px); 
   }
 }
+
 

@@ -1,24 +1,38 @@
-import { VStack, Text, HStack, Heading, Image, SimpleGrid, Button, Spacer } from '@chakra-ui/react';
-import logo from '../../assets/react.svg';
+import { VStack, Text, HStack, Heading, Image, Grid, Button, Spacer, GridItem } from '@chakra-ui/react';
+import logo from '../../assets/logo.svg';
 import style from './Hero.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
-  return <SimpleGrid columns={2} paddingX={40}>
-    <VStack align={'left'}>
-      <Heading fontSize={'58px'} fontWeight={'extrabold'}>Astro AI</Heading>
+  const navigate = useNavigate();
+
+  return <Grid 
+    templateAreas={{
+      lg: `"introduction logo"`,
+      base: `"logo" "introduction"`
+    }}
+    templateColumns={{
+      lg: "2fr 1fr",
+      base: "1fr"
+    }}
+    paddingX={{ base: 10, lg: 40 }}
+    gap={5}
+  >
+    <GridItem area={'introduction'}><VStack align={'center'} textAlign={{ base: 'center', lg: 'left'}}>
+      <Heading fontSize={'58px'} fontWeight={'extrabold'}>ThoughtTrail</Heading>
       <Heading fontSize={'58px'} fontWeight={'normal'}>Your companion AI second brain.</Heading>
-      <Text fontSize={'24px'} fontWeight={'semibold'}>Get ready for a development environment that can finally catch up with you.</Text>
+      <Text fontSize={'24px'} fontWeight={'semibold'}>Get advantage by using an AI tool specifically designed to help you achieve more!</Text>
       <Spacer />
       <HStack paddingY={5}>
-        <Button paddingX={5} borderRadius={'full'} variant={'solid'} colorScheme='blue'>Get Started</Button>
-        <Button paddingX={5} borderRadius={'full'} variant={'outline'}>Why Astro?</Button>
-        <Button paddingX={5} borderRadius={'full'} variant={'outline'}>View on GitHub</Button>
+        <Button onClick={() => navigate('/auth/register')} paddingX={5} borderRadius={'full'} variant={'solid'} background={'brand.primary'}>Get Started</Button>
+        <Button paddingX={5} borderRadius={'full'} variant={'outline'}>Why ThoughtTrail?</Button>
+        <Button onClick={() => navigate('https://github.com/ffekirnew')} paddingX={5} borderRadius={'full'} variant={'outline'}>View on GitHub</Button>
       </HStack>
-    </VStack>
-    <VStack>
-      <Image className={style['logo']} src={logo} boxSize={'300px'} />
-    </VStack>
-    </SimpleGrid>
+    </VStack></GridItem>
+    <GridItem area={'logo'}><VStack>
+      <Image className={style['logo']} src={logo} boxSize={{ base: '300px', lg: '400px' }} />
+    </VStack></GridItem>
+    </Grid>
 }
 
 export default Hero

@@ -20,6 +20,11 @@ const theme = extendTheme({
       800: "#202020",
       900: "#000000"
     },
+    brand: {
+      primary: "#8c52ff",
+      secondary: "#cb6ce6",
+      tertiary: "#ff66c4"
+    }
   }
 })
 

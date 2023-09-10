@@ -1,6 +1,6 @@
 import userAvatar from '../../assets/user_avatar.png';
-import logo from '../../assets/react.svg';
-import { Image, HStack, Button, Text } from '@chakra-ui/react';
+import logo from '../../assets/logo.svg';
+import { Image, HStack, Button, Text, Divider } from '@chakra-ui/react';
 import { Link, useNavigate } from 'react-router-dom';
 import ColorModeSwitch from '../shared/ColorModeSwitch';
 import SearchBox from './SearchBox';
@@ -10,12 +10,12 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return <HStack height={'100%'} gap={2} width={'100%'} alignItems={'center'}>
-    <Link to={''}>
-      <Image src={logo} boxSize={'40px'} borderRadius={5}/>
+    <Link to={'/'}>
+      <Image src={logo} boxSize={'40px'} borderRadius={5} marginEnd={5}/>
     </Link>
     <SearchBox />
     <Button onClick={() => navigate('/chat')} variant={'outline'} borderRadius={'full'} paddingX={5}><Text>Chat</Text></Button>
-    <Button onClick={() => navigate('/everything/notes/new')} variant={'solid'} borderRadius={'full'} width={'23rem'} paddingX={5}>
+    <Button onClick={() => navigate('/everything/notes/new')} variant={'solid'} borderRadius={'full'} width={'23rem'} paddingX={5} background={'brand.primary'} color={'white'}>
       <BsPlus size={'40px'} /><Text>Add new Knowledge</Text>
     </Button>
     <ColorModeSwitch />

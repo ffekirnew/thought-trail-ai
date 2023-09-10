@@ -1,4 +1,4 @@
-import { VStack, Box, Flex, Button, Input, HStack, Textarea } from '@chakra-ui/react'
+import { VStack, Box, Flex, Button, Input, HStack, Textarea, Text } from '@chakra-ui/react'
 import { BsChevronLeft } from 'react-icons/bs'
 import { Note } from '../../pages/second-brain/KnowledgePage'
 import { useNavigate } from 'react-router-dom'
@@ -21,31 +21,32 @@ const KnowledgeDetail = ({ note }: Props) => {
     setBody(e.target.value);
   };
 
-  return <VStack align={'left'} gap={5}>
-    <Flex gap={5} alignItems={'center'}>
-      <Button onClick={() => navigate('/everything')} variant={'ghost'}><BsChevronLeft /></Button>
+  return <VStack align={'left'} gap={3}>
+    <Flex gap={2} alignItems={'center'}>
+      <Button onClick={() => navigate('/everything')} variant={'ghost'}><BsChevronLeft color={'brand.primary'} /></Button>
       <Input
         size={'lg'}
         fontSize={'4xl'}
         paddingY={5}
         fontWeight={'bold'}
         type='text'
-        placeholder='Enter title of Note'
+        placeholder='Title of your note.'
         value={title}
-        variant={'flushed'}
+        variant={'unstyled'}
         onChange={handleTitleChange}
       />
-      <Button variant={'solid'}>Save</Button>
-      <Button variant={'outline'}>Delete</Button>
+      <Button variant={'solid'} background={'brand.secondary'} color={'white'}>Save</Button>
+      <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'}>Delete</Button>
     </Flex>
     <HStack>
+      <Text fontWeight={'bold'}>Tags: </Text>
       { note.tags.map((tag, index) => <Box border={'1px solid gray'} borderRadius={'full'} paddingX={4} key={index}>{ tag }</Box> )}
     </HStack>
     <Textarea
       variant={'unstyled'}
       fontSize={'xl'}
       value={body}
-      placeholder='Enter your note'
+      placeholder='Content of your note.'
       onChange={handleBodyChange}
       resize={'none'}
       height={'75vh'}
