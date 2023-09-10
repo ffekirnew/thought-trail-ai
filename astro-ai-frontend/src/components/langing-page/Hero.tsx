@@ -18,7 +18,7 @@ const Hero = () => {
     paddingX={{ base: 10, lg: 40 }}
     gap={5}
   >
-    <GridItem area={'introduction'}><VStack align={'center'} textAlign={{ base: 'center', lg: 'left'}}>
+    <GridItem area={'introduction'}><VStack align={'left'} textAlign={{ base: 'center', md: 'left'}}>
       <Heading fontSize={'58px'} fontWeight={'extrabold'}>ThoughtTrail</Heading>
       <Heading fontSize={'58px'} fontWeight={'normal'}>Your companion AI second brain.</Heading>
       <Text fontSize={'24px'} fontWeight={'semibold'}>Get advantage by using an AI tool specifically designed to help you achieve more!</Text>
