@@ -16,7 +16,7 @@ const SideBar = () => {
     </VStack>
     <Spacer />
     <VStack align={'left'}>
-      <Button background='brand.secondary' onClick={() => navigate('/')} variant={'solid'}>Sign Out</Button>
+      <Button background='brand.primary' onClick={() => navigate('/')} variant={'solid'}>Sign Out</Button>
     </VStack>
   </Flex>
 }

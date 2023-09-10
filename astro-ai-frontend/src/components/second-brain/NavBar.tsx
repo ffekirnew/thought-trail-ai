@@ -15,8 +15,8 @@ const NavBar = () => {
     </Link>
     <SearchBox />
     <Button onClick={() => navigate('/chat')} variant={'outline'} borderRadius={'full'} paddingX={5}><Text>Chat</Text></Button>
-    <Button onClick={() => navigate('/everything/notes/new')} variant={'solid'} borderRadius={'full'} width={'23rem'} paddingX={5} background={'brand.primary'} color={'white'}>
-      <BsPlus size={'40px'} /><Text>Add new Knowledge</Text>
+    <Button onClick={() => navigate('/everything/notes/new')} variant={'solid'} borderRadius={'full'} width={'15rem'} paddingX={5} background={'brand.primary'} color={'white'}>
+      <BsPlus size={'40px'} /><Text>Add new Note</Text>
     </Button>
     <ColorModeSwitch />
     <Image src={userAvatar} boxSize={'50px'} bg={'gray.900'} borderRadius={'full'}></Image>

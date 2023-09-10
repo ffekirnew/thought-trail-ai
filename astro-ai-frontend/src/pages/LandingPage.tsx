@@ -9,9 +9,9 @@ const LandingPage = () => {
     <Hero />
     <FeaturesGrid />
     <Divider borderColor='gray.500'/>
-    <VStack as="section" padding={10}>
+    <VStack as="section">
       <Text fontWeight={'bold'}>Released under the MIT License.</Text>
-      <Text fontWeight={'bold'}>Copyright © 2023 - present Fikernew Birhanu</Text>
+      <Text fontWeight={'bold'}>Copyright © Fikernew Birhanu (2023 - present).</Text>
     </VStack>
   </VStack>
 }

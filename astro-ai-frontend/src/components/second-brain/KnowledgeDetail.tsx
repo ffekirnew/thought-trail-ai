@@ -35,12 +35,12 @@ const KnowledgeDetail = ({ note }: Props) => {
         variant={'unstyled'}
         onChange={handleTitleChange}
       />
-      <Button variant={'solid'} background={'brand.secondary'} color={'white'}>Save</Button>
+      <Button variant={'solid'} background={'brand.primary'} color={'white'}>Save</Button>
       <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'}>Delete</Button>
     </Flex>
     <HStack>
-      <Text fontWeight={'bold'}>Tags: </Text>
-      { note.tags.map((tag, index) => <Box border={'1px solid gray'} borderRadius={'full'} paddingX={4} key={index}>{ tag }</Box> )}
+      <Text fontWeight={'extrabold'}>Tags: </Text>
+      { note.tags.map((tag, index) => <Box border={'1px solid gray'} borderRadius={10} paddingX={4} key={index}>{ tag }</Box> )}
     </HStack>
     <Textarea
       variant={'unstyled'}
@@ -49,10 +49,10 @@ const KnowledgeDetail = ({ note }: Props) => {
       placeholder='Content of your note.'
       onChange={handleBodyChange}
       resize={'none'}
-      height={'75vh'}
-      flexGrow={'inherit'}
+      height={'100%'}
+      flexGrow={1}
     />
   </VStack>
 }
 
-export default KnowledgeDetail
+export default KnowledgeDetail;
