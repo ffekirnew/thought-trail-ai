@@ -1,10 +1,9 @@
-import config from './core/app.config';
-import db from './core/db.config';
 import express from 'express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import AuthRouter from './routes/auth.route';
 import bodyParser from 'body-parser';
+import { AuthRouter } from './routes';
+import { config, db } from './core';
 
 const app = express();
 const configuration = { db: db };

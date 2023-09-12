@@ -1,7 +1,6 @@
+import { Types } from "mongoose";
 import INotesRepository from "../../contracts/persistence/notes-repository.contract";
-import CreateNoteDto from "./dtos/create-note.dto";
-import DeleteNoteDto from "./dtos/delete-note.dto";
-import UpdateNoteDto from "./dtos/update-note.dto";
+import { CreateNoteDto, DeleteNoteDto, UpdateNoteDto } from "./dtos";
 
 class NotesApplication {
   constructor(
@@ -11,5 +10,5 @@ class NotesApplication {
   create = async (createNoteDto: CreateNoteDto) => {}
   update = async (updateNoteDto: UpdateNoteDto) => {}
   delete = async (deleteNoteDto: DeleteNoteDto) => {}
-  getAll = async (_id)
+  getAll = async (_id: Types.ObjectId) => {}
 }

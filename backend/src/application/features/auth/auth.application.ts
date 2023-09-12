@@ -1,15 +1,9 @@
 import UserEntity from "../../../domain/entities/user.entity";
-import IEmailSender from "../../contracts/infrastructure/email-sender.contract";
-import IJwtGenerator from "../../contracts/infrastructure/jwt-generator.contract";
-import IOneTimeCodeGenerator from "../../contracts/infrastructure/one-time-code-generator.contract";
-import IPasswordHasher from "../../contracts/infrastructure/password-hasher.contract";
-import IUserRepository from "../../contracts/persistence/user-repository.contract";
 import LoggedInUserDto from "./dtos/logged-in-user.dto";
-import BaseResponse from "../../responses/base.response"; 
-import LoginUserDto from "./dtos/login-user.dto";
-import CreateUserDto from "./dtos/create-user.dto";
-import { create } from "domain";
-import VerifyEmailDto from "./dtos/verify-email.dto";
+import { IEmailSender, IJwtGenerator, IOneTimeCodeGenerator, IPasswordHasher } from "../../contracts/infrastructure";
+import { IUserRepository } from "../../contracts/persistence";
+import { CreateUserDto, LoginUserDto, VerifyEmailDto } from "./dtos";
+import { BaseResponse } from "../../responses";
 
 class AuthApplication {
   constructor(
