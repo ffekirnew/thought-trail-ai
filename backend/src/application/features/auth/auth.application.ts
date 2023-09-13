@@ -35,6 +35,31 @@ class AuthApplication {
     return BaseResponse.success<LoggedInUserDto>("Login was successful.", loggedInUser);
   }
 
+  async registerSkipVerification(createUserDto: RegisterUserDto): Promise<BaseResponse<LoggedInUserDto>> {
+    try {
+      createUserDto.validate();
+    } catch (error) {
+      return BaseResponse.error<LoggedInUserDto>("User registration failed.", error.message);
+    }
+
+    const userExists = await this.authRepository.getByEmail(createUserDto.email) || await this.authRepository.getByUsername(createUserDto.username);
+
+    if (userExists) return BaseResponse.error<LoggedInUserDto>("User registration failed.", "User name exists.");
+
+    const user = new UserEntity({
+      name: createUserDto.name,
+      email: createUserDto.email,
+      username: createUserDto.username,
+      salt: await this.passwordHasher.generateSalt()
+    });
+    user.password = await this.passwordHasher.hash(createUserDto.password, user.salt);
+    user.verificationToken = this.oneTimeCodeGenerator.generate();
+    user._id = await this.authRepository.create(user);
+
+    const loginUserDto = new LoginUserDto(user.username, createUserDto.password);
+    return this.login(loginUserDto);
+  }
+
   async register(createUserDto: RegisterUserDto): Promise<BaseResponse<string>> {
     try {
       createUserDto.validate();

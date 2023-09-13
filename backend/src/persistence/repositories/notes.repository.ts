@@ -90,7 +90,7 @@ class NoteRepository implements INotesRepository {
     const note = new NoteEntity({
       _id: noteDocument._id,
       title: noteDocument.title,
-      content: noteDocument.content,
+      body: noteDocument.body,
       tags: noteDocument.tags,
     });
     return note;
@@ -99,7 +99,7 @@ class NoteRepository implements INotesRepository {
   private toNoteDocument(note: NoteEntity): any {
     const noteDocument: any = {
       title: note.title,
-      content: note.content,
+      body: note.body,
       tags: note.tags,
     };
     return noteDocument;

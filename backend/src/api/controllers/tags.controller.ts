@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import TagsApplication from "../../application/features/tags/tags.application";
 import { TagsRepository } from "../../persistence/repositories";
 import { CreateTagDto, DeleteTagDto, GetAllTagsDto, GetTagDto, UpdateTagDto } from "../../application/features/tags/dtos";
+import { Types } from "mongoose";
 
 class TagsController {
   tagsApplication: TagsApplication;
@@ -34,9 +35,10 @@ class TagsController {
   }
 
   get = async (req: Request, res: Response) => {
-    const { userId, tagId } = req.body;
+    const { tagId } = req.params;
+    const { userId } = req.body;
 
-    const getTagDto = new GetTagDto(userId, tagId);
+    const getTagDto = new GetTagDto(userId, new Types.ObjectId(tagId));
     const response = await this.tagsApplication.get(getTagDto);
 
     if (response.success) res.status(200).json(response);
@@ -44,9 +46,10 @@ class TagsController {
   }
 
   update = async (req: Request, res: Response) => {
-    const { userId, tagId, name } = req.body;
+    const { tagId } = req.params;
+    const { userId, name } = req.body;
 
-    const updateTagDto = new UpdateTagDto(name, userId, tagId);
+    const updateTagDto = new UpdateTagDto(name, userId, new Types.ObjectId(tagId));
     const response = await this.tagsApplication.update(updateTagDto);
 
     if (response.success) res.status(204).json(response);
@@ -54,9 +57,10 @@ class TagsController {
   }
 
   delete = async (req: Request, res: Response) => {
-    const { userId, tagId } = req.body;
+    const { tagId } = req.params;
+    const { userId } = req.body;
 
-    const deleteTagDto = new DeleteTagDto(userId, tagId);
+    const deleteTagDto = new DeleteTagDto(userId, new Types.ObjectId(tagId));
     const response = await this.tagsApplication.delete(deleteTagDto);
 
     if (response.success) res.status(204).json(response);

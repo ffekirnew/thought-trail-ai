@@ -8,8 +8,8 @@ const notesController = new NotesController();
 NotesRouter.use(authMiddleware);
 NotesRouter.post('', notesController.create);
 NotesRouter.get('', notesController.getAll);
-NotesRouter.get('/:id', notesController.get);
-NotesRouter.put('/:id', notesController.update);
-NotesRouter.delete('/:id', notesController.delete);
+NotesRouter.get('/:noteId', notesController.get);
+NotesRouter.put('/:noteId', notesController.update);
+NotesRouter.delete('/:noteId', notesController.delete);
 
 export default NotesRouter;

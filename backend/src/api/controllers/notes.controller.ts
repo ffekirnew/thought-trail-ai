@@ -13,8 +13,8 @@ class NotesController {
   }
 
   create = async (req: Request, res: Response) => {
-    const { title, content, tags, userId } = req.body;
-    const createNoteDto = new CreateNoteDto(userId, title, content, tags);
+    const { title, body, tags, userId } = req.body;
+    const createNoteDto = new CreateNoteDto(userId, title, body, tags);
 
     const response = await this.notesApplication.create(createNoteDto);
 
@@ -36,19 +36,20 @@ class NotesController {
   }
   
   get = async (req: Request, res: Response) => {
-    const { userId, noteId } = req.body;
+    const { noteId } = req.params;
+    console.log(req.params);
+    const { userId } = req.body;
     const getNoteDto = new GetNoteDto(userId, noteId);
 
     const response = await this.notesApplication.get(getNoteDto);
-    if (response.success)
-      res.status(200).send(response);
-    else
-      res.status(400).send(response);
+    if (response.success) res.status(200).send(response);
+    else res.status(400).send(response);
   }
   
   update = async (req: Request, res: Response) => {
-    const { userId, noteId, title, content, tags } = req.body;
-    const updateNoteDto = new UpdateNoteDto(userId, noteId, title, content, tags);
+    const { noteId } = req.params;
+    const { userId, title, body, tags } = req.body;
+    const updateNoteDto = new UpdateNoteDto(userId, noteId, title, body, tags);
 
     const response = await this.notesApplication.update(updateNoteDto);
     if (response.success)
@@ -58,7 +59,8 @@ class NotesController {
   }
 
   delete = async (req: Request, res: Response) => {
-    const { userId, noteId } = req.body;
+    const { noteId } = req.params;
+    const { userId } = req.body;
     const deleteNoteDto = new DeleteNoteDto(userId, noteId);
 
     const response = await this.notesApplication.delete(deleteNoteDto);

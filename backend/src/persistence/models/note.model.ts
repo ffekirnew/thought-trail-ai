@@ -3,7 +3,7 @@ import { ITagDocument, tagSchema } from "./tag.model";
 
 export interface INoteDocument extends Document {
   title: string;
-  content: string;
+  body: string;
   tags: ITagDocument[];
   createdAt: Date;
   updatedAt: Date;
@@ -11,7 +11,7 @@ export interface INoteDocument extends Document {
 
 export const noteSchema = new Schema<INoteDocument>({
   title: { type: String, required: true },
-  content: { type: String, required: true },
+  body: { type: String, required: true },
   tags: { type: [tagSchema], default: [] },
 }, { timestamps: true });
 

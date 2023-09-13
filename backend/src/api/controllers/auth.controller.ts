@@ -24,6 +24,7 @@ class AuthController {
 
   @Post('login')
   login = async (req: Request, res: Response) => {
+    console.log(req.body);
     const { username, password } = req.body;
 
     const loginDto = new LoginUserDto(username, password);
@@ -40,6 +41,17 @@ class AuthController {
 
     const registerDto = new RegisterUserDto(name, username, email, password);
     const response = await this.authApp.register(registerDto);
+
+    if (response.success) res.status(201).json(response);
+    else res.status(400).json(response);
+  }
+
+  @Post('register')
+  registerNoVerification = async (req: Request, res: Response) => {
+    const { name, email, username, password } = req.body;
+
+    const registerDto = new RegisterUserDto(name, username, email, password);
+    const response = await this.authApp.registerSkipVerification(registerDto);
 
     if (response.success) res.status(201).json(response);
     else res.status(400).json(response);

@@ -1,14 +1,13 @@
-import { Types } from "mongoose";
 import { TagDto } from "../../tags/dtos";
 import { NoteEntity } from "../../../../domain/entities";
 
 class NoteDto {
-  _id: Types.ObjectId;
+  _id: string;
   title: string;
   body: string;
   tags: TagDto[];
 
-  constructor(id: Types.ObjectId, title: string, body: string, tags: TagDto[]) {
+  constructor(id: string, title: string, body: string, tags: TagDto[]) {
     this._id = id;
     this.title = title;
     this.body = body;
@@ -16,7 +15,7 @@ class NoteDto {
   }
 
   static fromEntity(note: NoteEntity) {
-    return new NoteDto(note._id, note.title, note.content, note.tags.map(tag => TagDto.fromEntity(tag)));
+    return new NoteDto(note._id.toString(), note.title, note.body, note.tags.map(tag => TagDto.fromEntity(tag)));
   }
 
 }

@@ -1,12 +1,11 @@
-import { Types } from "mongoose";
 import Dto from "../../../common/dto";
 import { z } from "zod";
 
 class DeleteNoteDto extends Dto {
-  userId: Types.ObjectId;
-  noteId: Types.ObjectId;
+  userId: string;
+  noteId: string;
 
-  constructor(userId: Types.ObjectId, noteId: Types.ObjectId) {
+  constructor(userId: string, noteId: string) {
     super();
     this.userId = userId;
     this.noteId = noteId;
@@ -14,14 +13,14 @@ class DeleteNoteDto extends Dto {
 
   validate(): void {
     const validator = z.object({ 
-      userId: z.string().min(1, 'User ID is required'),
-      noteId: z.string().min(1, 'Note ID is required'),
+      userId: z.string().min(1, {message: 'User ID is required'}),
+      noteId: z.string().min(1, {message: 'Note ID is required'}),
     });
 
     const validationResult = validator.safeParse(this);
     
     if (validationResult.success === false) {
-      throw new Error(validationResult.error.errors[0].message);
+      throw new Error(validationResult.error.message);
     }
   }
 }
