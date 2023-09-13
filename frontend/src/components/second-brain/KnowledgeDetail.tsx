@@ -1,17 +1,28 @@
-import { VStack, Box, Flex, Button, Input, HStack, Textarea, Text } from '@chakra-ui/react'
+import { VStack, Box, Flex, Button, Input, HStack, Textarea, Text, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Spinner } from '@chakra-ui/react'
 import { BsChevronLeft } from 'react-icons/bs'
-import { Note } from '../../pages/second-brain/KnowledgePage'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
+import { Note } from '../../services/notesService'
+import useCreateNote from '../../hooks/useCreateNote'
+import useUpdateNote from '../../hooks/useUpdateNote'
+import React from 'react'
+import useDeleteNote from '../../hooks/useDeleteNote'
+import DeleteNoteAlertDialog from './DeleteNoteAlertDialog'
 
 interface Props {
-  note: Note
+  note?: Note
 }
 const KnowledgeDetail = ({ note }: Props) => {
   const navigate = useNavigate();
+  const {isLoading: createNoteLoading, isSuccess: createNoteSuccess, createNote} = useCreateNote();
+  const {isLoading: updateNoteLoading, isSuccess: updateNoteSuccess, updateNote} = useUpdateNote();
+  const {isLoading: deleteNoteLoading, isSuccess: deleteNoteSuccess, deleteNote} = useDeleteNote();
 
-  const [title, setTitle] = useState(note.title);
-  const [body, setBody] = useState(note.body);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
+
+  const [title, setTitle] = useState<string>(note?.title || "");
+  const [body, setBody] = useState<string>(note?.body || "");
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -21,7 +32,30 @@ const KnowledgeDetail = ({ note }: Props) => {
     setBody(e.target.value);
   };
 
-  return <VStack align={'left'} gap={3}>
+  const onSave = () => {
+    if (note === undefined) {
+      const newNote: Note = { title: title, body: body, _id: "", tags: [] };
+      console.log(newNote);
+      createNote(newNote);
+    } else {
+      const updatedNote = { ...note, title: title, body: body };
+      console.log(updatedNote);
+      updateNote(note._id, updatedNote);
+
+    }
+  }
+
+  const onDelete = () => {
+    if (note !== undefined) {
+      deleteNote(note._id);
+    }
+  }
+
+  if (createNoteSuccess || deleteNoteSuccess) {
+    navigate("/everything");
+  }
+
+  return <><VStack align={'left'} gap={3}>
     <Flex gap={2} alignItems={'center'}>
       <Button onClick={() => navigate('/everything')} variant={'ghost'}><BsChevronLeft color={'brand.primary'} /></Button>
       <Input
@@ -35,12 +69,16 @@ const KnowledgeDetail = ({ note }: Props) => {
         variant={'unstyled'}
         onChange={handleTitleChange}
       />
-      <Button variant={'solid'} background={'brand.primary'} color={'white'}>Save</Button>
-      <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'}>Delete</Button>
+      <Button variant={'solid'} background={'brand.primary'} color={'white'} onClick={onSave}>
+        { createNoteLoading || updateNoteLoading ? <Spinner /> : note === undefined ? "Create" : "Save" }
+      </Button>
+      <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'} onClick={onOpen}>
+        { deleteNoteLoading ? "Deleting" : "Delete" }
+      </Button>
     </Flex>
     <HStack>
       <Text fontWeight={'extrabold'}>Tags: </Text>
-      { note.tags.map((tag, index) => <Box border={'1px solid gray'} borderRadius={10} paddingX={4} key={index}>{ tag }</Box> )}
+      { note?.tags.map((tag, index) => <Box border={'1px solid gray'} borderRadius={10} paddingX={4} key={index}>{ tag.name }</Box> )}
     </HStack>
     <Textarea
       variant={'unstyled'}
@@ -52,7 +90,9 @@ const KnowledgeDetail = ({ note }: Props) => {
       height={'100%'}
       flexGrow={1}
     />
-  </VStack>
+  </VStack> 
+  <DeleteNoteAlertDialog cancelRef={cancelRef} isOpen={isOpen} onClose={onClose} action={onDelete} />
+  </>
 }
 
 export default KnowledgeDetail;

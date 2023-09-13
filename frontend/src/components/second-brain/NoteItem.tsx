@@ -2,7 +2,7 @@ import { Flex, Checkbox, Spacer, Button, Text } from '@chakra-ui/react'
 import { BsPencil } from 'react-icons/bs'
 import EditMenu from './EditMenu'
 import { useNavigate } from 'react-router-dom';
-import { Note } from '../../pages/second-brain/KnowledgePage';
+import { Note } from '../../services/notesService';
 
 interface Props {
   note: Note;
@@ -13,8 +13,8 @@ const NoteItem = ({ note }: Props) => {
     <Checkbox />
     <Text marginX={5}>{ note.title }</Text>
     <Spacer />
-    <EditMenu />
-    <Button onClick={() => navigate('/everything/notes/' + note.id)} variant={'ghost'}><BsPencil /></Button>
+    <EditMenu noteId={note._id} />
+    <Button onClick={() => navigate('/everything/notes/' + note._id)} variant={'ghost'}><BsPencil /></Button>
   </Flex> 
 }
 

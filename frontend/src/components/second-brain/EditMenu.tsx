@@ -1,14 +1,33 @@
-import { Menu, MenuButton, Button, MenuList, MenuItem, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay } from '@chakra-ui/react'
+import { Menu, MenuButton, Button, MenuList, MenuItem, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Spinner } from '@chakra-ui/react'
 import React from 'react'
 import { BsThreeDots } from 'react-icons/bs'
+import DeleteNoteAlertDialog from './DeleteNoteAlertDialog';
+import useDeleteNote from '../../hooks/useDeleteNote';
+import { useNavigate } from 'react-router-dom';
 
-const EditMenu = () => {
+interface Props {
+  noteId: string;
+}
+
+const EditMenu = ({ noteId }: Props) => {
+  const navigate = useNavigate();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef<HTMLButtonElement>(null);
 
+  const {isLoading: deleteNoteLoading, isSuccess: deleteNoteSuccess, deleteNote} = useDeleteNote();
+
+  const onDeleteNote = () => {
+    deleteNote(noteId);
+  }
+
+  if (deleteNoteSuccess) {
+    navigate('/everything');
+  }
+
   return <><Menu>
-  <MenuButton as={Button} variant={'ghost'}>
-    <BsThreeDots />
+  <MenuButton as={Button} variant={'ghost'} disabled={deleteNoteLoading}>
+    { deleteNoteLoading ? <Spinner /> : <BsThreeDots /> }
   </MenuButton>
   <MenuList>
     <MenuItem onClick={onOpen}>Delete Note</MenuItem>
@@ -17,34 +36,9 @@ const EditMenu = () => {
     <MenuItem>Add as Task</MenuItem>
     <MenuItem>Add to plans</MenuItem>
   </MenuList>
-</Menu>
-  <AlertDialog
-        motionPreset='slideInBottom'
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-        isOpen={isOpen}
-        isCentered
-      >
-        <AlertDialogOverlay />
-
-        <AlertDialogContent>
-          <AlertDialogHeader>Delete this note?</AlertDialogHeader>
-          <AlertDialogCloseButton />
-          <AlertDialogBody>
-            You will not be able to recover this note.
-          </AlertDialogBody>
-          <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='red' ml={3}>
-              Confirm Delete
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+  </Menu>
+  <DeleteNoteAlertDialog cancelRef={cancelRef} onClose={onClose} isOpen={isOpen} action={onDeleteNote} />
   </>
-
 }
 
 export default EditMenu

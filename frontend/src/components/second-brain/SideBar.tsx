@@ -2,6 +2,7 @@ import { Button, Flex, Spacer, VStack } from '@chakra-ui/react'
 import { BsGraphUpArrow, BsHouse, BsListTask, BsNodePlus, BsSuitDiamond } from 'react-icons/bs'
 import SideBarOption from './SideBarOption'
 import { useNavigate } from 'react-router-dom'
+import useLogout from '../../hooks/useLogout'
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -16,7 +17,10 @@ const SideBar = () => {
     </VStack>
     <Spacer />
     <VStack align={'left'}>
-      <Button background='brand.primary' onClick={() => navigate('/')} variant={'solid'}>Sign Out</Button>
+      <Button background='brand.primary' onClick={() => {
+        useLogout();
+        navigate('/');
+      }} variant={'solid'}>Sign Out</Button>
     </VStack>
   </Flex>
 }
