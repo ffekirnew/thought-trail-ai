@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 import InputField from '../../components/authentication/InputForm';
 import { Text, Heading, Button, VStack } from '@chakra-ui/react';
+import useLogin from '../../hooks/useLogin';
 
 const schema = z.object({
   username: z.string().min(3, { message: "Username must be at least 3 charachters." }),
@@ -13,13 +14,15 @@ const schema = z.object({
 type SignInFormSchema = z.infer<typeof schema>
 
 const SignInPage = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<SignInFormSchema>({ resolver: zodResolver(schema) }); 
+  const {register, handleSubmit, formState: { errors }} = useForm<SignInFormSchema>({ resolver: zodResolver(schema) });
+  const { login, isLoading, error, isSuccess } = useLogin();
   const navigate = useNavigate();
 
   const onSignIn = (data: FieldValues) => {
-    console.log(data);
-    navigate('/everything');
+    login(data.username, data.password);
   }
+
+  if (isSuccess) navigate('/everything');
 
   return <VStack gap={10} align={'left'} padding={10} width={'100%'}>
       <Heading>Sign in to ThoughtTrail</Heading>
@@ -30,7 +33,7 @@ const SignInPage = () => {
           name="username"
           register={register}
           type="text"
-          disabled={false}
+          disabled={isLoading}
           placeholder="e.g. starlord"
           error={errors.username && errors.username.message}
         />
@@ -41,9 +44,10 @@ const SignInPage = () => {
           type="password"
           placeholder="Enter your password"
           error={errors.password && errors.password.message}
-          disabled={false}
+          disabled={isLoading}
         />
-        <Button type={'submit'} background='brand.primary' disabled={false} borderRadius={'full'} size={'lg'}>
+        <Text fontSize={'md'} color='red.400'>{error}</Text>
+        <Button type={'submit'} background='brand.primary' disabled={isLoading} borderRadius={'full'} size={'lg'}>
           <Text fontWeight={'bold'}>
            Sign In 
           </Text>

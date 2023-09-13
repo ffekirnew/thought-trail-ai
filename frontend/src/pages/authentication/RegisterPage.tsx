@@ -4,9 +4,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 import InputField from '../../components/authentication/InputForm';
 import { Text, Heading, Button, VStack } from '@chakra-ui/react';
+import useRegister from '../../hooks/useRegister';
 
 const schema = z
 .object({
+  name: z
+  .string()
+  .min(3, { message: "Name must be at least 3 characters." })
+  .regex(/^[a-zA-Z]+$/, { message: "Name can only contain letters, numbers, and underscores."}),
   username: z
     .string()
     .min(3, { message: "Username must be at least 3 characters." })
@@ -32,10 +37,15 @@ type RegisterSchema = z.infer<typeof schema>;
 
 const RegisterPage = () => {
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterSchema>({ resolver: zodResolver(schema) }); 
-  const history = useNavigate();
+  const navigate = useNavigate();
+  const {register: signUp, isSuccess, isLoading, error} = useRegister();
 
   const onRegister = (data: FieldValues) => {
-    console.log(data);
+    signUp(data.name, data.email, data.username, data.password);
+  }
+
+  if (isSuccess) {
+    navigate('/everything');
   }
 
   return <VStack gap={10} align={'left'} padding={10} width={'100%'}>
@@ -43,11 +53,20 @@ const RegisterPage = () => {
       <form onSubmit={handleSubmit(onRegister)}>
         <VStack align={'left'} gap={2}>
         <InputField
+          label="Name"
+          name="name"
+          register={register}
+          type="text"
+          disabled={isLoading}
+          placeholder="e.g. Peter"
+          error={errors.username && errors.username.message}
+        />
+        <InputField
           label="Username"
           name="username"
           register={register}
           type="text"
-          disabled={false}
+          disabled={isLoading}
           placeholder="e.g. starlord"
           error={errors.username && errors.username.message}
         />
@@ -56,7 +75,7 @@ const RegisterPage = () => {
           name="email"
           register={register}
           type="email"
-          disabled={false}
+          disabled={isLoading}
           placeholder="e.g. starlord@guardians.galaxy"
           helperText='We advise you use your primary email.'
           error={errors.email && errors.email.message}
@@ -68,7 +87,7 @@ const RegisterPage = () => {
           type="password"
           placeholder="Enter your password"
           error={errors.password && errors.password.message}
-          disabled={false}
+          disabled={isLoading}
         />
         <InputField
           label="Confirm Password"
@@ -77,9 +96,10 @@ const RegisterPage = () => {
           type="password"
           placeholder="Confirm your password"
           error={errors.passwordConfirmation && errors.passwordConfirmation.message}
-          disabled={false}
+          disabled={isLoading}
         />
-        <Button type={'submit'} background='brand.primary' disabled={false} borderRadius={'full'} size={'lg'}>
+        <Text fontSize={'md'} color={'red.400'}>{error}</Text>
+        <Button type={'submit'} background='brand.primary' disabled={isLoading} borderRadius={'full'} size={'lg'}>
           <Text fontWeight={'bold'}>
            Register 
           </Text>
@@ -87,7 +107,7 @@ const RegisterPage = () => {
         </VStack>
       </form>
       <Text fontSize={'md'}>
-        Already have an account? <Button color='brand.secondary' variant={'link'} onClick={() => history('/auth/sign-in')}>Sign In!</Button>
+        Already have an account? <Button color='brand.secondary' variant={'link'} onClick={() => navigate('/auth/sign-in')}>Sign In!</Button>
       </Text>
     </VStack>
 };
