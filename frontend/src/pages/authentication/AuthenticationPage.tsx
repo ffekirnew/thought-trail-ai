@@ -5,7 +5,7 @@ import './AuthenticationPage.css'
 
 const AuthenticationPage = () => {
   return <HStack>
-    <VStack height={'100vh'} width={'100%'}>
+    <VStack height={'100vh'} width={'100%'} overflowY={'scroll'}>
       <NavBar />
       <Outlet />
     </VStack>
