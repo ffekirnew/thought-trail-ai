@@ -8,6 +8,7 @@ const app = express();
 const configuration = { db: db };
 export const port = config.port || 3000;
 
+
 app.use(bodyParser.json());
 
 // Use controllers
