@@ -1,9 +1,8 @@
 import express from 'express';
-import swaggerJsdoc from 'swagger-jsdoc';
-import swaggerUi from 'swagger-ui-express';
 import bodyParser from 'body-parser';
-import { AuthRouter } from './routes';
+import { AuthRouter, NotesRouter, TagsRouter, UsersRouter } from './routes';
 import { config, db } from './core';
+import swaggerUi from 'swagger-ui-express';
 
 const app = express();
 const configuration = { db: db };
@@ -13,25 +12,20 @@ app.use(bodyParser.json());
 
 // Use controllers
 app.use('/auth', AuthRouter);
+app.use('/notes', NotesRouter);
+app.use('/me', UsersRouter);
+app.use('/tags', TagsRouter);
 
-// Swagger options
-const options = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'ThoughtTrail API Documentation',
-      version: '1.0.0',
-      description: 'Documentation for the ThoughtTrial API endpoints',
+// Swagger Documentation
+app.use(
+  "/docs",
+  swaggerUi.serve,
+  swaggerUi.setup(undefined, {
+    swaggerOptions: {
+      url: "./swagger.json",
     },
-    servers: [{ url: `http://localhost:${port}` }],
-  },
-  apis: ['./routes/*.ts'], 
-};
-
-const specs = swaggerJsdoc(options);
-
-// Serve Swagger UI
-app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
+  })
+);
 
 export default app;
 

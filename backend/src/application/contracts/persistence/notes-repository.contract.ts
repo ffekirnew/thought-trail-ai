@@ -1,15 +1,12 @@
 import { Types } from "mongoose";
 import NoteEntity from "../../../domain/entities/note.entity";
-import IGenericRepository from "./generic-repository.contract";
 
-abstract class INotesRepository implements IGenericRepository<NoteEntity> {
-    create: (entity: NoteEntity) => Promise<Types.ObjectId>;
-    update: (entity: NoteEntity) => Promise<void>;
-    delete: (_id: Types.ObjectId) => Promise<void>;
-    getAll: () => Promise<NoteEntity[]>;
-    get: (_id: Types.ObjectId) => Promise<NoteEntity>;
-
-    getAllByUserId: (userId: Types.ObjectId) => Promise<NoteEntity[]>;
+abstract class INotesRepository {
+  getNote: (userId: Types.ObjectId, noteId: Types.ObjectId) => Promise<NoteEntity | null>
+  getAllNotes: (userId: Types.ObjectId) => Promise<NoteEntity[]>;
+  createNote: (userId: Types.ObjectId, note: NoteEntity) => Promise<Types.ObjectId | null>;
+  deleteNote: (userId: Types.ObjectId, noteId: Types.ObjectId) => Promise<void>;
+  updateNote: (userId: Types.ObjectId, noteId: Types.ObjectId, note: NoteEntity) => Promise<void>;
 }
 
 export default INotesRepository;

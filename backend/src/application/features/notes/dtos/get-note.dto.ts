@@ -1,13 +1,12 @@
 import { Types } from "mongoose";
-import Dto from "../../../common/dto";
 import { z } from "zod";
+import Dto from "../../../common/dto";
 
-class DeleteNoteDto extends Dto {
+class GetNoteDto implements Dto {
   userId: Types.ObjectId;
   noteId: Types.ObjectId;
 
   constructor(userId: Types.ObjectId, noteId: Types.ObjectId) {
-    super();
     this.userId = userId;
     this.noteId = noteId;
   }
@@ -26,4 +25,4 @@ class DeleteNoteDto extends Dto {
   }
 }
 
-export default DeleteNoteDto;
+export default GetNoteDto;

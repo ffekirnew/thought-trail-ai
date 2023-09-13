@@ -1,7 +1,7 @@
 import { z } from "zod";
 import Dto from "../../../common/dto";
 
-class CreateUserDto extends Dto {
+class RegisterUserDto extends Dto {
   name: string;
   username: string;
   email: string;
@@ -26,9 +26,9 @@ class CreateUserDto extends Dto {
     const validationResult = validator.safeParse(this);
     
     if (validationResult.success === false) {
-      throw new Error(validationResult.error.errors[0].message);
+      throw new Error(validationResult.error.message);
     }
   }
 }
 
-export default CreateUserDto;
+export default RegisterUserDto;

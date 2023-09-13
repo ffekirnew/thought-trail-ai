@@ -20,7 +20,7 @@ class VerifyEmailDto extends Dto {
     const validationResult = validator.safeParse(this);
     
     if (validationResult.success === false) {
-      throw new Error(validationResult.error.errors[0].message);
+      throw new Error(JSON.stringify(validationResult.error.message));
     }
   }
 }

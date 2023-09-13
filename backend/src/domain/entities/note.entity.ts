@@ -1,12 +1,15 @@
-import { Types } from "mongoose";
+import TagEntity from "./tag.entity";
+import BaseEntity from "../common/base.entity";
 
-class NoteEntity {
-  _id: Types.ObjectId;
+class NoteEntity extends BaseEntity {
   title: string;
   content: string;
-  tags: string[];
-  createdAt: Date;
-  updatedAt: Date;
+  tags: TagEntity[];
+
+  constructor(note: Partial<NoteEntity>) {
+    super();
+    Object.assign(this, note);
+  }
 }
 
 export default NoteEntity;

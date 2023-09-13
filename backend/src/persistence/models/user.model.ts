@@ -1,4 +1,6 @@
 import mongoose, { Document, Model, Schema } from 'mongoose';
+import { INoteDocument, noteSchema } from './note.model';
+import { ITagDocument, tagSchema } from './tag.model';
 
 export interface IUserDocument extends Document {
   name: string;
@@ -9,6 +11,8 @@ export interface IUserDocument extends Document {
   profilePicture: string;
   emailVerified: boolean;
   verificationToken: string;
+  notes: INoteDocument[];
+  tags: ITagDocument[];
 }
 
 const userSchema = new Schema<IUserDocument>({
@@ -20,8 +24,11 @@ const userSchema = new Schema<IUserDocument>({
   profilePicture: String,
   emailVerified: Boolean,
   verificationToken: String,
-});
+  notes: { type: [noteSchema], default: [] },
+  tags: { type: [tagSchema], default: [] }
+}, { timestamps: true });
 
 const UserModel: Model<IUserDocument> = mongoose.model<IUserDocument>('User', userSchema);
 
 export default UserModel;
+

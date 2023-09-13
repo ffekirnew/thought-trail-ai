@@ -1,34 +1,31 @@
 import { z } from "zod";
 import Dto from "../../../common/dto";
-import { TagDto } from "../../tags/dtos";
 import { Types } from "mongoose";
 
-class CreateNoteDto implements Dto {
+class UpdateTagDto implements Dto {
   userId: Types.ObjectId;
-  title: string;
-  content: string;
-  tags: TagDto[];
+  tagId: Types.ObjectId;
+  name: string;
 
-  constructor(userId: Types.ObjectId, title: string, body: string, tags: TagDto[]) {
+  constructor(name: string, userId: Types.ObjectId, tagId: Types.ObjectId) {
+    this.name = name;
     this.userId = userId;
-    this.title = title;
-    this.content = body;
-    this.tags = tags;
+    this.tagId = tagId;
   }
-
+  
   validate(): void {
     const validator = z.object({ 
       userId: z.string().min(1, 'User ID is required'),
-      title: z.string().min(1, 'Title is required'),
-      content: z.string().min(1, 'Body is required'),
+      tagId: z.string().min(1, 'Note ID is required'),
+      name: z.string().min(1, 'Name is required').regex(/^[A-Za-z]+$/, 'Name must contain only alphabetic characters'),
     });
 
     const validationResult = validator.safeParse(this);
-    
+  
     if (validationResult.success === false) {
       throw new Error(validationResult.error.errors[0].message);
-    }
+    } 
   }
 }
 
-export default CreateNoteDto;
+export default UpdateTagDto;

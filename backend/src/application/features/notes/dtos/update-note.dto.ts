@@ -1,26 +1,29 @@
 import { Types } from "mongoose";
 import Dto from "../../../common/dto";
 import { z } from "zod";
+import { TagDto } from "../../tags/dtos";
 
 class UpdateNoteDto implements Dto {
-  _id: Types.ObjectId;
+  userId: Types.ObjectId;
+  noteId: Types.ObjectId;
   title: string;
-  body: string;
-  tags: string[];
+  content: string;
+  tags: TagDto[];
 
-  constructor(_id: Types.ObjectId, title: string, body: string, tags: string[]) {
-    this._id = _id;
+  constructor(userId: Types.ObjectId, noteId: Types.ObjectId, title: string, content: string, tags: TagDto[]) {
+    this.userId = userId;
+    this.noteId = noteId;
     this.title = title;
-    this.body = body;
+    this.content = content;
     this.tags = tags;
   }
 
   validate(): void {
     const validator = z.object({
-      _id: z.string().min(1, 'Note ID is required'),
+      userId: z.string().min(1, 'User ID is required'),
+      noteId: z.string().min(1, 'Note ID is required'),
       title: z.string().min(1, 'Title is required'),
-      body: z.string().min(1, 'Body is required'),
-      tags: z.array(z.string()).min(1, 'Tags are required'),
+      content: z.string().min(1, 'Body is required'),
     });
 
     const validationResult = validator.safeParse(this);

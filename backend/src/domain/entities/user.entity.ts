@@ -1,7 +1,8 @@
-import { Types } from "mongoose";
+import NoteEntity from "./note.entity";
+import BaseEntity from "../common/base.entity";
+import TagEntity from "./tag.entity";
 
-class UserEntity {
-  _id: Types.ObjectId;
+class UserEntity extends BaseEntity {
   name: string;
   username: string;
   email: string;
@@ -10,6 +11,13 @@ class UserEntity {
   profilePicture: string;
   emailVerified: boolean;
   verificationToken: string;
+  notes: NoteEntity[];
+  tags: TagEntity[];
+
+  constructor(user: Partial<UserEntity>) {
+    super();
+    Object.assign(this, user);
+  }
 }
 
 export default UserEntity;

@@ -20,7 +20,7 @@ class LoginUserDto extends Dto {
     const validationResult = validator.safeParse(this);
     
     if (validationResult.success === false) {
-      throw new Error(validationResult.error.errors[0].message);
+      throw new Error(validationResult.error.message);
     }
   }
 }

@@ -1,7 +1,7 @@
-import UserEntity from "../../../../domain/entities/user.entity";
+import UserDto from "./user.dto";
 
 interface LoggedInUserDto {
-  user: UserEntity;
+  user: UserDto;
   token: string;
 }
 

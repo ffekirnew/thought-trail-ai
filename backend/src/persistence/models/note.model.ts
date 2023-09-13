@@ -1,20 +1,19 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
+import { ITagDocument, tagSchema } from "./tag.model";
 
-interface INoteDocument extends Document {
+export interface INoteDocument extends Document {
   title: string;
   content: string;
-  tags: string[];
+  tags: ITagDocument[];
   createdAt: Date;
   updatedAt: Date;
 }
 
-const noteSchema = new Schema<INoteDocument>({
+export const noteSchema = new Schema<INoteDocument>({
   title: { type: String, required: true },
   content: { type: String, required: true },
-  tags: { type: [String], default: [] },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
-});
+  tags: { type: [tagSchema], default: [] },
+}, { timestamps: true });
 
 const NoteModel: Model<INoteDocument> = mongoose.model("Note", noteSchema);
 
