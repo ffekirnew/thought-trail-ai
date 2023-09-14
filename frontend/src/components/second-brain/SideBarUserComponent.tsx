@@ -1,0 +1,42 @@
+import avatar from '../../assets/user_avatar.png';
+import { HStack, VStack, Text, Avatar, AvatarBadge, Menu, Button, MenuButton, MenuItem, MenuList, Spacer, useColorMode } from "@chakra-ui/react"
+import useGetUser from '../../hooks/useGetUser';
+import { User } from '../../services/authClient';
+import { BsThreeDots } from 'react-icons/bs';
+import useLogout from '../../hooks/useLogout';
+import { useNavigate } from 'react-router-dom';
+
+const SideBarUserComponent = () => {
+  const navigate = useNavigate();
+  const user: User = useGetUser();
+  const {colorMode} = useColorMode(); 
+
+  const onLogout = () => {
+    useLogout();
+    navigate('/');
+  }
+
+  return <HStack
+  bg={ colorMode === 'dark' ? 'gray.600' : 'gray.300'}
+  padding={5}
+  gap={5}
+  justifyContent={'center'}>
+    <Avatar src={avatar} size={'sm'}>
+      <AvatarBadge boxSize='1.25em' bg='green.500' />
+    </Avatar>
+    <VStack align={'left'} gap={0}>
+      <Text>{ user.name[0].toUpperCase() + user.name.slice(1) }</Text>
+      <Text color={ colorMode === 'dark' ? 'gray.300' : 'gray.600'}>{ user.username }</Text>
+    </VStack>
+    <Spacer />
+    <Menu>
+      <MenuButton as={Button} rightIcon={<BsThreeDots />} variant={'ghost'} justifyContent={'center'} />
+      <MenuList>
+        <MenuItem>Account Settings</MenuItem>
+        <MenuItem onClick={onLogout}>Sign Out</MenuItem>
+      </MenuList>
+    </Menu>
+  </HStack>
+}
+
+export default SideBarUserComponent;
