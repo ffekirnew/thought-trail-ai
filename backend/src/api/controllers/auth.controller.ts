@@ -24,7 +24,6 @@ class AuthController {
 
   @Post('login')
   login = async (req: Request, res: Response) => {
-    console.log(req.body);
     const { username, password } = req.body;
 
     const loginDto = new LoginUserDto(username, password);

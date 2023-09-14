@@ -37,7 +37,6 @@ class NotesController {
   
   get = async (req: Request, res: Response) => {
     const { noteId } = req.params;
-    console.log(req.params);
     const { userId } = req.body;
     const getNoteDto = new GetNoteDto(userId, noteId);
 
