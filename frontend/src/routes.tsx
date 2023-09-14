@@ -34,6 +34,7 @@ const router = createBrowserRouter([
         path: 'everything',
         element: <SecondBrainPage />,
         children: [
+          { index: true, element: <KnowledgePage /> },
           { path: 'notes', element: <KnowledgePage /> },
           { path: 'chat', element: <ChatPage /> },
           { path: 'notes/:id', element: <KnowledgeDetailPage /> },
