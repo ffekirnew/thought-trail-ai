@@ -6,10 +6,11 @@ import NoteItemSkeleton from '../../components/second-brain/skeletons/NoteItemSk
 
 const KnowledgePage = () => {
   const { data: response, isLoading } = useGetNotes();
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   if (isLoading) return <VStack align={'left'}>
-    <Skeleton width={'100px'} height={'30px'} />    { skeletons.map((skeleton) => <NoteItemSkeleton key={skeleton} />) }
+    <Skeleton width={'100px'} height={'30px'} borderRadius={5} />
+    { skeletons.map((skeleton) => <NoteItemSkeleton key={skeleton} />) }
     </VStack>
 
   return <VStack align={'left'}>

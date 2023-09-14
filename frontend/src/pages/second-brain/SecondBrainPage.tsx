@@ -13,11 +13,9 @@ const SecondBrainPage = () => {
     }}
     templateColumns={{
       base: "1fr",
-      lg: "250px auto"
+      lg: "auto minmax(0, 1fr)"
     }}
     templateRows={"60px auto"}
-    gap={5}
-    paddingX={5}
     height={'100vh'}
   >
     <Show above="lg">
@@ -25,10 +23,10 @@ const SecondBrainPage = () => {
         <SideBar />
       </GridItem>
     </Show>
-    <GridItem area={'navbar'}>
+    <GridItem area={'navbar'} paddingX={5}>
       <NavBar />
     </GridItem>
-    <GridItem area={'main'} overflowY={'scroll'}>
+    <GridItem area={'main'} overflowY={'scroll'} paddingX={5}>
       <Outlet />
     </GridItem>
   </Grid>

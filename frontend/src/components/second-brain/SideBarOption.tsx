@@ -1,4 +1,4 @@
-import { Button, Flex, Spacer, Text } from '@chakra-ui/react'
+import { Button, Flex, Text } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 interface Props {
@@ -6,11 +6,10 @@ interface Props {
   icon: ReactNode;
 }
 const SideBarOption = ({ text, icon }: Props) => {
-  return <Button variant={'ghost'} borderRadius={'full'}>
-    <Flex width={'100%'} alignItems={'center'}>
-      <Text fontWeight={'normal'}>{ text }</Text>
-      <Spacer />
+  return <Button width={'100%'} variant={'ghost'} borderRadius={5} padding={0}>
+    <Flex width={'100%'} alignItems={'center'} gap={5} paddingX={3}>
       { icon }
+      <Text fontWeight={'normal'}>{ text }</Text>
     </Flex>
   </Button> 
 }

@@ -1,33 +1,29 @@
-import { Button, Flex, HStack, Input, Skeleton, SkeletonText, Text, VStack } from '@chakra-ui/react';
+import { Button, Flex, Grid, GridItem, HStack, Skeleton, Text } from '@chakra-ui/react';
 import { BsChevronLeft } from 'react-icons/bs';
 
 const KnowledgeDetailSkeleton = () => {
-  return <><VStack align={'left'} gap={3}>
-    <Flex gap={2} alignItems={'center'} width={'100%'} height={'35px'}>
-      <Skeleton height={'100%'}>
-        <Button><BsChevronLeft color={'brand.primary'} /></Button>
-      </Skeleton>
-      <Skeleton height={'100%'} width={'100%'}>
-      <Input
-        size={'lg'}
-        fontSize={'xl'}
-        fontWeight={'bold'}
-        type='text'
-        placeholder='Title of your note.'
-        value={''}
-        variant={'unstyled'}
-        onChange={() => {}}
-      />
-      </Skeleton>
-      <Skeleton height={'100%'}><Button>Save</Button></Skeleton>
-      <Skeleton height={'100%'}><Button>Delete</Button></Skeleton>
-    </Flex>
-    <HStack>
-      <Skeleton><Text fontWeight={'extrabold'}>Tags are good</Text></Skeleton>
-    </HStack>
-    <SkeletonText mt='4' noOfLines={8} spacing='4' skeletonHeight='4' height={'1200px'} flexGrow={1} />
-  </VStack> 
-  </>
+  return <Grid
+    height={'100%'}
+    templateAreas={`"titlebar" "tags" "textarea"`}
+    templateRows={"auto auto minmax(0, 1fr)"}
+    gap={3}>
+    <GridItem area="titlebar">
+      <Flex gap={2} alignItems={'center'} height={'40px'}>
+        <Skeleton borderRadius={5} height={'100%'}><Button><BsChevronLeft /></Button></Skeleton>
+        <Skeleton borderRadius={5} height={'100%'} width={'100%'}></Skeleton>
+        <Skeleton borderRadius={5} height={'100%'}><Button>Create</Button></Skeleton>
+        <Skeleton borderRadius={5} height={'100%'}><Button>Delete</Button></Skeleton>
+      </Flex>
+    </GridItem>
+    <GridItem area="tags">
+      <HStack>
+        <Skeleton borderRadius={5}><Text fontWeight={'extrabold'}>Tags: </Text></Skeleton>
+      </HStack>
+    </GridItem>
+    <GridItem area="textarea" paddingBottom={5}>
+      <Skeleton borderRadius={5} height={'100%'}></Skeleton>
+    </GridItem>
+  </Grid> 
 }
 
 export default KnowledgeDetailSkeleton;

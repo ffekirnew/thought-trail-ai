@@ -10,7 +10,7 @@ interface Props {
 const NoteItem = ({ note }: Props) => {
   const navigate = useNavigate();
   return <Flex borderColor={'gray.700'} gap={1} borderRadius={10} alignItems={'center'}>
-    <Button as={'h3'} disabled={true} variant={'solid'} width={'100%'} justifyContent={'left'} textAlign={'left'} overflow={'hidden'}>{ note.title }</Button>
+    <Button as={'h3'} disabled={true} variant={'ghost'} width={'100%'} justifyContent={'left'} textAlign={'left'} overflow={'hidden'}>{ note.title }</Button>
     <Spacer />
     <Show above='lg'><EditMenu noteId={note._id} /></Show>
     <Button onClick={() => navigate('/everything/notes/' + note._id)} variant={'outline'}><BsPencil /></Button>

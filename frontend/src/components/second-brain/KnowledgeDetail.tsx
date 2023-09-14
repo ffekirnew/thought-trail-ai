@@ -1,4 +1,4 @@
-import { VStack, Box, Flex, Button, Input, HStack, Textarea, Text, useDisclosure, useToast } from '@chakra-ui/react';
+import { Box, Flex, Button, Input, HStack, Textarea, Text, useDisclosure, useToast, Grid, GridItem } from '@chakra-ui/react';
 import { BsChevronLeft } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -73,17 +73,23 @@ const KnowledgeDetail = ({ note }: Props) => {
     navigate("/everything");
   }
 
-  return <><VStack align={'left'} gap={3}>
-    <Flex gap={2} alignItems={'center'}>
-      <Button onClick={() => navigate('/everything')} variant={'ghost'}><BsChevronLeft color={'brand.primary'} /></Button>
+  return <><Grid
+    height={'100%'}
+    templateAreas={`"titlebar" "tags" "textarea"`}
+    templateRows={"auto auto minmax(0, 1fr)"}
+    gap={3}>
+    <GridItem area="titlebar">
+    <Flex gap={2} alignItems={'center'} height={'40px'}>
+      <Button variant={'solid'} height={'100%'} onClick={() => navigate('/everything')}><BsChevronLeft color={'brand.primary'} /></Button>
       <Input
+        height={'100%'}
         size={'lg'}
-        fontSize={'4xl'}
+        fontSize={'2xl'}
         fontWeight={'bold'}
         type='text'
         placeholder='Title of your note.'
         value={title}
-        variant={'unstyled'}
+        variant={'filled'}
         onChange={handleTitleChange}
       />
       <Button variant={'solid'} background={'brand.primary'} color={'white'} onClick={onSave} disabled={deleteNoteLoading || updateNoteLoading || createNoteLoading}>
@@ -93,21 +99,25 @@ const KnowledgeDetail = ({ note }: Props) => {
         Delete
       </Button>
     </Flex>
+    </GridItem>
+    <GridItem area="tags">
     <HStack>
       <Text fontWeight={'extrabold'}>Tags: </Text>
       { note?.tags.map((tag, index) => <Box border={'1px solid gray'} borderRadius={10} paddingX={4} key={index}>{ tag.name }</Box> )}
     </HStack>
+    </GridItem>
+    <GridItem area="textarea" paddingBottom={5}>
     <Textarea
-      variant={'unstyled'}
+      variant={'filled'}
       fontSize={'xl'}
       value={body}
       placeholder='Content of your note.'
       onChange={handleBodyChange}
       resize={'none'}
       height={'100%'}
-      flexGrow={1}
     />
-  </VStack> 
+    </GridItem>
+  </Grid> 
   <DeleteNoteAlertDialog cancelRef={cancelRef} isOpen={isOpen} onClose={onClose} action={onDelete} />
   </>
 }
