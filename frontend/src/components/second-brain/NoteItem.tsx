@@ -1,4 +1,4 @@
-import { Flex, Checkbox, Spacer, Button, Text } from '@chakra-ui/react'
+import { Flex, Spacer, Button, Show } from '@chakra-ui/react'
 import { BsPencil } from 'react-icons/bs'
 import EditMenu from './EditMenu'
 import { useNavigate } from 'react-router-dom';
@@ -9,12 +9,11 @@ interface Props {
 }
 const NoteItem = ({ note }: Props) => {
   const navigate = useNavigate();
-  return <Flex border={'1px'} paddingX={5} borderColor={'gray.700'} borderRadius={10} alignItems={'center'}>
-    <Checkbox />
-    <Text marginX={5}>{ note.title }</Text>
+  return <Flex borderColor={'gray.700'} gap={1} borderRadius={10} alignItems={'center'}>
+    <Button as={'h3'} disabled={true} variant={'solid'} width={'100%'} justifyContent={'left'} textAlign={'left'} overflow={'hidden'}>{ note.title }</Button>
     <Spacer />
-    <EditMenu noteId={note._id} />
-    <Button onClick={() => navigate('/everything/notes/' + note._id)} variant={'ghost'}><BsPencil /></Button>
+    <Show above='lg'><EditMenu noteId={note._id} /></Show>
+    <Button onClick={() => navigate('/everything/notes/' + note._id)} variant={'outline'}><BsPencil /></Button>
   </Flex> 
 }
 

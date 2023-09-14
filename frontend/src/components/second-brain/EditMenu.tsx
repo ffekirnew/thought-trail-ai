@@ -1,6 +1,6 @@
-import { Menu, MenuButton, Button, MenuList, MenuItem, useDisclosure, AlertDialog, AlertDialogBody, AlertDialogCloseButton, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Spinner } from '@chakra-ui/react'
+import { Menu, MenuButton, Button, MenuList, MenuItem, useDisclosure } from '@chakra-ui/react';
 import React from 'react'
-import { BsThreeDots } from 'react-icons/bs'
+import { BsThreeDots } from 'react-icons/bs';
 import DeleteNoteAlertDialog from './DeleteNoteAlertDialog';
 import useDeleteNote from '../../hooks/useDeleteNote';
 import { useNavigate } from 'react-router-dom';
@@ -26,8 +26,8 @@ const EditMenu = ({ noteId }: Props) => {
   }
 
   return <><Menu>
-  <MenuButton as={Button} variant={'ghost'} disabled={deleteNoteLoading}>
-    { deleteNoteLoading ? <Spinner /> : <BsThreeDots /> }
+  <MenuButton as={Button} variant={'outline'} disabled={deleteNoteLoading}>
+    <BsThreeDots />
   </MenuButton>
   <MenuList>
     <MenuItem onClick={onOpen}>Delete Note</MenuItem>
@@ -41,4 +41,4 @@ const EditMenu = ({ noteId }: Props) => {
   </>
 }
 
-export default EditMenu
+export default EditMenu;
