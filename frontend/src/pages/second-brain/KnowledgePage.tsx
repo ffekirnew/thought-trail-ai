@@ -1,4 +1,4 @@
-import { Skeleton, Text, VStack } from '@chakra-ui/react'
+import { VStack } from '@chakra-ui/react'
 import NoteItem from '../../components/second-brain/NoteItem'
 import useGetNotes from '../../hooks/useGetNotes';
 import { Note } from '../../services/notesService';
@@ -9,12 +9,10 @@ const KnowledgePage = () => {
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   if (isLoading) return <VStack align={'left'}>
-    <Skeleton width={'100px'} height={'30px'} borderRadius={5} />
     { skeletons.map((skeleton) => <NoteItemSkeleton key={skeleton} />) }
     </VStack>
 
   return <VStack align={'left'}>
-    <Text fontWeight={'bold'}>August 2023</Text>
     { response?.data?.map((note: Note) => <NoteItem key={note._id} note={note} />) }
   </VStack>
 }

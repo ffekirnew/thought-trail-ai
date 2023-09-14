@@ -70,7 +70,7 @@ const KnowledgeDetail = ({ note }: Props) => {
   }
 
   if (createNoteSuccess || deleteNoteSuccess) {
-    navigate("/everything");
+    navigate("/everything/notes");
   }
 
   return <><Grid
