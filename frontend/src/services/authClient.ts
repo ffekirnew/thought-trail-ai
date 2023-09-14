@@ -2,7 +2,7 @@ import axios from "axios";
 import { FetchResponse } from "./apiClient";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:3000/"
+  baseURL: "https://thoughttrail-api.fikernew-birhanu.me/"
 })
 
 export interface User {
