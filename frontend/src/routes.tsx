@@ -10,6 +10,7 @@ import SecondBrainPage from "./pages/second-brain/SecondBrainPage";
 import KnowledgePage from "./pages/second-brain/KnowledgePage";
 import KnowledgeDetailPage from "./pages/second-brain/KnowledgeDetailPage";
 import AddNewNotePage from "./pages/second-brain/AddNewNotePage";
+import ChatPage from "./pages/second-brain/ChatPage";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,8 @@ const router = createBrowserRouter([
         path: 'everything',
         element: <SecondBrainPage />,
         children: [
-          { path: '', element: <KnowledgePage /> },
+          { path: 'notes', element: <KnowledgePage /> },
+          { path: 'chat', element: <ChatPage /> },
           { path: 'notes/:id', element: <KnowledgeDetailPage /> },
           { path: 'notes/new', element: <AddNewNotePage /> }
         ]
