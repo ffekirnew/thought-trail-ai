@@ -24,7 +24,7 @@ const ChatMessage = ({ message }: Props) => {
     borderBottomLeftRadius={message.sender === 'bot' ? 0 : 10}
     paddingY={3}
     paddingX={5}
-    width={'95%'}
+    max-width={'95%'}
     marginLeft={message.sender === 'user' ? 'auto' : 0}
     marginRight={message.sender === 'user' ? 0 : 'auto'}
   >

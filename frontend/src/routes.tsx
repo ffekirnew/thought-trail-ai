@@ -11,6 +11,7 @@ import KnowledgePage from "./pages/second-brain/KnowledgePage";
 import KnowledgeDetailPage from "./pages/second-brain/KnowledgeDetailPage";
 import AddNewNotePage from "./pages/second-brain/AddNewNotePage";
 import ChatPage from "./pages/second-brain/ChatPage";
+import JournalPage from "./pages/second-brain/JournalPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
         element: <SecondBrainPage />,
         children: [
           { index: true, element: <KnowledgePage /> },
+          { path: 'journal', element: <JournalPage /> },
           { path: 'notes', element: <KnowledgePage /> },
           { path: 'chat', element: <ChatPage /> },
           { path: 'notes/:id', element: <KnowledgeDetailPage /> },
