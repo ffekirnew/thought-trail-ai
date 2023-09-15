@@ -5,6 +5,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import InputField from '../../components/authentication/InputForm';
 import { Text, Heading, Button, VStack } from '@chakra-ui/react';
 import useRegister from '../../hooks/useRegister';
+import LoadingRipples from '../../components/ui/loading-ripples/LoadingRipples';
 
 const schema = z
 .object({
@@ -100,9 +101,10 @@ const RegisterPage = () => {
         />
         <Text fontSize={'md'} color={'red.400'}>{error}</Text>
         <Button type={'submit'} background='brand.primary' disabled={isLoading} borderRadius={'full'} size={'lg'}>
-          <Text fontWeight={'bold'}>
-           Register 
-          </Text>
+          { isLoading ?
+            <LoadingRipples color={'gray.200'} size={'sm'} /> :
+            <Text fontWeight={'bold'}>Register</Text>
+          }
         </Button>
         </VStack>
       </form>

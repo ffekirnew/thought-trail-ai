@@ -5,6 +5,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import InputField from '../../components/authentication/InputForm';
 import { Text, Heading, Button, VStack } from '@chakra-ui/react';
 import useLogin from '../../hooks/useLogin';
+import LoadingRipples from '../../components/ui/loading-ripples/LoadingRipples';
 
 const schema = z.object({
   username: z.string().min(3, { message: "Username must be at least 3 charachters." }),
@@ -47,10 +48,11 @@ const SignInPage = () => {
           disabled={isLoading}
         />
         <Text fontSize={'md'} color='red.400'>{error}</Text>
-        <Button type={'submit'} background='brand.primary' disabled={isLoading} borderRadius={'full'} size={'lg'}>
-          <Text fontWeight={'bold'}>
-           Sign In 
-          </Text>
+        <Button type={'submit'} background={'brand.primary'} disabled={isLoading} borderRadius={'full'} size={'lg'}>
+          { isLoading ?
+            <LoadingRipples color={'gray.200'} size={'sm'} /> :
+            <Text fontWeight={'bold'}>Sign In</Text>
+          }
         </Button>
         </VStack>
       </form>
