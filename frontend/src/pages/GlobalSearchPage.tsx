@@ -23,7 +23,7 @@ const GlobalSearchPage = () => {
     <VStack alignItems={'left'}>
         { searches.map((search, index) => <Search key={index} content={search} />) }
     </VStack>}
-    chatBox={<ChatBox buttonText={'Search'} />}
+    chatBox={<ChatBox />}
   />
 }
 

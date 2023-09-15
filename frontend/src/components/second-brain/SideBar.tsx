@@ -6,6 +6,7 @@ import SideBarOption from './SideBarOption';
 import logo from '../../assets/logo.svg';
 import ColorModeSwitch from '../shared/ColorModeSwitch';
 import SideBarUserComponent from './SideBarUserComponent';
+import { BsFillJournalBookmarkFill } from 'react-icons/bs';
 
 const SideBar = () => {
   const { colorMode } = useColorMode();
@@ -22,10 +23,12 @@ const SideBar = () => {
         <Image src={logo} boxSize={'30px'} borderRadius={'full'}/>
       </Link>
       <Text as={'h2'} fontSize={'md'} fontWeight={'semibold'} marginEnd={5}>ThoughtTrail AI</Text>
-      <ColorModeSwitch variant='ghost' />
+      <Spacer />
+      <ColorModeSwitch variant={'ghost'} />
     </HStack>
     <VStack align={'left'} width={'100%'} gap={2} paddingX={5}>
-      <Link to={'/everything/notes'}><SideBarOption text='Notes' icon={<BiSolidInbox />} /></Link>
+      <Link to={'/everything/journal'}><SideBarOption text='Journal' icon={<BsFillJournalBookmarkFill />} /></Link>
+      <Link to={'/everything/notes'}><SideBarOption text='Collections' icon={<BiSolidInbox />} /></Link>
       <Link to={'/everything/chat'}><SideBarOption text='Chat' icon={<BiMessageSquare />} /></Link>
       <SideBarOption text='Saved' icon={<BiStar />} />
       <SideBarOption text='Tasks' icon={<BiFlag />} />
