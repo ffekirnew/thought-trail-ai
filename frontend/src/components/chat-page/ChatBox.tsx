@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import useChatStore, { Chat } from '../../state/useChatStore';
+import { BiSend } from 'react-icons/bi';
 
 const schema = z.object({
   chat: z.string().min(1)
@@ -31,8 +32,8 @@ const ChatBox = () => {
         placeholder='Send a message'
         resize={'none'}
       />
-      <InputRightElement width={'3.5rem'} marginX={'1rem'}>
-        <Button type={'submit'} variant={'outline'} size={'sm'}>Send</Button>
+      <InputRightElement width={'3.5rem'} marginX={'0rem'}>
+        <Button type={'submit'} variant={'outline'} size={'sm'}><BiSend /></Button>
       </InputRightElement>
     </InputGroup>
   </form>

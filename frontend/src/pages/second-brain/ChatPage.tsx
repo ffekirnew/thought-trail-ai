@@ -29,7 +29,7 @@ const ChatPage = () => {
     <GridItem area={'chat'}>
       <Grid gap={5} height={'100%'} templateRows={"auto minmax(0, 1fr)"}>
         <GridItem>
-          <HStack alignItems={'center'} justifyContent={'center'}>
+          <HStack>
             <Menu>
               <MenuButton as={Button} variant={'solid'} rightIcon={<BsChevronDown />}>Based On</MenuButton>
               <MenuList>
