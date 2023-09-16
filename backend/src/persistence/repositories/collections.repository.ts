@@ -46,8 +46,6 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-
-
   async getAllCollections(userId: Types.ObjectId): Promise<CollectionEntity[]> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
@@ -131,6 +129,7 @@ class CollectionRepository implements ICollectionsRepository {
       _id: collectionDocument._id,
       name: collectionDocument.name,
       description: collectionDocument.description,
+      slug: collectionDocument.slug,
       notes: collectionDocument.notes,
       createdAt: collectionDocument.createdAt,
       updatedAt: collectionDocument.updatedAt
