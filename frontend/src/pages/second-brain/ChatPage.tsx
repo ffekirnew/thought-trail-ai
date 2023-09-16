@@ -4,10 +4,12 @@ import useChatStore from '../../state/useChatStore';
 import ChatMessage from '../../components/second-brain/ChatMessage';
 import { useRef, useEffect } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
+import { useGetCollections } from '../../hooks/collections';
 
 const ChatPage = () => {
   const { chats } = useChatStore();
   const chatRef = useRef<HTMLDivElement>(null);
+  const { data: collections } = useGetCollections();
 
   useEffect(() => {
     if (chatRef.current) {
@@ -40,10 +42,7 @@ const ChatPage = () => {
             <Menu>
               <MenuButton as={Button} variant={'solid'} rightIcon={<BsChevronDown />}>Collection</MenuButton>
               <MenuList>
-                <MenuItem>Collection 1</MenuItem>
-                <MenuItem>Collection 2</MenuItem>
-                <MenuItem>Collection 3</MenuItem>
-                <MenuItem>Collection 4</MenuItem>
+                { collections?.data?.map((collection) => <MenuItem>{ collection.name }</MenuItem> ) }
               </MenuList>
             </Menu>
           </HStack>

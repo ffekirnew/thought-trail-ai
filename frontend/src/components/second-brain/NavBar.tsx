@@ -17,9 +17,6 @@ const NavBar = () => {
     </Show>
     <SearchBox />
     <Show above={'lg'}>
-      <Button onClick={() => navigate('/everything/notes/new')} variant={'solid'} borderRadius={10} paddingX={10} background={'brand.primary'} color={'white'}>
-        <Text>Add new Note</Text>
-      </Button>
       <Button onClick={() => navigate('/everything/journals/new')} variant={'solid'} borderRadius={10} paddingX={10} background={'brand.primary'} color={'white'}>
         <Text>Add a Journal</Text>
       </Button>

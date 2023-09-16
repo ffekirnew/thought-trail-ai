@@ -1,9 +1,5 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({
-  baseURL: "https://thoughttrail-api.fikernew-birhanu.me"
-})
-
 export interface FetchResponse<T> {
   success: boolean;
   message: string;
@@ -13,13 +9,17 @@ export interface FetchResponse<T> {
 
 class ApiClient<T> {
   endpoint: string;
+  axiosInstance;
 
   constructor(endpoint: string) {
     this.endpoint = endpoint;
+    this.axiosInstance = axios.create({
+      baseURL: "https://thoughttrail-api.fikernew-birhanu.me"
+    });
   }
 
   getAll = async () => {
-    return axiosInstance.get<FetchResponse<T[]>>(this.endpoint, {
+    return this.axiosInstance.get<FetchResponse<T[]>>(this.endpoint, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -27,7 +27,7 @@ class ApiClient<T> {
   }
 
   get = async(_id?: string) => {
-    return axiosInstance.get<FetchResponse<T>>(this.endpoint + "/" + _id, {
+    return this.axiosInstance.get<FetchResponse<T>>(this.endpoint + "/" + _id, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -35,7 +35,7 @@ class ApiClient<T> {
   }
 
   create = async (data: T) => {
-    return axiosInstance.post<FetchResponse<T>>(this.endpoint, data, {
+    return this.axiosInstance.post<FetchResponse<T>>(this.endpoint, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -43,7 +43,7 @@ class ApiClient<T> {
   }
 
   update = async (_id: string, data: T) => {
-    return axiosInstance.put<FetchResponse<T>>(this.endpoint + "/" + _id, data, {
+    return this.axiosInstance.put<FetchResponse<T>>(this.endpoint + "/" + _id, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -51,7 +51,7 @@ class ApiClient<T> {
   }
 
   delete = async (_id: string) => {
-    return axiosInstance.delete<FetchResponse<T>>(this.endpoint + "/" + _id, {
+    return this.axiosInstance.delete<FetchResponse<T>>(this.endpoint + "/" + _id, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }

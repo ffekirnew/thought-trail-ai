@@ -14,6 +14,7 @@ import ChatPage from "./pages/second-brain/ChatPage";
 import JournalPage from "./pages/second-brain/JournalPage";
 import JournalDetailPage from "./pages/second-brain/JournalDetailPage";
 import AddNewJournalPage from "./pages/second-brain/AddNewJournalPage";
+import CollectionsPage from "./pages/second-brain/CollectionsPage";
 
 const router = createBrowserRouter([
   {
@@ -41,9 +42,13 @@ const router = createBrowserRouter([
           { path: 'journals', element: <JournalPage /> },
           { path: 'journals/:id', element: <JournalDetailPage /> },
           { path: 'journals/new', element: <AddNewJournalPage /> },
+
           { path: 'notes', element: <KnowledgePage /> },
           { path: 'notes/:id', element: <KnowledgeDetailPage /> },
           { path: 'notes/new', element: <AddNewNotePage /> },
+
+          { path: 'collections', element: <CollectionsPage /> },
+
           { path: 'chat', element: <ChatPage /> },
         ]
       }
