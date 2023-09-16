@@ -2,6 +2,7 @@ import mongoose, { Document, Model, Schema } from 'mongoose';
 import { INoteDocument, noteSchema } from './note.model';
 import { ITagDocument, tagSchema } from './tag.model';
 import { IJournalDocument, journalSchema } from './journal.model';
+import { ICollectionDocument, collectionSchema } from './collection.model';
 
 export interface IUserDocument extends Document {
   name: string;
@@ -12,6 +13,7 @@ export interface IUserDocument extends Document {
   profilePicture: string;
   emailVerified: boolean;
   verificationToken: string;
+  collections: ICollectionDocument[];
   notes: INoteDocument[];
   journals: IJournalDocument[];
   tags: ITagDocument[];
@@ -26,6 +28,7 @@ const userSchema = new Schema<IUserDocument>({
   profilePicture: String,
   emailVerified: Boolean,
   verificationToken: String,
+  collections: { type: [collectionSchema], default: [] },
   notes: { type: [noteSchema], default: [] },
   journals: { type: [journalSchema], default: [] },
   tags: { type: [tagSchema], default: [] }

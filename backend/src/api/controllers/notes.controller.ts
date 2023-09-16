@@ -4,12 +4,11 @@ import NotesApplication from "../../application/features/notes/notes.application
 import { CreateNoteDto, DeleteNoteDto, GetAllNotesDto, GetNoteDto, UpdateNoteDto } from "../../application/features/notes/dtos";
 
 class NotesController {
-  notesRepository: NotesRepository;
   notesApplication: NotesApplication;
 
   constructor() {
-    this.notesRepository = new NotesRepository();
-    this.notesApplication = new NotesApplication(this.notesRepository);
+    const notesRepository = new NotesRepository();
+    this.notesApplication = new NotesApplication(notesRepository);
   }
 
   create = async (req: Request, res: Response) => {

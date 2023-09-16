@@ -1,3 +1,4 @@
+export { default as CollectionModel } from './collection.model';
 export { default as UserModel } from './user.model';
 export { default as NoteModel } from './note.model';
 export { default as JournalModel } from './journal.model';

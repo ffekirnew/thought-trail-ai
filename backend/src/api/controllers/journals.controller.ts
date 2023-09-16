@@ -4,12 +4,11 @@ import JournalsApplication from "../../application/features/journals/journals.ap
 import { CreateJournalDto, DeleteJournalDto, GetAllJournalsDto, GetJournalDto, UpdateJournalDto } from "../../application/features/journals/dtos";
 
 class JournalsController {
-  journalsRepository: JournalsRepository;
   journalsApplication: JournalsApplication;
 
   constructor() {
-    this.journalsRepository = new JournalsRepository();
-    this.journalsApplication = new JournalsApplication(this.journalsRepository);
+    const journalsRepository = new JournalsRepository();
+    this.journalsApplication = new JournalsApplication(journalsRepository);
   }
 
   create = async (req: Request, res: Response) => {
