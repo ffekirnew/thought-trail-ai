@@ -1,6 +1,7 @@
 import { VStack, Text, HStack, Spacer, Button } from "@chakra-ui/react"
 import { Collection } from "../../services/collectionsService"
 import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (date: Date) => {
   return format(new Date(date), 'MMM dd');
@@ -10,10 +11,18 @@ interface Props {
   collection: Collection
 }
 const CollectionItem = ({ collection }: Props) => {
-  return <Button variant={'solid'} height={'auto'} textAlign={'left'} padding={5} borderRadius={10}>
+  const navigate = useNavigate();
+
+  return <Button
+      variant={'solid'}
+      height={'auto'}
+      textAlign={'left'}
+      padding={5}
+      borderRadius={10}
+      onClick={() => navigate(`/everything/collections/${collection.slug}`)}>
     <VStack align={'left'} width={'100%'} gap={2}>
-      <Text as={'h3'} fontSize={'2xl'} fontWeight={'bold'}>{ collection.name }</Text> 
-      <Text as={'p'} fontSize={'md'} fontWeight={'light'}>{ collection.description }</Text>
+      <Text as={'h3'} fontSize={'2xl'} fontWeight={'bold'} overflow={'hidden'}>{ collection.name }</Text> 
+      <Text as={'p'} fontSize={'md'} fontWeight={'light'} overflow={'hidden'}>{ collection.description }</Text>
       <HStack>
         <Text fontWeight={'light'}>{ formatDate(collection.updatedAt!) }</Text>
         <Spacer />

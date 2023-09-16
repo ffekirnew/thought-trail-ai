@@ -24,7 +24,7 @@ const JournalItem = ({ journal }: Props) => {
         width={'100%'}
         border={'1px'}
         paddingX={5}
-        borderRadius={5}
+        borderRadius={10}
         borderColor={ colorMode === 'dark' ? 'gray.700' : 'gray.100' }
         gap={5}>
         <Checkbox />
