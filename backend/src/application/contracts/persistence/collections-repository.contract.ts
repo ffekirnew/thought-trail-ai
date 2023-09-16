@@ -9,9 +9,11 @@ abstract class ICollectionsRepository {
   createCollection: (userId: Types.ObjectId, collection: CollectionEntity) => Promise<Types.ObjectId | null>;
   deleteCollection: (userId: Types.ObjectId, collectionId: Types.ObjectId) => Promise<void>;
   updateCollection: (userId: Types.ObjectId, collectionId: Types.ObjectId, collection: CollectionEntity) => Promise<void>;
-  addNoteToCollection: (userId: Types.ObjectId, collectionId: Types.ObjectId, note: NoteEntity) => Promise<Types.ObjectId | null>;
-  getCollectionNote: (userId: Types.ObjectId, collectionId: Types.ObjectId, noteId: Types.ObjectId) => Promise<NoteEntity | null>;
-  getCollectionNoteBySlug: (userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId) => Promise<NoteEntity | null>;
+  getCollectionNotes: (userId: Types.ObjectId, collectionSlug: string) => Promise<NoteEntity[]>;
+  getCollectionNote: (userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId) => Promise<NoteEntity | null>;
+  addNoteToCollection: (userId: Types.ObjectId, collectionSlug: string, note: NoteEntity) => Promise<Types.ObjectId | null>;
+  removeNoteFromCollection: (userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId) => Promise<void>;
+  updateNoteInCollection: (userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId, note: NoteEntity) => Promise<void>;
 
 }
 

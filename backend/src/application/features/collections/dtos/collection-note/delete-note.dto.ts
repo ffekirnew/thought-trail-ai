@@ -1,21 +1,21 @@
+import Dto from "../../../../common/dto";
 import { z } from "zod";
-import Dto from "../../../common/dto";
 
-class GetCollectionNoteDto implements Dto {
+class DeleteNoteDto implements Dto {
   userId: string;
-  collectionId: string;
+  collectionSlug: string;
   noteId: string;
 
-  constructor(userId: string, collectionId: string, noteId: string) {
+  constructor(userId: string, collectionSlug: string, noteId: string) {
     this.userId = userId;
-    this.collectionId = collectionId;
+    this.collectionSlug = collectionSlug;
     this.noteId = noteId;
   }
 
   validate(): void {
-    const validator = z.object({ 
+    const validator = z.object({
       userId: z.string().min(1, {message: 'User ID is required'}),
-      collectionId: z.string().min(1, {message: 'Collection ID is required'}),
+      collectionSlug: z.string().min(1, {message: 'Collection ID is required'}),
       noteId: z.string().min(1, {message: 'Note ID is required'}),
     });
 
@@ -27,4 +27,5 @@ class GetCollectionNoteDto implements Dto {
   }
 }
 
-export default GetCollectionNoteDto;
+export default DeleteNoteDto;
+

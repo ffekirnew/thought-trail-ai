@@ -1,9 +1,10 @@
 import { Request, Response } from "express";
 import { CollectionsRepository, NotesRepository } from "../../persistence/repositories";
 import CollectionsApplication from "../../application/features/collections/collections.application";
-import { AddNoteToCollectionDto, CreateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionBySlugDto, GetCollectionDto, GetCollectionNoteBySlugDto, GetCollectionNoteDto, UpdateCollectionDto } from "../../application/features/collections/dtos";
+import { CreateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionBySlugDto, GetCollectionDto, UpdateCollectionDto } from "../../application/features/collections/dtos";
 import Slugify from "../../infrastructure/slug/slugify";
 import { CreateNoteDto } from "../../application/features/notes/dtos";
+import { AddNoteDto, DeleteNoteDto, GetNote, GetNotes, UpdateNoteDto } from "../../application/features/collections/dtos/collection-note";
 
 class CollectionsController {
   collectionsApplication: CollectionsApplication;
@@ -83,36 +84,59 @@ class CollectionsController {
   } 
 
   addNoteToCollection = async (req: Request, res: Response) => {
-    const { collectionId } = req.params;
+    const { collectionSlug } = req.params;
     const { userId, note } = req.body;
 
     const newNoteDto = new CreateNoteDto(userId, note.title, note.body, note.tags);
-    const addNoteToCollectionDto = new AddNoteToCollectionDto(userId, collectionId, newNoteDto);
+    const addNoteToCollectionDto = new AddNoteDto(userId, collectionSlug, newNoteDto);
 
     const response = await this.collectionsApplication.addNoteToCollection(addNoteToCollectionDto);
     if (response.success)
-      res.status(204).send(response);
+      res.status(201).send(response);
     else
       res.status(400).send(response);
   }
 
-  getNote = async (req: Request, res: Response) => {
-    const { collectionId, noteId } = req.params;
+  getNotes = async (req: Request, res: Response) => {
+    const { collectionSlug } = req.params;
     const { userId } = req.body;
-    const getCollectionNoteDto = new GetCollectionNoteDto(userId, collectionId, noteId);
+    const getCollectionNotesDto = new GetNotes(userId, collectionSlug);
 
-    const response = await this.collectionsApplication.getCollectionNote(getCollectionNoteDto);
+    const response = await this.collectionsApplication.getNotes(getCollectionNotesDto);
+    if (response.success) res.status(200).send(response);
+    else res.status(400).send(response);
+  }
+
+  getNote = async (req: Request, res: Response) => {
+    const { collectionSlug, noteId } = req.params;
+    const { userId } = req.body;
+    const getCollectionNoteDto = new GetNote(userId, collectionSlug, noteId);
+
+    const response = await this.collectionsApplication.getNote(getCollectionNoteDto);
     if (response.success) res.status(200).send(response);
     else res.status(400).send(response);
   }
   
-  getNoteBySlug = async (req: Request, res: Response) => {
+  updateNote = async (req: Request, res: Response) => {
+    const { collectionSlug, noteId } = req.params;
+    const { userId, note } = req.body;
+
+    const noteDto = new CreateNoteDto(userId, note.title, note.body, note.tags);
+    const updateNotedto = new UpdateNoteDto(userId, collectionSlug, noteId, noteDto);
+
+    const response = await this.collectionsApplication.updateNoteInCollection(updateNotedto);
+    if (response.success) res.status(204).send(response);
+    else res.status(400).send(response);
+  }
+
+  deleteNote = async (req: Request, res: Response) => {
     const { collectionSlug, noteId } = req.params;
     const { userId } = req.body;
-    const getCollectionNoteBySlugDto = new GetCollectionNoteBySlugDto(userId, collectionSlug, noteId);
 
-    const response = await this.collectionsApplication.getCollectionNoteBySlug(getCollectionNoteBySlugDto);
-    if (response.success) res.status(200).send(response);
+    const deleteNotedto = new DeleteNoteDto(userId, collectionSlug, noteId);
+
+    const response = await this.collectionsApplication.deleteNoteFromCollection(deleteNotedto);
+    if (response.success) res.status(204).send(response);
     else res.status(400).send(response);
   }
 }

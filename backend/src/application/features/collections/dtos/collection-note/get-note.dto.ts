@@ -1,7 +1,7 @@
+import Dto from "../../../../common/dto";
 import { z } from "zod";
-import Dto from "../../../common/dto";
 
-class GetCollectionNoteBySlugDto implements Dto {
+class GetNoteDto implements Dto {
   userId: string;
   collectionSlug: string;
   noteId: string;
@@ -13,9 +13,9 @@ class GetCollectionNoteBySlugDto implements Dto {
   }
 
   validate(): void {
-    const validator = z.object({ 
+    const validator = z.object({
       userId: z.string().min(1, {message: 'User ID is required'}),
-      collectionSlug: z.string().min(1, {message: 'Collection slug is required'}),
+      collectionSlug: z.string().min(1, {message: 'Collection ID is required'}),
       noteId: z.string().min(1, {message: 'Note ID is required'}),
     });
 
@@ -27,4 +27,5 @@ class GetCollectionNoteBySlugDto implements Dto {
   }
 }
 
-export default GetCollectionNoteBySlugDto;
+export default GetNoteDto;
+

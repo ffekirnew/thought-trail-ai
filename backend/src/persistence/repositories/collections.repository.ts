@@ -8,6 +8,7 @@ class CollectionRepository implements ICollectionsRepository {
   constructor(
     private readonly notesRepository: NotesRepository
   ) {}
+
   private async execute<T>(fn: () => Promise<T>): Promise<T> {
     try {
       return await fn();
@@ -105,13 +106,13 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-  async addNoteToCollection(userId: Types.ObjectId, collectionId: Types.ObjectId, note: NoteEntity): Promise<Types.ObjectId> {
+  async addNoteToCollection(userId: Types.ObjectId, collectionSlug: string, note: NoteEntity): Promise<Types.ObjectId> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection._id.equals(collectionId));
+      const collection = user.collections.find((collection) => collection.slug === collectionSlug);
 
       if (!collection) {
         throw new Error("Collection not found");
@@ -121,30 +122,9 @@ class CollectionRepository implements ICollectionsRepository {
       await user.save();
       return null;
     });
-  }
+  } 
 
-  async getCollectionNote(userId: Types.ObjectId, collectionId: Types.ObjectId, noteId: Types.ObjectId): Promise<NoteEntity> {
-    return this.execute(async () => {
-      const user = await UserModel.findOne({ _id: userId });
-      if (!user) {
-        throw new Error("User not found");
-      }
-
-      const collection = user.collections.find((collection) => collection._id.equals(collectionId));
-      if (!collection) {
-        throw new Error("Collection not found");
-      }
-
-      const note = collection.notes.find((note) => note._id.equals(noteId));
-
-      if (!note) {
-        throw new Error("Note not found");
-      }
-      return this.notesRepository.toNoteEntity(note);
-    });
-  }
-
-  async getCollectionNoteBySlug(userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId): Promise<NoteEntity | null> {
+  async getCollectionNote(userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId): Promise<NoteEntity | null> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -164,6 +144,68 @@ class CollectionRepository implements ICollectionsRepository {
       return this.notesRepository.toNoteEntity(note);
     });
   }
+
+  async getCollectionNotes(userId: Types.ObjectId, collectionSlug: string): Promise<NoteEntity[]> {
+    return this.execute(async () => {
+      const user = await UserModel.findOne({ _id: userId });
+      if (!user) {
+        throw new Error("User not found");
+      }
+      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+
+      if (!collection) {
+        throw new Error("Collection not found");
+      }
+
+      return collection.notes.map((note) => this.notesRepository.toNoteEntity(note));
+    });
+  }
+    async removeNoteFromCollection(userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId): Promise<void> {
+     return this.execute(async () => {
+      const user = await UserModel.findOne({ _id: userId });
+      if (!user) {
+        throw new Error("User not found");
+      }
+      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+
+      if (!collection) {
+        throw new Error("Collection not found");
+      }
+
+      const noteIndex = collection.notes.findIndex((note) => note._id.equals(noteId));
+      
+      if (noteIndex === -1) {
+        throw new Error("Note not found");
+      }
+
+      collection.notes.splice(noteIndex, 1);
+      await user.save();
+      });
+    }
+
+    async updateNoteInCollection(userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId, note: NoteEntity): Promise<void> {
+    return this.execute(async () => {
+      const user = await UserModel.findOne({ _id: userId });
+      if (!user) {
+        throw new Error("User not found");
+      }
+      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+
+      if (!collection) {
+        throw new Error("Collection not found");
+      }
+
+      const noteIndex = collection.notes.findIndex((note) => note._id.equals(noteId));
+
+      if (noteIndex === -1) {
+        throw new Error("Note not found");
+      }
+
+      collection.notes[noteIndex] = this.notesRepository.toNoteDocument(note);
+      await user.save();
+    });
+  }
+
 
   private toCollectionEntity(collectionDocument: any): CollectionEntity {
     const collection = new CollectionEntity({
