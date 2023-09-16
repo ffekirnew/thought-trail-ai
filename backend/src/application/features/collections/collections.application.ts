@@ -3,7 +3,7 @@ import { ISlugify } from "../../contracts/infrastructure";
 import { ICollectionsRepository } from "../../contracts/persistence"
 import { BaseResponse } from "../../responses";
 import { NoteDto } from "../notes/dtos";
-import { CreateCollectionDto, UpdateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionDto, GetCollectionBySlugDto, CollectionDto, AddNoteToCollectionDto, GetCollectionNoteDto } from "./dtos"
+import { CreateCollectionDto, UpdateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionDto, GetCollectionBySlugDto, CollectionDto, AddNoteToCollectionDto, GetCollectionNoteDto, GetCollectionNoteBySlugDto } from "./dtos"
 import { Types } from "mongoose";
 
 class CollectionsApplication {
@@ -108,10 +108,20 @@ class CollectionsApplication {
     }
   }
 
-  getNote = async (getCollectionNoteDto: GetCollectionNoteDto): Promise<BaseResponse<NoteDto>> => {
+  getCollectionNote = async (getCollectionNoteDto: GetCollectionNoteDto): Promise<BaseResponse<NoteDto>> => {
     try {
       getCollectionNoteDto.validate();
       const note = await this.collectionsRepository.getCollectionNote(new Types.ObjectId(getCollectionNoteDto.userId), new Types.ObjectId(getCollectionNoteDto.collectionId), new Types.ObjectId(getCollectionNoteDto.noteId));
+      return BaseResponse.success<NoteDto>("Collection note retrieved successfully.", NoteDto.fromEntity(note));
+    } catch (error) {
+      return BaseResponse.error<NoteDto>("Collection note could not be retrieved.", error.message);
+    } 
+  }
+
+  getCollectionNoteBySlug = async (getCollectionNoteBySlugDto: GetCollectionNoteBySlugDto): Promise<BaseResponse<NoteDto>> => {
+    try {
+      getCollectionNoteBySlugDto.validate();
+      const note = await this.collectionsRepository.getCollectionNoteBySlug(new Types.ObjectId(getCollectionNoteBySlugDto.userId), getCollectionNoteBySlugDto.collectionSlug, new Types.ObjectId(getCollectionNoteBySlugDto.noteId));
       return BaseResponse.success<NoteDto>("Collection note retrieved successfully.", NoteDto.fromEntity(note));
     } catch (error) {
       return BaseResponse.error<NoteDto>("Collection note could not be retrieved.", error.message);
