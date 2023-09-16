@@ -2,7 +2,7 @@ import { CollectionEntity, NoteEntity, TagEntity } from "../../../domain/entitie
 import { ISlugify } from "../../contracts/infrastructure";
 import { ICollectionsRepository } from "../../contracts/persistence"
 import { BaseResponse } from "../../responses";
-import { CreateCollectionDto, UpdateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionDto, CollectionDto, AddNoteToCollectionDto } from "./dtos"
+import { CreateCollectionDto, UpdateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionDto, GetCollectionBySlugDto, CollectionDto, AddNoteToCollectionDto } from "./dtos"
 import { Types } from "mongoose";
 
 class CollectionsApplication {
@@ -65,6 +65,16 @@ class CollectionsApplication {
     } catch (error) {
       return BaseResponse.error<CollectionDto[]>("Collections could not be retrieved.", error.message);
     }
+  }
+
+  getBySlug = async (getCollectionBySlugDto: GetCollectionBySlugDto): Promise<BaseResponse<CollectionDto>> => {
+    try {
+      getCollectionBySlugDto.validate();
+      const collection = await this.collectionsRepository.getCollectionBySlug(new Types.ObjectId(getCollectionBySlugDto.userId), getCollectionBySlugDto.collectionSlug);
+      return BaseResponse.success<CollectionDto>("Collection retrieved successfully.", CollectionDto.fromEntity(collection));
+    } catch (error) {
+      return BaseResponse.error<CollectionDto>("Collection could not be retrieved.", error.message);
+    } 
   }
 
   get = async (getCollectionDto: GetCollectionDto): Promise<BaseResponse<CollectionDto>> => {

@@ -31,6 +31,23 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
+  async getCollectionBySlug(userId: Types.ObjectId, collectionSlug: string): Promise<CollectionEntity | null> {
+    return this.execute(async () => {
+      const user = await UserModel.findOne({ _id: userId });
+      if (!user) {
+        throw new Error("User not found");
+      }
+      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+
+      if (!collection) {
+        throw new Error("Collection not found");
+      }
+      return this.toCollectionEntity(collection);
+    });
+  }
+
+
+
   async getAllCollections(userId: Types.ObjectId): Promise<CollectionEntity[]> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
