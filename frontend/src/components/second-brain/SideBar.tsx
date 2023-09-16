@@ -27,7 +27,7 @@ const SideBar = () => {
       <ColorModeSwitch variant={'ghost'} />
     </HStack>
     <VStack align={'left'} width={'100%'} gap={2} paddingX={5}>
-      <Link to={'/everything/journal'}><SideBarOption text='Journal' icon={<BsFillJournalBookmarkFill />} /></Link>
+      <Link to={'/everything/journals'}><SideBarOption text='Journals' icon={<BsFillJournalBookmarkFill />} /></Link>
       <Link to={'/everything/notes'}><SideBarOption text='Collections' icon={<BiSolidInbox />} /></Link>
       <Link to={'/everything/chat'}><SideBarOption text='Chat' icon={<BiMessageSquare />} /></Link>
       <SideBarOption text='Saved' icon={<BiStar />} />

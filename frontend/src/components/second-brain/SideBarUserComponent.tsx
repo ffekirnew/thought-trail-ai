@@ -1,10 +1,9 @@
 import avatar from '../../assets/user_avatar.png';
 import { HStack, VStack, Text, Avatar, AvatarBadge, Menu, Button, MenuButton, MenuItem, MenuList, Spacer, useColorMode } from "@chakra-ui/react"
-import useGetUser from '../../hooks/useGetUser';
 import { User } from '../../services/authClient';
 import { BsThreeDots } from 'react-icons/bs';
-import useLogout from '../../hooks/useLogout';
 import { useNavigate } from 'react-router-dom';
+import { useGetUser, useLogout } from '../../hooks/auth';
 
 const SideBarUserComponent = () => {
   const navigate = useNavigate();
