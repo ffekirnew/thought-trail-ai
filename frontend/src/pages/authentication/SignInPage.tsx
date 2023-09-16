@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 import InputField from '../../components/authentication/InputForm';
 import { Text, Heading, Button, VStack } from '@chakra-ui/react';
-import useLogin from '../../hooks/useLogin';
 import LoadingRipples from '../../components/ui/loading-ripples/LoadingRipples';
+import { useLogin } from '../../hooks/auth';
 
 const schema = z.object({
   username: z.string().min(3, { message: "Username must be at least 3 charachters." }),

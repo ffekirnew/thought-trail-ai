@@ -2,7 +2,7 @@ import { Menu, MenuButton, Button, MenuList, MenuItem, useDisclosure } from '@ch
 import React from 'react'
 import { BsThreeDots } from 'react-icons/bs';
 import DeleteNoteAlertDialog from './DeleteNoteAlertDialog';
-import useDeleteNote from '../../hooks/useDeleteNote';
+import { useDeleteNote } from '../../hooks/notes';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {

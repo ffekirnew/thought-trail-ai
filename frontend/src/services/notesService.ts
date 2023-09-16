@@ -6,6 +6,8 @@ export interface Note {
   title: string;
   body: string;
   tags: Tag[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-export default new ApiClient<Note>("/notes")
+export default new ApiClient<Note>("/notes");

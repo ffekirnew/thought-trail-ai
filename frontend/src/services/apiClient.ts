@@ -26,7 +26,7 @@ class ApiClient<T> {
     }).then(res => res.data);
   }
 
-  getDetails = async(_id?: string) => {
+  get = async(_id?: string) => {
     return axiosInstance.get<FetchResponse<T>>(this.endpoint + "/" + _id, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`

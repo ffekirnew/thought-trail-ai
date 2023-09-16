@@ -3,11 +3,9 @@ import { BsChevronLeft } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { Note } from '../../services/notesService';
-import useCreateNote from '../../hooks/useCreateNote';
-import useUpdateNote from '../../hooks/useUpdateNote';
 import React from 'react';
-import useDeleteNote from '../../hooks/useDeleteNote';
 import DeleteNoteAlertDialog from './DeleteNoteAlertDialog';
+import { useCreateNote, useUpdateNote, useDeleteNote } from '../../hooks/notes';
 
 interface Props {
   note?: Note

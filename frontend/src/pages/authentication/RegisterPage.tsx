@@ -4,8 +4,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { FieldValues, useForm } from 'react-hook-form';
 import InputField from '../../components/authentication/InputForm';
 import { Text, Heading, Button, VStack } from '@chakra-ui/react';
-import useRegister from '../../hooks/useRegister';
 import LoadingRipples from '../../components/ui/loading-ripples/LoadingRipples';
+import { useRegister } from '../../hooks/auth';
 
 const schema = z
 .object({

@@ -1,6 +1,6 @@
 import { VStack } from '@chakra-ui/react'
 import NoteItem from '../../components/second-brain/NoteItem'
-import useGetNotes from '../../hooks/useGetNotes';
+import { useGetNotes } from '../../hooks/notes';
 import { Note } from '../../services/notesService';
 import NoteItemSkeleton from '../../components/second-brain/skeletons/NoteItemSkeleton';
 

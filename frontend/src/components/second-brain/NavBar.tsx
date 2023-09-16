@@ -1,7 +1,6 @@
 import { HStack, Button, Text, Show, useDisclosure, Drawer, DrawerOverlay, DrawerBody, DrawerContent } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import SearchBox from './SearchBox';
-import { BsPlus } from 'react-icons/bs';
 import { BiMenu } from 'react-icons/bi';
 import { useRef } from 'react';
 import SideBar from './SideBar';
@@ -17,10 +16,18 @@ const NavBar = () => {
       <Button onClick={onOpen} variant={'ghost'}><BiMenu size={'30px'} /></Button>
     </Show>
     <SearchBox />
-    <Show above={'lg'}><Button onClick={() => navigate('/chat')} variant={'outline'} borderRadius={'full'} paddingX={5}><Text>Chat</Text></Button></Show>
-    <Show above={'lg'}><Button onClick={() => navigate('/everything/notes/new')} variant={'solid'} borderRadius={'full'} width={'15rem'} paddingX={5} background={'brand.primary'} color={'white'}>
-      <BsPlus size={'40px'} /><Text>Add new Note</Text>
-    </Button></Show>
+    <Show above={'lg'}>
+      <Button onClick={() => navigate('/everything/notes/new')} variant={'solid'} borderRadius={10} paddingX={10} background={'brand.primary'} color={'white'}>
+        <Text>Add new Note</Text>
+      </Button>
+      <Button onClick={() => navigate('/everything/journals/new')} variant={'solid'} borderRadius={10} paddingX={10} background={'brand.primary'} color={'white'}>
+        <Text>Add a Journal</Text>
+      </Button>
+      <Button onClick={() => navigate('/everything/chat')} variant={'outline'} borderRadius={10} paddingX={5}>
+        <Text>Chat</Text>
+      </Button>
+    </Show>
+
     <Drawer
       isOpen={isOpen}
       placement='left'
