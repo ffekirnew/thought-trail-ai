@@ -92,6 +92,8 @@ class NoteRepository implements INotesRepository {
       title: noteDocument.title,
       body: noteDocument.body,
       tags: noteDocument.tags,
+      createdAt: noteDocument.createdAt,
+      updatedAt: noteDocument.updatedAt
     });
     return note;
   }

@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { AuthRouter, NotesRouter, TagsRouter, UsersRouter } from './routes';
+import { AuthRouter, NotesRouter, TagsRouter, UsersRouter, JournalsRouter } from './routes';
 import { config, db } from './core';
 import swaggerUi from 'swagger-ui-express';
 
@@ -17,6 +17,7 @@ app.use(cors());
 // Use controllers
 app.use('/auth', AuthRouter);
 app.use('/notes', NotesRouter);
+app.use('/journals', JournalsRouter);
 app.use('/me', UsersRouter);
 app.use('/tags', TagsRouter);
 
