@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CollectionsRepository, NotesRepository } from "../../persistence/repositories";
 import CollectionsApplication from "../../application/features/collections/collections.application";
-import { AddNoteToCollectionDto, CreateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionBySlugDto, GetCollectionDto, UpdateCollectionDto } from "../../application/features/collections/dtos";
+import { AddNoteToCollectionDto, CreateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionBySlugDto, GetCollectionDto, GetCollectionNoteDto, UpdateCollectionDto } from "../../application/features/collections/dtos";
 import Slugify from "../../infrastructure/slug/slugify";
 import { CreateNoteDto } from "../../application/features/notes/dtos";
 
@@ -37,13 +37,23 @@ class CollectionsController {
     else
       res.status(400).send(response);
   }
-  
+
   get = async (req: Request, res: Response) => {
     const { collectionId } = req.params;
     const { userId } = req.body;
     const getCollectionDto = new GetCollectionDto(userId, collectionId);
 
     const response = await this.collectionsApplication.get(getCollectionDto);
+    if (response.success) res.status(200).send(response);
+    else res.status(400).send(response);
+  }
+  
+  getNote = async (req: Request, res: Response) => {
+    const { collectionId, noteId } = req.params;
+    const { userId } = req.body;
+    const getCollectionNoteDto = new GetCollectionNoteDto(userId, collectionId, noteId);
+
+    const response = await this.collectionsApplication.getNote(getCollectionNoteDto);
     if (response.success) res.status(200).send(response);
     else res.status(400).send(response);
   }

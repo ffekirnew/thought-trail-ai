@@ -121,7 +121,27 @@ class CollectionRepository implements ICollectionsRepository {
       await user.save();
       return null;
     });
+  }
 
+  async getCollectionNote(userId: Types.ObjectId, collectionId: Types.ObjectId, noteId: Types.ObjectId): Promise<NoteEntity> {
+    return this.execute(async () => {
+      const user = await UserModel.findOne({ _id: userId });
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      const collection = user.collections.find((collection) => collection._id.equals(collectionId));
+      if (!collection) {
+        throw new Error("Collection not found");
+      }
+
+      const note = collection.notes.find((note) => note._id.equals(noteId));
+
+      if (!note) {
+        throw new Error("Note not found");
+      }
+      return this.notesRepository.toNoteEntity(note);
+    });
   }
 
   private toCollectionEntity(collectionDocument: any): CollectionEntity {

@@ -10,6 +10,7 @@ abstract class ICollectionsRepository {
   deleteCollection: (userId: Types.ObjectId, collectionId: Types.ObjectId) => Promise<void>;
   updateCollection: (userId: Types.ObjectId, collectionId: Types.ObjectId, collection: CollectionEntity) => Promise<void>;
   addNoteToCollection: (userId: Types.ObjectId, collectionId: Types.ObjectId, note: NoteEntity) => Promise<Types.ObjectId | null>;
+  getCollectionNote: (userId: Types.ObjectId, collectionId: Types.ObjectId, noteId: Types.ObjectId) => Promise<NoteEntity | null>;
 }
 
 export default ICollectionsRepository;

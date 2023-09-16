@@ -2,7 +2,8 @@ import { CollectionEntity, NoteEntity, TagEntity } from "../../../domain/entitie
 import { ISlugify } from "../../contracts/infrastructure";
 import { ICollectionsRepository } from "../../contracts/persistence"
 import { BaseResponse } from "../../responses";
-import { CreateCollectionDto, UpdateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionDto, GetCollectionBySlugDto, CollectionDto, AddNoteToCollectionDto } from "./dtos"
+import { NoteDto } from "../notes/dtos";
+import { CreateCollectionDto, UpdateCollectionDto, DeleteCollectionDto, GetAllCollectionsDto, GetCollectionDto, GetCollectionBySlugDto, CollectionDto, AddNoteToCollectionDto, GetCollectionNoteDto } from "./dtos"
 import { Types } from "mongoose";
 
 class CollectionsApplication {
@@ -105,6 +106,16 @@ class CollectionsApplication {
     } catch (error) {
       return BaseResponse.error<string>("Note could not be added to collection.", error.message);
     }
+  }
+
+  getNote = async (getCollectionNoteDto: GetCollectionNoteDto): Promise<BaseResponse<NoteDto>> => {
+    try {
+      getCollectionNoteDto.validate();
+      const note = await this.collectionsRepository.getCollectionNote(new Types.ObjectId(getCollectionNoteDto.userId), new Types.ObjectId(getCollectionNoteDto.collectionId), new Types.ObjectId(getCollectionNoteDto.noteId));
+      return BaseResponse.success<NoteDto>("Collection note retrieved successfully.", NoteDto.fromEntity(note));
+    } catch (error) {
+      return BaseResponse.error<NoteDto>("Collection note could not be retrieved.", error.message);
+    } 
   }
 }
 

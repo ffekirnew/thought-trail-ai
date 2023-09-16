@@ -5,4 +5,5 @@ export { default as DeleteCollectionDto } from './delete-collection.dto';
 export { default as CollectionDto } from './collection.dto';
 export { default as GetAllCollectionsDto } from './get-all-collections.dto';
 export { default as GetCollectionDto } from './get-collection.dto';
+export { default as GetCollectionNoteDto } from './get-collection-note.dto';
 export { default as GetCollectionBySlugDto } from './get-collection-by-slug.dto';

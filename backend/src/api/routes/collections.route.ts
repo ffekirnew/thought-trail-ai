@@ -9,6 +9,7 @@ CollectionsRouter.use(authMiddleware);
 CollectionsRouter.post('', collectionsController.create);
 CollectionsRouter.get('', collectionsController.getAll);
 CollectionsRouter.get('/:collectionId', collectionsController.get);
+CollectionsRouter.get('/:collectionId/notes/:noteId', collectionsController.getNote);
 CollectionsRouter.get('/slug/:collectionSlug', collectionsController.getBySlug);
 CollectionsRouter.put('/:collectionId', collectionsController.update);
 CollectionsRouter.delete('/:collectionId', collectionsController.delete);
