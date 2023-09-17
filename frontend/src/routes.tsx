@@ -16,14 +16,14 @@ import JournalDetailPage from "./pages/second-brain/JournalDetailPage";
 import AddNewJournalPage from "./pages/second-brain/AddNewJournalPage";
 import CollectionsPage from "./pages/second-brain/CollectionsPage";
 import CollectionDetailPage from "./pages/second-brain/CollectionDetailPage";
+import CollectionNotePage from "./pages/second-brain/CollectionNotePage";
+import AddNewCollectionNotePage from "./pages/second-brain/AddNewCollectionNotePage";
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
     errorElement: <ErrorPage />,
-    // navigate to one of the children
-
     children: [
       { path: '/', element: <LandingPage /> },
       {
@@ -34,22 +34,19 @@ const router = createBrowserRouter([
           { path: 'register', element: <RegisterPage /> }
         ]
       },
-      { path: 'chat', element: <GlobalSearchPage /> },
       {
         path: 'everything',
         element: <SecondBrainPage />,
         children: [
-          { index: true, element: <KnowledgePage /> },
+          { index: true, element: <JournalPage /> },
           { path: 'journals', element: <JournalPage /> },
           { path: 'journals/:id', element: <JournalDetailPage /> },
           { path: 'journals/new', element: <AddNewJournalPage /> },
 
-          { path: 'notes', element: <KnowledgePage /> },
-          { path: 'notes/:id', element: <KnowledgeDetailPage /> },
-          { path: 'notes/new', element: <AddNewNotePage /> },
-
           { path: 'collections', element: <CollectionsPage /> },
-          { path: 'collections/:slug', element: <CollectionDetailPage /> },
+          { path: 'collections/:collectionSlug', element: <CollectionDetailPage /> },
+          { path: 'collections/:collectionSlug/notes/:noteId', element: <CollectionNotePage /> },
+          { path: 'collections/:collectionSlug/notes/new', element: <AddNewCollectionNotePage /> },
 
           { path: 'chat', element: <ChatPage /> },
         ]

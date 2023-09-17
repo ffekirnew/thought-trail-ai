@@ -1,15 +1,15 @@
 import { useParams } from 'react-router-dom';
-import JournalDetail from '../../components/second-brain/JournalDetail';
-import JournalDetailSkeleton from '../../components/second-brain/skeletons/JournalDetailSkeleton';
-import { useGetJournal } from '../../hooks/journals';
+import CollectionNoteDetail from '../../components/second-brain/CollectionNoteDetail';
+import CollectionNoteDetailSkeleton from '../../components/second-brain/skeletons/CollectionNoteDetailSkeleton';
+import { useGetCollectionNote } from '../../hooks/collections/notes';
 
 const CollectionNotePage = () => {
-  const { id } = useParams();
-  const { data, isLoading } = useGetJournal(id!);
+  const { collectionSlug, noteId } = useParams();
+  const { data, isLoading } = useGetCollectionNote(collectionSlug!, noteId!);
 
-  if (isLoading) return <JournalDetailSkeleton />
+  if (isLoading) return <CollectionNoteDetailSkeleton />
 
-  return <JournalDetail journal={data?.data} />
+  return <CollectionNoteDetail note={data?.data!} collectionSlug={collectionSlug!} />
 }
 
 export default CollectionNotePage;

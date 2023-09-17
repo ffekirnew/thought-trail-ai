@@ -1,10 +1,11 @@
-import { VStack, Text, Heading, Image, Grid, Button, Spacer, GridItem, Flex } from '@chakra-ui/react';
+import { VStack, Text, Heading, Image, Grid, Button, Spacer, GridItem, Flex, useColorMode } from '@chakra-ui/react';
 import logo from '../../assets/logo.svg';
 import style from './Hero.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const navigate = useNavigate();
+  const { colorMode } = useColorMode();
 
   return <Grid 
     templateAreas={{
@@ -24,7 +25,7 @@ const Hero = () => {
       <Text fontSize={'24px'} fontWeight={'normal'}>Get advantage by using an AI tool specifically designed to help you achieve more! ThoughtTrail will follow your thoughts and give you insights to help you achieve that next level.</Text>
       <Spacer />
       <Flex flexWrap={'wrap'} gap={3} justifyContent={{base: 'center', lg: 'left'}} paddingY={5}>
-        <Button onClick={() => navigate('/auth/register')} paddingX={5} borderRadius={'full'} variant={'solid'} background={'brand.primary'}>Get Started</Button>
+        <Button onClick={() => navigate('/auth/register')} paddingX={5} borderRadius={'full'} variant={'solid'} background={'brand.primary'} color={'gray.50'}>Get Started</Button>
         <Button paddingX={5} borderRadius={'full'} variant={'outline'}>Why ThoughtTrail?</Button>
         <Button onClick={() => navigate('https://github.com/ffekirnew')} paddingX={5} borderRadius={'full'} variant={'outline'}>View on GitHub</Button>
       </Flex>

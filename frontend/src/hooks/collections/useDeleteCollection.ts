@@ -1,5 +1,5 @@
 import { useState } from "react";
-import collectionsService from "../../services/journalsService";
+import collectionsService from "../../services/collectionsService";
 
 const useDeleteCollection = () => {
   const [isLoading, setLoading] = useState<boolean>(false);

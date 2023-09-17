@@ -8,6 +8,7 @@ export interface Chat {
 interface UseChatStoreType {
   chats: Chat[];
   addChat: (chat: Chat) => void;
+  reset: () => void;
 }
 
 const useChatStore = create<UseChatStoreType>(set => ({
@@ -16,6 +17,7 @@ const useChatStore = create<UseChatStoreType>(set => ({
     store.chats.push(chat);
     return { chats: store.chats };
   }),
+  reset: () => set({ chats: [] })
 }))
 
 export default useChatStore;

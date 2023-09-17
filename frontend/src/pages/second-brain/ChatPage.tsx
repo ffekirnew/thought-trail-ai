@@ -1,13 +1,14 @@
 import { Button, Flex, Grid, GridItem, HStack, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
-import ChatBox from '../../components/chat-page/ChatBox';
 import useChatStore from '../../state/useChatStore';
 import ChatMessage from '../../components/second-brain/ChatMessage';
 import { useRef, useEffect } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 import { useGetCollections } from '../../hooks/collections';
+import ChatBox from '../../components/second-brain/ChatBox';
+import ChatMenu from '../../components/second-brain/ChatMenu';
 
 const ChatPage = () => {
-  const { chats } = useChatStore();
+  const { chats, reset } = useChatStore();
   const chatRef = useRef<HTMLDivElement>(null);
   const { data: collections } = useGetCollections();
 
@@ -31,21 +32,7 @@ const ChatPage = () => {
     <GridItem area={'chat'}>
       <Grid gap={5} height={'100%'} templateRows={"auto minmax(0, 1fr)"}>
         <GridItem>
-          <HStack>
-            <Menu>
-              <MenuButton as={Button} variant={'solid'} rightIcon={<BsChevronDown />}>Based On</MenuButton>
-              <MenuList>
-                <MenuItem>Journal</MenuItem>
-                <MenuItem>A Collection</MenuItem>
-              </MenuList>
-            </Menu>
-            <Menu>
-              <MenuButton as={Button} variant={'solid'} rightIcon={<BsChevronDown />}>Collection</MenuButton>
-              <MenuList>
-                { collections?.data?.map((collection) => <MenuItem>{ collection.name }</MenuItem> ) }
-              </MenuList>
-            </Menu>
-          </HStack>
+          <ChatMenu />
         </GridItem>
         <GridItem height={'100%'} overflowY={'scroll'} ref={chatRef}>
           <Flex flexDir={'column'} justifyContent={'center'}>

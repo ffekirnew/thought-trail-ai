@@ -1,10 +1,10 @@
-import { VStack, Text, HStack, Spacer, Button } from "@chakra-ui/react"
+import { VStack, Text, HStack, Spacer, Button, Box, Flex } from "@chakra-ui/react"
 import { Collection } from "../../services/collectionsService"
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 
 const formatDate = (date: Date) => {
-  return format(new Date(date), 'MMM dd');
+  return format(new Date(date), 'MMM dd, yyyy');
 };
 
 interface Props {
@@ -17,16 +17,19 @@ const CollectionItem = ({ collection }: Props) => {
       variant={'solid'}
       height={'auto'}
       textAlign={'left'}
-      padding={5}
+      paddingY={5}
+      paddingX={0}
       borderRadius={10}
       onClick={() => navigate(`/everything/collections/${collection.slug}`)}>
-    <VStack align={'left'} width={'100%'} gap={2}>
-      <Text as={'h3'} fontSize={'2xl'} fontWeight={'bold'} overflow={'hidden'}>{ collection.name }</Text> 
-      <Text as={'p'} fontSize={'md'} fontWeight={'light'} overflow={'hidden'}>{ collection.description }</Text>
-      <HStack>
-        <Text fontWeight={'light'}>{ formatDate(collection.updatedAt!) }</Text>
+    <VStack align={'left'} width={'100%'} gap={3}>
+      <Flex flexDir={'column'} paddingX={5} gap={3}>
+        <Text as={'h3'} fontSize={'2xl'} fontWeight={'bold'} overflow={'hidden'}>{ collection.name }</Text> 
+        <Text as={'p'} fontSize={'md'} fontWeight={'light'} overflow={'hidden'}>{ collection.description }</Text>
+      </Flex>
+      <HStack paddingX={5} paddingTop={3} borderTopWidth={'1px'}>
+        <Text fontWeight={'light'}>Last Interaction: { formatDate(collection.updatedAt!) }</Text>
         <Spacer />
-        <Text fontWeight={'light'}>{ collection.notes.length } Notes</Text>
+        <Text fontWeight={'light'}>{ collection.notes?.length } Notes</Text>
       </HStack>
     </VStack>
   </Button>

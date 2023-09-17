@@ -25,7 +25,7 @@ const SideBarUserComponent = () => {
     </Avatar>
     <VStack align={'left'} gap={0}>
       <Text>{ user.name[0].toUpperCase() + user.name.slice(1) }</Text>
-      <Text color={ colorMode === 'dark' ? 'gray.300' : 'gray.600'}>{ user.username }</Text>
+      <Text color={ colorMode === 'dark' ? 'gray.300' : 'gray.600'}>@{ user.username }</Text>
     </VStack>
     <Spacer />
     <Menu>

@@ -7,7 +7,7 @@ const useAddNoteToCollection = () => {
   const [error, setError] = useState<string>("");
   const [isSuccess, setSuccess] = useState<boolean>(false);
   
-  const createCollection = (collectionId: string, note: Note) => {
+  const addNoteToCollection = (collectionId: string, note: Note) => {
     setLoading(true);
     setError("");
     setSuccess(false);
@@ -21,7 +21,7 @@ const useAddNoteToCollection = () => {
     })
   }
 
-  return { isLoading, error, isSuccess, createCollection };
+  return { isLoading, error, isSuccess, addNoteToCollection };
 }
 
 export default useAddNoteToCollection;

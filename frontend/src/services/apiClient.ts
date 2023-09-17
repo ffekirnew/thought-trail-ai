@@ -15,6 +15,7 @@ class ApiClient<T> {
     this.endpoint = endpoint;
     this.axiosInstance = axios.create({
       baseURL: "https://thoughttrail-api.fikernew-birhanu.me"
+      // baseURL: "http://localhost:3000"
     });
   }
 

@@ -8,6 +8,7 @@ const useCreateCollection = () => {
   const [isSuccess, setSuccess] = useState<boolean>(false);
   
   const createCollection = (data: Collection) => {
+    console.log(data);
     setLoading(true);
     setError("");
     setSuccess(false);

@@ -2,12 +2,14 @@ import { Text, VStack, Divider } from "@chakra-ui/react"
 import NavBar from "../components/langing-page/NavBar"
 import Hero from "../components/langing-page/Hero"
 import FeaturesGrid from "../components/langing-page/FeaturesGrid"
+import HowToUse from "../components/langing-page/HowToUse"
 
 const LandingPage = () => {
   return <VStack gap={'80px'} paddingY={5}>
     <NavBar />
     <Hero />
     <FeaturesGrid />
+    <HowToUse />
     <Divider borderColor='gray.500'/>
     <VStack as="section">
       <Text fontWeight={'bold'}>Released under the MIT License.</Text>

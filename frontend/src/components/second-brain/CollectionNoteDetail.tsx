@@ -2,20 +2,21 @@ import { useToast, useDisclosure, Grid, GridItem, Flex, Button, Input, Textarea 
 import React, { useState } from 'react'
 import { BsChevronLeft } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
-import { useCreateNote, useUpdateNote, useDeleteNote } from '../../hooks/notes';
 import DeleteNoteAlertDialog from './DeleteNoteAlertDialog';
 import { Note } from '../../services/notesService';
+import { useAddNoteToCollection, useDeleteNoteFromCollection, useUpdateNoteInCollection } from '../../hooks/collections/notes';
 
 interface Props {
-  note: Note;
+  collectionSlug: string;
+  note?: Note;
 }
-const CollectionNoteDetail = ({ note }: Props) => {
+const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const {isLoading: createNoteLoading, isSuccess: createNoteSuccess, createNote} = useCreateNote();
-  const {isLoading: updateNoteLoading, updateNote} = useUpdateNote();
-  const {isLoading: deleteNoteLoading, isSuccess: deleteNoteSuccess, deleteNote} = useDeleteNote();
+  const {isLoading: createNoteLoading, isSuccess: createNoteSuccess, addNoteToCollection} = useAddNoteToCollection();
+  const {isLoading: updateNoteLoading, updateNoteInCollection} = useUpdateNoteInCollection();
+  const {isLoading: deleteNoteLoading, isSuccess: deleteNoteSuccess, deleteNoteFromCollection} = useDeleteNoteFromCollection();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef<HTMLButtonElement>(null);
@@ -36,7 +37,7 @@ const CollectionNoteDetail = ({ note }: Props) => {
         isClosable: true,
       })
       const newNote: Note = { title: title, body: body, _id: "", tags: [] };
-      createNote(newNote);
+      addNoteToCollection(collectionSlug, newNote);
     } else {
       toast({
         title: 'Note being updated.',
@@ -47,7 +48,7 @@ const CollectionNoteDetail = ({ note }: Props) => {
         colorScheme: 'blue'
       })
       const updatedNote = { ...note, title: title, body: body };
-      updateNote(note._id, updatedNote);
+      updateNoteInCollection(collectionSlug, note._id, updatedNote);
 
     }
   }
@@ -62,7 +63,7 @@ const CollectionNoteDetail = ({ note }: Props) => {
         isClosable: true,
         colorScheme: 'blue'
       })
-      deleteNote(note._id);
+      deleteNoteFromCollection(collectionSlug, note._id);
     }
   }
 
@@ -77,7 +78,7 @@ const CollectionNoteDetail = ({ note }: Props) => {
     gap={3}>
     <GridItem area="titlebar">
     <Flex gap={2} alignItems={'center'} height={'40px'}>
-      <Button variant={'solid'} height={'100%'} onClick={() => navigate('/everything/notes')}><BsChevronLeft color={'brand.primary'} /></Button>
+      <Button variant={'solid'} height={'100%'} onClick={() => navigate(`/everything/collections/${collectionSlug}`)}><BsChevronLeft color={'brand.primary'} /></Button>
       <Input
         height={'100%'}
         size={'lg'}

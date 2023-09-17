@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const formatDate = (date: Date) => {
-  return format(new Date(date), 'MMM dd');
+  return format(new Date(date), 'MMM. dd, yyyy');
 };
 
 interface Props {
@@ -40,7 +40,7 @@ const JournalItem = ({ journal }: Props) => {
               <Text fontWeight={'light'} overflow={'hidden'}>{ journal.body }</Text>
             </Show>
             <Spacer />
-            <Text fontWeight={'bold'} width={'6rem'}>{ formattedDate }</Text>
+            <Text fontWeight={'semibold'} width={'6rem'}>{ formattedDate }</Text>
           </HStack>
         </Button>
       </HStack>
