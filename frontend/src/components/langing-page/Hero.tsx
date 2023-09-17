@@ -1,11 +1,10 @@
-import { VStack, Text, Heading, Image, Grid, Button, Spacer, GridItem, Flex, useColorMode } from '@chakra-ui/react';
+import { VStack, Text, Heading, Image, Grid, Button, Spacer, GridItem, Flex } from '@chakra-ui/react';
 import logo from '../../assets/logo.svg';
 import style from './Hero.module.css';
 import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const navigate = useNavigate();
-  const { colorMode } = useColorMode();
 
   return <Grid 
     templateAreas={{

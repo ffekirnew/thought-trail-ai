@@ -6,7 +6,7 @@ import { Note } from "../../services/notesService";
 const useGetCollectionNote = (collectionSlug: string, noteId: string) => {
   return useQuery<FetchResponse<Note>, Error>({
     queryKey: ["collections", collectionSlug, "notes", noteId],
-    queryFn: () => collectionsService.getNoteBySlug(collectionSlug, noteId),
+    queryFn: () => collectionsService.getNote(collectionSlug, noteId),
   });
 }
 

@@ -1,15 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import ErrorPage from "./pages/ErrorPage";
-import GlobalSearchPage from "./pages/GlobalSearchPage";
 import Layout from "./pages/Layout";
 import LandingPage from "./pages/LandingPage";
 import SignInPage from "./pages/authentication/SignInPage";
 import RegisterPage from "./pages/authentication/RegisterPage";
 import AuthenticationPage from "./pages/authentication/AuthenticationPage";
 import SecondBrainPage from "./pages/second-brain/SecondBrainPage";
-import KnowledgePage from "./pages/second-brain/KnowledgePage";
-import KnowledgeDetailPage from "./pages/second-brain/KnowledgeDetailPage";
-import AddNewNotePage from "./pages/second-brain/AddNewNotePage";
 import ChatPage from "./pages/second-brain/ChatPage";
 import JournalPage from "./pages/second-brain/JournalPage";
 import JournalDetailPage from "./pages/second-brain/JournalDetailPage";

@@ -1,16 +1,13 @@
-import { Button, Flex, Grid, GridItem, HStack, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
+import { Flex, Grid, GridItem, Text } from '@chakra-ui/react';
 import useChatStore from '../../state/useChatStore';
 import ChatMessage from '../../components/second-brain/ChatMessage';
 import { useRef, useEffect } from 'react';
-import { BsChevronDown } from 'react-icons/bs';
-import { useGetCollections } from '../../hooks/collections';
 import ChatBox from '../../components/second-brain/ChatBox';
 import ChatMenu from '../../components/second-brain/ChatMenu';
 
 const ChatPage = () => {
-  const { chats, reset } = useChatStore();
+  const { chats } = useChatStore();
   const chatRef = useRef<HTMLDivElement>(null);
-  const { data: collections } = useGetCollections();
 
   useEffect(() => {
     if (chatRef.current) {

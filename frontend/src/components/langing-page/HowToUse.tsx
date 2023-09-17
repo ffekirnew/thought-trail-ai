@@ -1,6 +1,4 @@
-import { Flex, Heading, SimpleGrid, Image } from '@chakra-ui/react'
-import React from 'react'
-import FeatureCard from './FeatureCard'
+import { Flex, Heading, Image } from '@chakra-ui/react'
 
 import addJournal from '../../assets/addJournal.png';
 import addCollection from '../../assets/addCollection.png';

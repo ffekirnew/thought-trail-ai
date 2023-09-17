@@ -1,6 +1,5 @@
 import { HStack, Box, Text, useColorMode, Spacer, Button } from "@chakra-ui/react";
 import { Chat } from "../../state/useChatStore";
-import { BiLogoAlgolia, BiRecycle, BiRedo, BiSave, BiSolidSave } from "react-icons/bi";
 
 interface Props {
   message: Chat

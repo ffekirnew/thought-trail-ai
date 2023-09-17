@@ -1,4 +1,4 @@
-import { VStack, Text, HStack, Spacer, Button, Box, Flex } from "@chakra-ui/react"
+import { VStack, Text, HStack, Spacer, Button, Flex } from "@chakra-ui/react"
 import { Collection } from "../../services/collectionsService"
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";

@@ -1,7 +1,7 @@
 import { Flex, VStack, Text, Button, HStack, Spacer } from "@chakra-ui/react";
 import { Collection } from "../../services/collectionsService"
 import CollectionNoteItem from "./CollectionNoteItem";
-import { BiPlus, BiRecycle, BiSolidTrash } from "react-icons/bi";
+import { BiPlus, BiSolidTrash } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useDeleteCollection } from "../../hooks/collections";
 
@@ -10,7 +10,7 @@ interface Props {
 }
 const CollectionDetail = ({ collection }: Props) => {
   const navigate = useNavigate();
-  const { isLoading, isSuccess, error, deleteCollection } = useDeleteCollection();
+  const { isLoading, isSuccess, deleteCollection } = useDeleteCollection();
 
   const onDelete = () => {
     deleteCollection(collection._id!);

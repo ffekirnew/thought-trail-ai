@@ -4,16 +4,12 @@ import { useGetCollections } from "../../hooks/collections"
 import CollectionItem from "../../components/second-brain/CollectionItem";
 import CollectionItemSkeleton from "../../components/second-brain/skeletons/CollectionItemSkeleton";
 import { useRef } from "react";
-import SideBar from "../../components/chat-page/SideBar";
 import AddNewCollectionForm from "../../components/second-brain/AddNewCollectionForm";
 import { BiPlus } from "react-icons/bi";
-import useCollectionsStore from "../../state/useCollectionsStore";
 
 const CollectionsPage = () => {
-  const { data: response, isLoading, isSuccess } = useGetCollections();
+  const { data: response, isLoading } = useGetCollections();
   const collectionSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-  const setCollections = useCollectionsStore(s => s.setCollections);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
