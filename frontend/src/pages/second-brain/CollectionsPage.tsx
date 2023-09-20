@@ -8,7 +8,7 @@ import AddNewCollectionForm from "../../components/second-brain/AddNewCollection
 import { BiPlus } from "react-icons/bi";
 
 const CollectionsPage = () => {
-  const { data: response, isLoading } = useGetCollections();
+  const { data: collections, isLoading } = useGetCollections();
   const collectionSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -36,7 +36,7 @@ const CollectionsPage = () => {
       </HStack>
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap={3}>
         { isLoading && collectionSkeletons.map((skeleton) => <CollectionItemSkeleton key={skeleton} />) }
-        { response?.data?.map((collection) => <CollectionItem key={collection._id} collection={collection} />) }
+        { collections?.map((collection) => <CollectionItem key={collection._id} collection={collection} />) }
       </SimpleGrid>
       <Button variant={'outline'} leftIcon={<BiPlus />} onClick={onOpen}>Add a new Collection</Button>
     </VStack>

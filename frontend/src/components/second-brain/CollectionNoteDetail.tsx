@@ -14,9 +14,9 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const {isLoading: createNoteLoading, isSuccess: createNoteSuccess, addNoteToCollection} = useAddNoteToCollection();
-  const {isLoading: updateNoteLoading, updateNoteInCollection} = useUpdateNoteInCollection();
-  const {isLoading: deleteNoteLoading, isSuccess: deleteNoteSuccess, deleteNoteFromCollection} = useDeleteNoteFromCollection();
+  const addNoteToCollection = useAddNoteToCollection();
+  const updateNoteInCollection = useUpdateNoteInCollection();
+  const deleteNoteFromCollection = useDeleteNoteFromCollection();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef<HTMLButtonElement>(null);
@@ -28,7 +28,7 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
   const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setBody(e.target.value);
 
   const onSave = () => {
-    if (note === undefined) {
+    if (note === undefined || note._id === undefined) {
       toast({
         title: 'Note being created.',
         description: "We're saving your note.",
@@ -37,7 +37,7 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         isClosable: true,
       })
       const newNote: Note = { title: title, body: body, _id: "", tags: [] };
-      addNoteToCollection(collectionSlug, newNote);
+      addNoteToCollection.mutate({collection: collectionSlug, note: newNote });
     } else {
       toast({
         title: 'Note being updated.',
@@ -48,7 +48,7 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         colorScheme: 'blue'
       })
       const updatedNote = { ...note, title: title, body: body };
-      updateNoteInCollection(collectionSlug, note._id, updatedNote);
+      updateNoteInCollection.mutate({ collection: collectionSlug, noteId: note._id, note: updatedNote });
 
     }
   }
@@ -63,12 +63,12 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         isClosable: true,
         colorScheme: 'blue'
       })
-      deleteNoteFromCollection(collectionSlug, note._id);
+      deleteNoteFromCollection.mutate({ collection: collectionSlug, noteId: note?._id! });
     }
   }
 
-  if (createNoteSuccess || deleteNoteSuccess) {
-    navigate("/everything/notes");
+  if (addNoteToCollection.isSuccess || deleteNoteFromCollection.isSuccess) {
+    navigate(`/everything/collections/${collectionSlug}/`);
   }
 
   return <><Grid
@@ -90,10 +90,10 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         variant={'filled'}
         onChange={handleTitleChange}
       />
-      <Button variant={'solid'} background={'brand.primary'} color={'white'} onClick={onSave} disabled={deleteNoteLoading || updateNoteLoading || createNoteLoading}>
-        { note === undefined ? "Create" : "Save" }
+      <Button variant={'solid'} background={'brand.primary'} color={'white'} onClick={onSave} disabled={deleteNoteFromCollection.isLoading || updateNoteInCollection.isLoading || addNoteToCollection.isLoading}>
+        { note === undefined || note._id === undefined ? "Create" : "Save" }
       </Button>
-      <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'} onClick={onOpen} disabled={deleteNoteLoading}>
+      <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'} onClick={onOpen} disabled={deleteNoteFromCollection.isLoading}>
         Delete
       </Button>
     </Flex>

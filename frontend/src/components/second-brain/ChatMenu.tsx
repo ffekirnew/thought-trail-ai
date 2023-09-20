@@ -73,7 +73,7 @@ const ChatMenu = () => {
     <Menu>
       <MenuButton as={Button} variant={'solid'} rightIcon={<BsChevronDown />}>{ chatParameters.collectionName || "Collection" }</MenuButton>
       <MenuList>
-        { collections?.data?.map((collection) => <MenuItem key={collection._id} onClick={() => onChangeCollection(collection.name!)}>{ collection.name }</MenuItem> ) }
+        { collections?.map((collection) => <MenuItem key={collection._id} onClick={() => onChangeCollection(collection.name!)}>{ collection.name }</MenuItem> ) }
       </MenuList>
     </Menu> }
   </HStack>

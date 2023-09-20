@@ -4,6 +4,7 @@ import SearchBox from './SearchBox';
 import { BiMenu } from 'react-icons/bi';
 import { useRef } from 'react';
 import SideBar from './SideBar';
+import useNewJournalStore from '../../state/useNewJournalStore';
 
 const NavBar = () => {
   const navigate = useNavigate();
@@ -11,13 +12,20 @@ const NavBar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef<HTMLButtonElement>(null);
 
+  const setJournal = useNewJournalStore(s => s.setJournal);
+
+  const onAddJournal = () => {
+    setJournal(undefined);
+    navigate('/everything/journals/new');
+  }
+
   return <HStack height={'100%'} gap={{ base: 1, lg: 2}} width={'100%'} alignItems={'center'}>
     <Show below={'lg'}>
       <Button onClick={onOpen} variant={'ghost'}><BiMenu size={'30px'} /></Button>
     </Show>
     <SearchBox />
     <Show above={'lg'}>
-      <Button onClick={() => navigate('/everything/journals/new')} variant={'solid'} borderRadius={10} paddingX={10} background={'brand.primary'} color={'white'}>
+      <Button onClick={onAddJournal} variant={'solid'} borderRadius={10} paddingX={10} background={'brand.primary'} color={'white'}>
         <Text>Add a Journal</Text>
       </Button>
       <Button onClick={() => navigate('/everything/chat')} variant={'outline'} borderRadius={10} paddingX={5}>

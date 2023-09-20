@@ -2,10 +2,10 @@ import ApiClient from "./apiClient";
 import { Tag } from "./tagsService";
 
 export interface Note {
-  _id: string;
-  title: string;
-  body: string;
-  tags: Tag[];
+  _id?: string;
+  title?: string;
+  body?: string;
+  tags?: Tag[];
   createdAt?: Date;
   updatedAt?: Date;
 }

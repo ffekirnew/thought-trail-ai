@@ -14,9 +14,9 @@ const JournalDetail = ({ journal }: Props) => {
   const navigate = useNavigate();
   const toast = useToast();
 
-  const {isLoading: createJournalLoading, isSuccess: createJournalSuccess, createJournal} = useCreateJournal();
-  const {isLoading: updateJournalLoading, updateJournal} = useUpdateJournal();
-  const {isLoading: deleteJournalLoading, isSuccess: deleteJournalSuccess, deleteJournal} = useDeleteJournal();
+  const createJournal = useCreateJournal();
+  const updateJournal = useUpdateJournal();
+  const deleteJournal = useDeleteJournal();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef<HTMLButtonElement>(null);
@@ -31,13 +31,14 @@ const JournalDetail = ({ journal }: Props) => {
     if (journal === undefined) {
       toast({
         title: 'Journal being created.',
-        description: "We're saving your journal.",
+        description: "We have created your new journal.",
         status: 'info',
         duration: 1500,
         isClosable: true,
       })
-      const newJournal: Journal = { title: title, body: body, _id: "" };
-      createJournal(newJournal);
+      const newJournal: Journal = { title: title, body: body, _id: "", createdAt: new Date(), updatedAt: new Date() };
+      createJournal.mutate(newJournal);
+      navigate('/everything/journals');
     } else {
       toast({
         title: 'Journal being updated.',
@@ -48,27 +49,26 @@ const JournalDetail = ({ journal }: Props) => {
         colorScheme: 'blue'
       })
       const updatedJournal = { ...journal, title: title, body: body };
-      updateJournal(journal._id, updatedJournal);
-
+      updateJournal.mutate({id: journal?._id!, journal: updatedJournal});
     }
   }
 
   const onDelete = () => {
     if (journal !== undefined) {
       toast({
-        title: 'Journal being deleted.',
-        description: "We're deleting this journal.",
-        status: 'warning',
+        title: 'Journal was just deleted.',
+        description: `${journal.title} was deleted this journal.`,
+        status: 'success',
         duration: 1000,
         isClosable: true,
         colorScheme: 'blue'
       })
-      deleteJournal(journal._id);
+      deleteJournal.mutate(journal?._id!);
+      navigate("/everything/journals");
     }
   }
 
-  if (createJournalSuccess || deleteJournalSuccess) {
-    navigate("/everything/journals");
+  if (createJournal.isSuccess || deleteJournal.isSuccess) {
   }
 
   return <><Grid
@@ -90,10 +90,12 @@ const JournalDetail = ({ journal }: Props) => {
         variant={'filled'}
         onChange={handleTitleChange}
       />
-      <Button variant={'solid'} background={'brand.primary'} color={'white'} onClick={onSave} disabled={deleteJournalLoading || updateJournalLoading || createJournalLoading}>
-        { journal === undefined ? "Create" : "Save" }
+      <Button variant={'solid'} background={'brand.primary'} color={'white'} onClick={onSave} disabled={deleteJournal.isLoading || updateJournal.isLoading || createJournal.isLoading}>
+        { createJournal.isLoading ? "Creating..." :
+          updateJournal.isLoading ? "Updating..." :
+          journal === undefined ? "Create" : "Save" }
       </Button>
-      <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'} onClick={onOpen} disabled={deleteJournalLoading}>
+      <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'} onClick={onOpen} disabled={deleteJournal.isLoading}>
         Delete
       </Button>
     </Flex>

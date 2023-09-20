@@ -9,7 +9,7 @@ const CollectionNotePage = () => {
 
   if (isLoading) return <CollectionNoteDetailSkeleton />
 
-  return <CollectionNoteDetail note={data?.data!} collectionSlug={collectionSlug!} />
+  return <CollectionNoteDetail note={data!} collectionSlug={collectionSlug!} />
 }
 
 export default CollectionNotePage;

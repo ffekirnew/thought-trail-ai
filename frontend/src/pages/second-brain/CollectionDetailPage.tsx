@@ -5,11 +5,11 @@ import CollectionDetailSkeleton from '../../components/second-brain/skeletons/Co
 
 const CollectionDetailPage = () => {
   const { collectionSlug } = useParams();
-  const { data, isLoading } = useGetCollectionBySlug(collectionSlug!);
+  const { data: collection, isLoading } = useGetCollectionBySlug(collectionSlug!);
 
   if (isLoading) return <CollectionDetailSkeleton />
 
-  return <CollectionDetail collection={data?.data!} />
+  return <CollectionDetail collection={collection!} />
 }
 
 export default CollectionDetailPage;

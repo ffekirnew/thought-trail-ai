@@ -19,11 +19,11 @@ interface Props {
 const AddNewCollectionForm = ({onClose}: Props) => {
   const {register, handleSubmit, formState: { errors }} = useForm<AddNewCollectionFormSchema>({ resolver: zodResolver(schema) });
 
-  const { isLoading, isSuccess, error, createCollection } = useCreateCollection();
+  const createCollection = useCreateCollection();
 
   const onSubmit = (data: FieldValues) => {
-    const newCollection: Collection = { name: data.name, description: data.description };
-    createCollection(newCollection);
+    const newCollection: Collection = { name: data.name, description: data.description, createdAt: new Date(), updatedAt: new Date() };
+    createCollection.mutate(newCollection);
   }
 
   return <form onSubmit={handleSubmit(onSubmit)}>
@@ -32,7 +32,7 @@ const AddNewCollectionForm = ({onClose}: Props) => {
     <Box paddingX={5} gap={5}>
       <FormControl isInvalid={errors.name != undefined}>
         <FormLabel>Collection Name</FormLabel>
-        <Input variant={'filled'} disabled={isLoading} type='text' {...register('name')} />
+        <Input variant={'filled'} disabled={createCollection.isLoading} type='text' {...register('name')} />
         {!isError ? (
           <FormHelperText>
             Enter the name of your new collection. 
@@ -43,7 +43,7 @@ const AddNewCollectionForm = ({onClose}: Props) => {
       </FormControl>
       <FormControl isInvalid={errors.description != undefined}>
         <FormLabel>Collection Description</FormLabel>
-        <Textarea variant={'filled'} disabled={isLoading} {...register('description')} />
+        <Textarea variant={'filled'} disabled={createCollection.isLoading} {...register('description')} />
         {!isError ? (
           <FormHelperText>
             Add a description for your new collection. 
@@ -52,14 +52,14 @@ const AddNewCollectionForm = ({onClose}: Props) => {
           <FormErrorMessage>{ errors.description?.message }</FormErrorMessage>
         )}
       </FormControl>
-      { isLoading && <Spinner /> }
-      { error && <Text color={'red.400'}>{error}</Text> }
-      { isSuccess && <Text color={'green'}>Your collection has been created</Text> }
+      { createCollection.isLoading && <Spinner /> }
+      { createCollection.isError && <Text color={'red.400'}>{createCollection.error.message}</Text> }
+      { createCollection.isSuccess && <Text color={'green'}>Your collection has been created</Text> }
     </Box>
     <Spacer />
     <HStack justifyContent={'right'} paddingTop={5} borderTopWidth={'1px'} paddingX={5}>
-      <Button type={'submit'} variant={'solid'} bg={'brand.primary'} disabled={isLoading}>Create</Button>
-      <Button variant={'outline'} onClick={onClose} disabled={isLoading}>Cancel</Button>
+      <Button type={'submit'} variant={'solid'} bg={'brand.primary'} disabled={createCollection.isLoading}>Create</Button>
+      <Button variant={'outline'} onClick={onClose} disabled={createCollection.isLoading}>Cancel</Button>
     </HStack>
   </VStack></form>
 }

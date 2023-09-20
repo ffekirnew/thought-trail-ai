@@ -48,7 +48,7 @@ const KnowledgeDetail = ({ note }: Props) => {
         colorScheme: 'blue'
       })
       const updatedNote = { ...note, title: title, body: body };
-      updateNote(note._id, updatedNote);
+      updateNote(note?._id!, updatedNote);
 
     }
   }
@@ -63,7 +63,7 @@ const KnowledgeDetail = ({ note }: Props) => {
         isClosable: true,
         colorScheme: 'blue'
       })
-      deleteNote(note._id);
+      deleteNote(note?._id!);
     }
   }
 
@@ -101,7 +101,7 @@ const KnowledgeDetail = ({ note }: Props) => {
     <GridItem area="tags">
     <HStack>
       <Text fontWeight={'extrabold'}>Tags: </Text>
-      { note?.tags.map((tag, index) => <Box border={'1px solid gray'} borderRadius={10} paddingX={4} key={index}>{ tag.name }</Box> )}
+      { note?.tags?.map((tag, index) => <Box border={'1px solid gray'} borderRadius={10} paddingX={4} key={index}>{ tag.name }</Box> )}
     </HStack>
     </GridItem>
     <GridItem area="textarea" paddingBottom={5}>

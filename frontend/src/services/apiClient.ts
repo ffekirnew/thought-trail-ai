@@ -36,7 +36,7 @@ class ApiClient<T> {
   }
 
   create = async (data: T) => {
-    return this.axiosInstance.post<FetchResponse<T>>(this.endpoint, data, {
+    return this.axiosInstance.post(this.endpoint, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -44,7 +44,7 @@ class ApiClient<T> {
   }
 
   update = async (_id: string, data: T) => {
-    return this.axiosInstance.put<FetchResponse<T>>(this.endpoint + "/" + _id, data, {
+    return this.axiosInstance.put(this.endpoint + "/" + _id, data, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }
@@ -52,7 +52,7 @@ class ApiClient<T> {
   }
 
   delete = async (_id: string) => {
-    return this.axiosInstance.delete<FetchResponse<T>>(this.endpoint + "/" + _id, {
+    return this.axiosInstance.delete(this.endpoint + "/" + _id, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`
       }

@@ -9,7 +9,7 @@ const JournalDetailPage = () => {
 
   if (isLoading) return <JournalDetailSkeleton />
 
-  return <JournalDetail journal={data?.data} />
+  return <JournalDetail journal={data} />
 }
 
 export default JournalDetailPage;

@@ -1,5 +1,11 @@
 import { HStack, Box, Text, useColorMode, Spacer, Button } from "@chakra-ui/react";
 import { Chat } from "../../state/useChatStore";
+import useChatParametersStore from "../../state/useChatParametersStore";
+import { Journal } from "../../services/journalsService";
+import useNewJournalStore from "../../state/useNewJournalStore";
+import { Note } from "../../services/notesService";
+import useNewCollectionNoteStore from "../../state/useNewCollectionNoteStore";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   message: Chat
@@ -17,6 +23,25 @@ const userBackgroundColors = {
 
 const ChatMessage = ({ message }: Props) => {
   const {colorMode} = useColorMode();
+  const { chatParameters } = useChatParametersStore();
+
+  const navigate = useNavigate();
+
+  const setJournal = useNewJournalStore(s => s.setJournal);
+  const setCollectionNote = useNewCollectionNoteStore(s => s.setNote);
+
+  const onSave = () => {
+    if (chatParameters.chatBasis === "Journal") {
+      const newJournal: Journal = { body: message.body };
+      setJournal(newJournal);
+      navigate(`/everything/journals/new`);
+    } else {
+      const newNote: Note = { body: message.body };
+      setCollectionNote(newNote);
+      navigate(`/everything/collections/${chatParameters.collectionName}/notes/new`);
+    }
+  }
+
   return (<Box
     bg={message.sender === 'user' ? userBackgroundColors[colorMode] : botBackgroundColors[colorMode]}
     borderRadius={10}
@@ -31,7 +56,7 @@ const ChatMessage = ({ message }: Props) => {
     { message.sender === 'bot' &&
       <HStack>
         <Spacer />
-        <Button variant={'solid'} size={'sm'} >Save</Button>
+        <Button variant={'solid'} size={'sm'} onClick={onSave} >Save</Button>
         <Button variant={'solid'} size={'sm'} >Regenerate</Button>
       </HStack>
     }

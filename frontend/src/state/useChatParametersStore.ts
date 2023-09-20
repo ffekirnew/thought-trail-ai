@@ -1,6 +1,10 @@
 import { create } from "zustand"
 
 export type ChatBasis = "Journal" | "Collection";
+export interface CollectionType {
+  name?: string;
+  slug?: string;
+}
 
 export interface ChatParameters {
   chatBasis?: ChatBasis;

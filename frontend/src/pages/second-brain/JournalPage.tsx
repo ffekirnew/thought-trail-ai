@@ -5,7 +5,7 @@ import JournalItem from '../../components/second-brain/JournalItem';
 import JournalItemSkeleton from '../../components/second-brain/skeletons/JournalItemSkeleton';
 
 const JournalPage = () => {
-  const { data: response, isLoading } = useGetJournals();
+  const { data: journals, isLoading } = useGetJournals();
   const journalSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
   return <VStack align={'left'}>
@@ -28,7 +28,7 @@ const JournalPage = () => {
       </Menu>
     </HStack>
     { isLoading && journalSkeletons.map((skeleton) => <JournalItemSkeleton key={skeleton} />) }
-    { response?.data?.map((journal) => <JournalItem key={journal._id} journal={journal} />) }
+    { journals?.map((journal) => <JournalItem key={journal._id} journal={journal} />) }
   </VStack>
 }
 

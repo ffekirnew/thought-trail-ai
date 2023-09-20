@@ -17,7 +17,7 @@ const JournalItem = ({ journal }: Props) => {
   const { colorMode } = useColorMode();
   const navigate = useNavigate();
   const [starred, setStarred] = useState<boolean>(false);
-  const formattedDate = formatDate(journal.createdAt!);
+  const formattedDate = formatDate(journal?.createdAt!);
 
   return (
       <HStack
@@ -33,11 +33,11 @@ const JournalItem = ({ journal }: Props) => {
           aria-label={"favorite-journal"}
           icon={starred ? <BiSolidStar /> : <BiStar />}
           variant={'unstyled'} />
-        <Button variant={'unstyled'} onClick={() => navigate('/everything/journals/' + journal._id)} width={'100%'}>
+        <Button variant={'unstyled'} onClick={() => navigate('/everything/journals/' + journal?._id)} width={'100%'}>
           <HStack width={'100%'}>
-            <Text fontWeight={'bold'} overflow={'hidden'}>{ journal.title }</Text>
+            <Text fontWeight={'bold'} overflow={'hidden'}>{ journal?.title }</Text>
             <Show above={'lg'}>
-              <Text fontWeight={'light'} overflow={'hidden'}>{ journal.body }</Text>
+              <Text fontWeight={'light'} overflow={'hidden'}>{ journal?.body }</Text>
             </Show>
             <Spacer />
             <Text fontWeight={'semibold'} width={'6rem'}>{ formattedDate }</Text>

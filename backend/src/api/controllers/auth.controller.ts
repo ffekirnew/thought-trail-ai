@@ -20,6 +20,7 @@ class AuthController {
     const authRepository = new AuthRepository();
 
     this.authApp = new AuthApplication(jwtGenerator, passwordHasher, authRepository, emailSender, oneTimeCodeGenerator);
+
   }
 
   @Post('login')
