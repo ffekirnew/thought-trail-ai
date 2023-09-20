@@ -1,26 +1,38 @@
-import { useState } from "react";
 import collectionsService, { Collection } from "../../services/collectionsService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+interface UpdateCollectionData {
+  id: string;
+  collection: Collection;
+}
+
+interface UpdateCollectionContext {
+  previousCollections: Collection[];
+}
 
 const useUpdateCollection = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [isSuccess, setSuccess] = useState<boolean>(false);
-  
-  const updateCollection = (id: string, data: Collection) => {
-    setLoading(true);
-    setError("");
-    setSuccess(false);
+  const queryClient = useQueryClient();
 
-    collectionsService.update(id, data).then(() => {
-      setSuccess(true);
-    }).catch(() => {
-      setError("Unable to update collection. Try again.")
-    }).finally(() => {
-      setLoading(false);
-    });
-  }
+  const updateCollection = useMutation<void, Error, UpdateCollectionData, UpdateCollectionContext>({
+    mutationFn: (updateCollectionData) => collectionsService.update(updateCollectionData.id, updateCollectionData.collection).then((res) => res.data),
+    onMutate: (updateCollectionData) => {
+      const previousCollections = queryClient.getQueryData<Collection[]>(['collections']) || [];
 
-  return { isLoading, error, isSuccess, updateCollection };
+      queryClient.setQueryData<Collection[]>(['collections'], (collections) => {
+        return collections?.map(collection =>
+                         collection._id === updateCollectionData.id ? updateCollectionData.collection : collection);
+      });
+      queryClient.invalidateQueries(['collections', updateCollectionData.id]);
+
+
+      return { previousCollections };
+    },
+    onError: (_error, _updateCollectionData, context) => {
+      queryClient.setQueryData<Collection[]>(['collections'], () => context?.previousCollections);
+    }
+  });
+
+  return updateCollection;
 }
 
 export default useUpdateCollection;

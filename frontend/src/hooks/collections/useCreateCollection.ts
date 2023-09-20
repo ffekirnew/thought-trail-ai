@@ -1,28 +1,24 @@
-import { useState } from "react";
 import { collectionsService } from "../../services";
 import { Collection } from "../../services/collectionsService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const useCreateCollection = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [isSuccess, setSuccess] = useState<boolean>(false);
-  
-  const createCollection = (data: Collection) => {
-    console.log(data);
-    setLoading(true);
-    setError("");
-    setSuccess(false);
+  const queryClient = useQueryClient();
 
-    collectionsService.create(data).then(() => {
-      setSuccess(true);
-    }).catch(() => {
-      setError("Unable to create collection. Try again.")
-    }).finally(() => {
-      setLoading(false);
-    })
-  }
+  const createCollection = useMutation<void, Error, Collection>({
+    mutationFn: (collection: Collection) => collectionsService.create(collection).then((res) => res.data),
+    onMutate: (collection) => {
+      console.log(queryClient.getQueryData<Collection[]>(['collections']));
+      queryClient.setQueryData<Collection[]>(['collections'], collections => [...(collections || []), collection]);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['collections']
+      });
+    }
+  });
 
-  return { isLoading, error, isSuccess, createCollection };
+  return createCollection;
 }
 
 export default useCreateCollection;

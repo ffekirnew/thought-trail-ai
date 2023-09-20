@@ -1,24 +1,30 @@
-import { useState } from "react";
-import collectionsService from "../../services/collectionsService";
+import collectionsService, { Collection } from "../../services/collectionsService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+interface DeleteCollectionContext {
+  previousCollections: Collection[];
+}
 const useDeleteCollection = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [isSuccess, setSuccess] = useState<boolean>(false);
-  
-  const deleteCollection = (id: string) => {
-    setLoading(true);
-    setError("");
-    setSuccess(false);
+  const queryClient = useQueryClient();
 
-    collectionsService.delete(id).then(() => {
-      setSuccess(true);
-    }).catch(() => {
-      setError("Unable to delete collection. Try again.")
-    })
-  }
+  const deleteCollection = useMutation<void, Error, string, DeleteCollectionContext>({
+    mutationFn: (id) => collectionsService.delete(id).then((res) => res.data),
+    onMutate: (id) => {
+      const previousCollections = queryClient.getQueryData<Collection[]>(['collections']) || [];
 
-  return { isLoading, error, isSuccess, deleteCollection };
+      queryClient.setQueryData<Collection[]>(['collections'], (collections) => {
+        return collections?.filter(collection => collection._id !== id);
+      });
+      queryClient.invalidateQueries(['collections', id]);
+
+      return { previousCollections };
+    },
+    onError: (_error, _updateCollectionData, context) => {
+      queryClient.setQueryData<Collection[]>(['collections'], () => context?.previousCollections);
+    }
+  });
+
+  return deleteCollection;
 }
 
 export default useDeleteCollection;

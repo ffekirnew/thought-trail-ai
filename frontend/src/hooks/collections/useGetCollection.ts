@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { FetchResponse } from "../../services/apiClient";
 import collectionsService, { Collection } from "../../services/collectionsService";
 
 const useGetCollection = (id: string) => {
-  return useQuery<FetchResponse<Collection>, Error>({
+  return useQuery<Collection, Error>({
     queryKey: ["collections", id],
-    queryFn: () => collectionsService.get(id),
+    queryFn: () => collectionsService.get(id).then(res => res.data),
+    staleTime: 24 * 60 * 60 * 1000, // 1 day
+    keepPreviousData: true,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
+
   });
 }
 
