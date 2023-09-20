@@ -1,27 +1,33 @@
-import { useState } from "react";
 import { journalsService } from "../../services";
 import { Journal } from "../../services/journalsService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+interface UseCreateJournalContext {
+  previousJournals: Journal[];
+}
 
 const useCreateJournal = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [isSuccess, setSuccess] = useState<boolean>(false);
-  
-  const createJournal = (data: Journal) => {
-    setLoading(true);
-    setError("");
-    setSuccess(false);
+  const queryClient = useQueryClient();
 
-    journalsService.create(data).then(() => {
-      setSuccess(true);
-    }).catch(() => {
-      setError("Unable to create journal. Try again.")
-    }).finally(() => {
-      setLoading(false);
-    })
-  }
+  const createJournal = useMutation<void, Error, Journal, UseCreateJournalContext>({
+    mutationFn: (journal: Journal) => journalsService.create(journal).then((res) => res.data),
+    onMutate: (journal) => {
+      const previousJournals = queryClient.getQueryData<Journal[]>(['journals']) || [];
+      queryClient.setQueryData<Journal[]>(['journals'], journals => [...(journals || []), journal]);
 
-  return { isLoading, error, isSuccess, createJournal };
+      return { previousJournals };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['journals']
+      });
+    },
+    onError: (_error, _journal, context) => {
+      queryClient.setQueryData<Journal[]>(['journals'], () => context?.previousJournals);
+    }
+  });
+
+  return createJournal;
 }
 
 export default useCreateJournal;
