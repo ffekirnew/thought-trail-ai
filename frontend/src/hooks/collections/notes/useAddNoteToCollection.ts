@@ -1,27 +1,24 @@
-import { useState } from "react";
 import { collectionsService } from "../../../services";
 import { Note } from "../../../services/notesService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
+interface AddNoteToCollectionData {
+  collection: string;
+  note: Note;
+}
 const useAddNoteToCollection = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [isSuccess, setSuccess] = useState<boolean>(false);
-  
-  const addNoteToCollection = (collectionSlug: string, note: Note) => {
-    setLoading(true);
-    setError("");
-    setSuccess(false);
+  const queryClient = useQueryClient();
 
-    collectionsService.addNoteToCollection(collectionSlug, note).then(() => {
-      setSuccess(true);
-    }).catch(() => {
-      setError("Unable to add note to collection. Try again.")
-    }).finally(() => {
-      setLoading(false);
-    })
-  }
+  const addNoteToCollection = useMutation<void, Error, AddNoteToCollectionData>({
+    mutationFn: (data) => collectionsService.addNoteToCollection(data.collection, data.note).then((res) => res.data),
+    onSuccess: (_savedNote, data) => {
+      queryClient.invalidateQueries({
+        queryKey: ['collections', data.collection]
+      });
+    }
+  });
 
-  return { isLoading, error, isSuccess, addNoteToCollection };
+  return addNoteToCollection;
 }
 
 export default useAddNoteToCollection;

@@ -1,26 +1,39 @@
-import { useState } from "react";
 import { collectionsService } from "../../../services";
+import { Note } from "../../../services/notesService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const deleteNoteFromCollection = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
-  const [isSuccess, setSuccess] = useState<boolean>(false);
-  
-  const deleteNoteFromCollection = (collectionSlug: string, noteId: string) => {
-    setLoading(true);
-    setError("");
-    setSuccess(false);
-
-    collectionsService.deleteNoteFromCollection(collectionSlug, noteId).then(() => {
-      setSuccess(true);
-    }).catch(() => {
-      setError("Unable to delete note from collection. Try again.")
-    }).finally(() => {
-      setLoading(false);
-    });
-  }
-
-  return { isLoading, error, isSuccess, deleteNoteFromCollection };
+interface DeleteNoteInCollectionData {
+  collection: string;
+  noteId: string;
 }
 
-export default deleteNoteFromCollection;
+interface DeleteNoteInCollectionContext {
+  previousNotes: Note[];
+}
+
+const useDeleteNoteFromCollection = () => {
+  const queryClient = useQueryClient();
+
+  const deleteNoteFromCollection = useMutation<void, Error, DeleteNoteInCollectionData, DeleteNoteInCollectionContext>({
+    mutationFn: (data) => collectionsService.deleteNoteFromCollection(data.collection, data.noteId).then((res) => res.data),
+    onMutate: (data) => {
+      const previousNotes = queryClient.getQueryData<Note[]>(['collections', data.collection, 'notes']) || [];
+
+      queryClient.setQueryData<Note[]>(
+        ['collections', data.collection, 'notes'],
+        notes => notes?.filter(note => note._id !== data.noteId))
+      queryClient.invalidateQueries(['collections', data.collection, 'notes', data.noteId]);
+
+      return { previousNotes };
+    },
+    onError: (_, data, context) => {
+      queryClient.setQueryData<Note[]>(
+        ['collections', data.collection, 'notes'],
+        () => context?.previousNotes);
+    }
+  });
+
+  return deleteNoteFromCollection;
+}
+
+export default useDeleteNoteFromCollection;
