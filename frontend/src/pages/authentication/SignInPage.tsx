@@ -23,7 +23,7 @@ const SignInPage = () => {
     login(data.username, data.password);
   }
 
-  if (isSuccess) navigate('/everything');
+  if (isSuccess) navigate('/everything/chat');
 
   return <VStack gap={10} align={'left'} padding={10} width={'100%'}>
       <Heading>Sign in to ThoughtTrail</Heading>

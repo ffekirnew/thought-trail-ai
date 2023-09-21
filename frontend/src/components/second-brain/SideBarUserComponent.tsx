@@ -31,7 +31,6 @@ const SideBarUserComponent = () => {
     <Menu>
       <MenuButton as={Button} rightIcon={<BsThreeDots />} variant={'ghost'} justifyContent={'center'} />
       <MenuList>
-        <MenuItem>Account Settings</MenuItem>
         <MenuItem onClick={onLogout}>Sign Out</MenuItem>
       </MenuList>
     </Menu>

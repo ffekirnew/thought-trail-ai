@@ -7,13 +7,14 @@ import RegisterPage from "./pages/authentication/RegisterPage";
 import AuthenticationPage from "./pages/authentication/AuthenticationPage";
 import SecondBrainPage from "./pages/second-brain/SecondBrainPage";
 import ChatPage from "./pages/second-brain/ChatPage";
-import JournalPage from "./pages/second-brain/JournalPage";
+import JournalsPage from "./pages/second-brain/JournalsPage";
 import JournalDetailPage from "./pages/second-brain/JournalDetailPage";
 import AddNewJournalPage from "./pages/second-brain/AddNewJournalPage";
 import CollectionsPage from "./pages/second-brain/CollectionsPage";
 import CollectionDetailPage from "./pages/second-brain/CollectionDetailPage";
 import CollectionNotePage from "./pages/second-brain/CollectionNotePage";
 import AddNewCollectionNotePage from "./pages/second-brain/AddNewCollectionNotePage";
+import AccountStatisticsPage from "./pages/second-brain/AccountStatisticsPage";
 
 const router = createBrowserRouter([
   {
@@ -34,8 +35,8 @@ const router = createBrowserRouter([
         path: 'everything',
         element: <SecondBrainPage />,
         children: [
-          { index: true, element: <JournalPage /> },
-          { path: 'journals', element: <JournalPage /> },
+          { index: true, element: <ChatPage /> },
+          { path: 'journals', element: <JournalsPage /> },
           { path: 'journals/:id', element: <JournalDetailPage /> },
           { path: 'journals/new', element: <AddNewJournalPage /> },
 
@@ -45,6 +46,8 @@ const router = createBrowserRouter([
           { path: 'collections/:collectionSlug/notes/new', element: <AddNewCollectionNotePage /> },
 
           { path: 'chat', element: <ChatPage /> },
+
+          { path: 'account', element: <AccountStatisticsPage /> }
         ]
       }
     ]

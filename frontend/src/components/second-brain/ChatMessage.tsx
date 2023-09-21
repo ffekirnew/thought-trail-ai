@@ -38,7 +38,7 @@ const ChatMessage = ({ message }: Props) => {
     } else {
       const newNote: Note = { body: message.body };
       setCollectionNote(newNote);
-      navigate(`/everything/collections/${chatParameters.collectionName}/notes/new`);
+      navigate(`/everything/collections/${chatParameters.collection?.slug}/notes/new`);
     }
   }
 

@@ -11,6 +11,8 @@ export interface User {
   username: string;
   email: string;
   profilePicture: string;
+  numberOfJournals: number;
+  numberOfCollections: number;
 }
 
 export interface LoggedInUser {

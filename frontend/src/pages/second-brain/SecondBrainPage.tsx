@@ -1,7 +1,7 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react"
-import { Outlet } from "react-router-dom"
-import SideBar from "../../components/second-brain/SideBar"
-import NavBar from "../../components/second-brain/NavBar"
+import { Outlet } from "react-router-dom";
+import SideBar from "../../components/second-brain/SideBar";
+import NavBar from "../../components/second-brain/NavBar";
 
 const SecondBrainPage = () => {
   return <Grid
@@ -32,4 +32,4 @@ const SecondBrainPage = () => {
   </Grid>
 }
 
-export default SecondBrainPage
+export default SecondBrainPage;

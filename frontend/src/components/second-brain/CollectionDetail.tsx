@@ -1,4 +1,4 @@
-import { Flex, VStack, Text, Button, HStack, useToast, useDisclosure, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import { Flex, VStack, Text, Button, useToast, useDisclosure, Menu, MenuButton, MenuItem, MenuList, Show } from "@chakra-ui/react";
 import { Collection } from "../../services/collectionsService"
 import CollectionNoteItem from "./CollectionNoteItem";
 import { BiPlus, BiSolidTrash } from "react-icons/bi";
@@ -20,6 +20,10 @@ const CollectionDetail = ({ collection }: Props) => {
   const navigate = useNavigate();
   const deleteCollection = useDeleteCollection();
 
+  const onAddNoteToCollection = () => {
+    navigate(`/everything/collections/${collection.slug}/notes/new`);
+  }
+
   const onDelete = () => {
     deleteCollection.mutate(collection._id!);
     toast({
@@ -33,15 +37,22 @@ const CollectionDetail = ({ collection }: Props) => {
     navigate(`/everything/collections`);
   }
 
-  return <VStack align={'left'} gap={5}>
-    <HStack justifyContent={'space-between'}>
+  return <VStack height={'100%'} align={'left'} gap={5}>
+    <Flex justifyContent={'space-between'}>
       <Text as={'h2'} fontSize={'2xl'} fontWeight={'bold'}>{ collection.name }</Text>
-      <Button variant={'outline'} leftIcon={<BiSolidTrash />} onClick={onOpen}>
-        { deleteCollection.isLoading ? "Deleting..." : "Delete Collection" }
-      </Button>
-    </HStack>
+      <Show above={'lg'}>
+        <Button variant={'outline'} leftIcon={<BiSolidTrash />} onClick={onOpen}>
+          { deleteCollection.isLoading ? "Deleting..." : "Delete Collection" }
+        </Button>
+      </Show>
+      <Show below={'lg'}>
+        <Button variant={'outline'} onClick={onOpen}>
+          <BiSolidTrash />
+        </Button>
+      </Show>
+    </Flex>
     <Text as={'p'} fontSize={'md'} fontWeight={'light'}>{ collection.description }</Text>
-    <HStack>
+    <Flex flexWrap={'wrap-reverse'} gap={3}>
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>Order by</MenuButton>
         <MenuList>
@@ -58,11 +69,19 @@ const CollectionDetail = ({ collection }: Props) => {
           <MenuItem>Tag 4</MenuItem>
         </MenuList>
       </Menu>
-      <Button onClick={() => navigate(`/everything/collections/${collection.slug}/notes/new`)} variant={'solid'} leftIcon={<BiPlus />}>Add a new note</Button>
-    </HStack>
+      <Button onClick={onAddNoteToCollection} variant={'solid'} leftIcon={<BiPlus />}>Add a new note</Button>
+    </Flex>
 
-    <Flex flexDir={'column'} gap={2}>
+    <Flex flexDir={'column'} gap={2} height={'100%'}>
       { collection.notes?.map((note) => <CollectionNoteItem key={note._id} note={note} collectionSlug={collection.slug!} /> ) }
+      {
+        collection?.notes?.length == 0 &&
+        <VStack height={'100%'} justifyContent={'center'}>
+          <Button variant={'ghost'} onClick={onAddNoteToCollection}>
+            <Text color={'gray.600'}>You don't have a note in this collection. Add a note!</Text>
+          </Button>
+        </VStack>
+      }
     </Flex> 
     <DeleteCollectionAlertDialog cancelRef={cancelRef} isOpen={isOpen} onClose={onClose} action={onDelete} />
   </VStack>

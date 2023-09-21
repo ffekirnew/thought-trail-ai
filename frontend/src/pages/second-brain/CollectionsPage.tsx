@@ -1,11 +1,11 @@
-import { VStack, HStack, Menu, MenuButton, Button, MenuList, MenuItem, SimpleGrid, useDisclosure, Drawer, DrawerBody, DrawerContent, DrawerOverlay } from "@chakra-ui/react";
+import { VStack, Text, Menu, MenuButton, Button, MenuList, MenuItem, SimpleGrid, useDisclosure, Drawer, DrawerBody, DrawerContent, DrawerOverlay, IconButton, Spacer, Heading, Flex, Show } from "@chakra-ui/react";
 import { BsChevronDown } from "react-icons/bs";
 import { useGetCollections } from "../../hooks/collections"
 import CollectionItem from "../../components/second-brain/CollectionItem";
 import CollectionItemSkeleton from "../../components/second-brain/skeletons/CollectionItemSkeleton";
 import { useRef } from "react";
 import AddNewCollectionForm from "../../components/second-brain/AddNewCollectionForm";
-import { BiPlus } from "react-icons/bi";
+import { BiGridAlt, BiListOl, BiPlus } from "react-icons/bi";
 
 const CollectionsPage = () => {
   const { data: collections, isLoading } = useGetCollections();
@@ -15,8 +15,9 @@ const CollectionsPage = () => {
   const btnRef = useRef<HTMLButtonElement>(null);
 
   return <>
-    <VStack align={'left'} paddingBottom={5}>
-      <HStack paddingBottom={3}>
+    <VStack align={'left'} paddingBottom={5} height={'100%'}>
+      <Heading>Collections</Heading>
+      <Flex flexWrap={'wrap-reverse'} paddingBottom={3} gap={3}>
         <Menu>
           <MenuButton as={Button} rightIcon={<BsChevronDown />}>Order by</MenuButton>
           <MenuList>
@@ -34,11 +35,24 @@ const CollectionsPage = () => {
           </MenuList>
         </Menu>
         <Button variant={'solid'} leftIcon={<BiPlus />} onClick={onOpen}>Add a new Collection</Button>
-      </HStack>
+        <Spacer />
+        <Show above={'lg'}>
+          <IconButton aria-label={'change to grid view'}><BiGridAlt /></IconButton>
+          <IconButton aria-label={'change to grid view'}><BiListOl /></IconButton>
+        </Show>
+      </Flex>
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap={3}>
         { isLoading && collectionSkeletons.map((skeleton) => <CollectionItemSkeleton key={skeleton} />) }
         { collections?.map((collection) => <CollectionItem key={collection._id} collection={collection} />) }
       </SimpleGrid> 
+      {
+        !isLoading && collections?.length == 0 &&
+        <VStack height={'100%'} justifyContent={'center'}>
+          <Button variant={'ghost'} onClick={onOpen}>
+            <Text color={'gray.600'}>You don't have a collection. Collections are an awesome way to organize your notes. Start by creating a collection!</Text>
+          </Button>
+        </VStack>
+      }
     </VStack>
     <Drawer
       isOpen={isOpen}

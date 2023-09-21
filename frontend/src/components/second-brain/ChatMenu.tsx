@@ -5,19 +5,20 @@ import { useGetCollections } from '../../hooks/collections';
 import useChatParametersStore, { ChatBasis } from '../../state/useChatParametersStore';
 import MessageAlertDialog, { AlertDetails } from '../shared/MessageAlertDialog';
 import useChatStore from '../../state/useChatStore';
+import { Collection } from '../../services/collectionsService';
 
 interface LocalChatState {
   chatBasis?: ChatBasis,
-  collectionName?: string;
+  collection?: Collection;
 }
 
 const ChatMenu = () => {
   const { data: collections } = useGetCollections();
-  const { chatParameters, setChatBasis, setCollectionName } = useChatParametersStore();
+  const { chatParameters, setChatBasis, setCollection} = useChatParametersStore();
 
   const [ localChatState, setLocalChatState ] = useState<LocalChatState>({
     chatBasis: chatParameters.chatBasis,
-    collectionName: chatParameters.collectionName
+    collection: chatParameters.collection
   });
 
   const { chats, reset } = useChatStore();
@@ -37,7 +38,7 @@ const ChatMenu = () => {
     if (chatBasis !== chatParameters.chatBasis && chats.length > 0) {
       onOpen();
     } else {
-      setChatBasis(localChatState.chatBasis!);
+      setChatBasis(chatBasis);
     }
   }
 
@@ -45,17 +46,17 @@ const ChatMenu = () => {
     setChatBasis(localChatState.chatBasis!);
   }
 
-  const onChangeCollection = (collectionName: string) => {
-    setLocalChatState({ ...localChatState, collectionName })
-    if (collectionName !== chatParameters.collectionName && chatParameters.collectionName && chats.length > 0) {
+  const onChangeCollection = (collection: Collection) => {
+    setLocalChatState({ ...localChatState, collection })
+    if (collection !== chatParameters.collection && chatParameters.collection && chats.length > 0) {
       onOpen();
     } else {
-      setCollectionName(collectionName);
+      setCollection(collection);
     }
   }
 
   const resetAndChangeCollection = () => {
-    setCollectionName(localChatState.collectionName!);
+    setCollection(localChatState.collection!);
   }
 
   return <><HStack>
@@ -71,9 +72,9 @@ const ChatMenu = () => {
     </Menu>
     { chatParameters.chatBasis === "Collection" &&
     <Menu>
-      <MenuButton as={Button} variant={'solid'} rightIcon={<BsChevronDown />}>{ chatParameters.collectionName || "Collection" }</MenuButton>
+      <MenuButton as={Button} variant={'solid'} rightIcon={<BsChevronDown />}>{ chatParameters.collection?.name || "Collection" }</MenuButton>
       <MenuList>
-        { collections?.map((collection) => <MenuItem key={collection._id} onClick={() => onChangeCollection(collection.name!)}>{ collection.name }</MenuItem> ) }
+        { collections?.map((collection) => <MenuItem key={collection._id} onClick={() => onChangeCollection(collection)}>{ collection.name }</MenuItem> ) }
       </MenuList>
     </Menu> }
   </HStack>

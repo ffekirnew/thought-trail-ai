@@ -23,8 +23,8 @@ const ChatPage = () => {
     templateColumns={"1fr"}
     templateRows={"minmax(0, 1fr) auto"}
     gap={3}
-    paddingBottom={3}
     height={'100%'}
+    paddingBottom={3}
   >
     <GridItem area={'chat'}>
       <Grid gap={5} height={'100%'} templateRows={"auto minmax(0, 1fr)"}>
@@ -32,7 +32,7 @@ const ChatPage = () => {
           <ChatMenu />
         </GridItem>
         <GridItem height={'100%'} overflowY={'scroll'} ref={chatRef}>
-          <Flex flexDir={'column'} justifyContent={'center'}>
+          <Flex flexDir={'column'} height={'100%'} justifyContent={'center'}>
             { chats.length == 0 && <Text textAlign={'center'} color={'gray.600'}>Start chatting with our bot.</Text> }
           </Flex>
           <Flex flexDir={'column'} gap={3}>

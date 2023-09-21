@@ -15,13 +15,13 @@ const useUpdateJournal = () => {
 
   const updateJournal = useMutation<Journal, Error, UpdateJournalInterface, UpdateJournalContext>({
     mutationFn: (updateJournal) => journalsService.update(updateJournal.id, updateJournal.journal).then((res) => res.data),
-    onMutate: (updateJournalInterface) => {
+    onMutate: (data) => {
       const previousJournals = queryClient.getQueryData<Journal[]>(['journals']) || [];
 
       queryClient.setQueryData<Journal[]>(
         ['journals'],
-        (journals) => journals?.map(journal => journal._id === updateJournalInterface.id ? updateJournalInterface.journal : journal));
-      queryClient.invalidateQueries(['collections', updateJournalInterface.id]);
+        (journals) => journals?.map(journal => journal._id === data.id ? data.journal : journal));
+      queryClient.invalidateQueries(['journals', data.id]);
 
 
       return { previousJournals };

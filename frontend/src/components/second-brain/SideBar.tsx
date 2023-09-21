@@ -1,6 +1,6 @@
-import { Image, Spacer, VStack, HStack, Text, useColorMode } from '@chakra-ui/react';
+import { Image, Spacer, VStack, HStack, Text, useColorMode, InputGroup, Input, InputRightElement, IconButton, Button } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
-import { BiCircleThreeQuarter, BiEqualizer, BiFlag, BiMessageSquare, BiNote, BiSolidInbox, BiStar } from 'react-icons/bi';
+import { BiEqualizer, BiMessageSquare, BiSearch, BiSolidInbox } from 'react-icons/bi';
 import SideBarOption from './SideBarOption';
 
 import logo from '../../assets/logo.svg';
@@ -27,23 +27,24 @@ const SideBar = () => {
       <ColorModeSwitch variant={'ghost'} />
     </HStack>
     <VStack align={'left'} width={'100%'} gap={2} paddingX={5}>
+      <InputGroup outline={'brand.primary'} overflow={'hidden'} gap={5}>
+        <Input placeholder='Search...' borderRadius={10} variant={'outline'} overflow={'hidden'}/>
+        <InputRightElement padding={2}>
+          <IconButton aria-label={'search-everything'} as={Button} variant={'outline'}>
+            <BiSearch />
+          </IconButton>
+        </InputRightElement>
+      </InputGroup> 
+      <Link to={'/everything/chat'}><SideBarOption text='Chat' icon={<BiMessageSquare />} /></Link>
       <Link to={'/everything/journals'}><SideBarOption text='Journals' icon={<BsFillJournalBookmarkFill />} /></Link>
       <Link to={'/everything/collections'}><SideBarOption text='Collections' icon={<BiSolidInbox />} /></Link>
-      <Link to={'/everything/chat'}><SideBarOption text='Chat' icon={<BiMessageSquare />} /></Link>
-      <SideBarOption text='Saved' icon={<BiStar />} />
-      <SideBarOption text='Tasks' icon={<BiFlag />} />
     </VStack>
     <Spacer />
     <VStack align={'left'} width={'100%'} gap={2} paddingX={5}>
-      <SideBarOption text='Plans' icon={<BiNote />} />
-      <SideBarOption text='Goals' icon={<BiCircleThreeQuarter />} />
-    </VStack>
-    <Spacer />
-    <VStack align={'left'} width={'100%'} gap={2} paddingX={5}>
-      <SideBarOption text='Settings' icon={<BiEqualizer />} />
+      <Link to={'/everything/account'}><SideBarOption text='Account Stats' icon={<BiEqualizer />} /></Link>
     </VStack>
     <SideBarUserComponent />
   </VStack>
 }
 
-export default SideBar
+export default SideBar;
