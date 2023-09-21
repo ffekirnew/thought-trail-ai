@@ -1,5 +1,5 @@
-import { Heading, VStack } from "@chakra-ui/react"
-import { useLocation } from "react-router-dom"
+import { Heading, VStack } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
 import AddKnowledge from "./AddKnowledge";
 
 const SideBar = () => {
@@ -14,4 +14,4 @@ const SideBar = () => {
   </VStack>
 }
 
-export default SideBar
+export default SideBar;
