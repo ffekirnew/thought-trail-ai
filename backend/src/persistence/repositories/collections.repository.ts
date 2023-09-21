@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 import { ICollectionsRepository } from "../../application/contracts/persistence";
 import { CollectionEntity, NoteEntity } from "../../domain/entities";
 import { UserModel } from "../models";
-import { NotesRepository } from ".";
+import { CollectionsRepository, NotesRepository } from ".";
 
 class CollectionRepository implements ICollectionsRepository { 
   constructor(
@@ -28,7 +28,7 @@ class CollectionRepository implements ICollectionsRepository {
       if (!collection) {
         throw new Error("Collection not found");
       }
-      return this.toCollectionEntity(collection);
+      return CollectionRepository.toCollectionEntity(collection);
     });
   }
 
@@ -43,7 +43,7 @@ class CollectionRepository implements ICollectionsRepository {
       if (!collection) {
         throw new Error("Collection not found");
       }
-      return this.toCollectionEntity(collection);
+      return CollectionRepository.toCollectionEntity(collection);
     });
   }
 
@@ -53,7 +53,7 @@ class CollectionRepository implements ICollectionsRepository {
       if (!user) {
         throw new Error("User not found");
       }
-      return user.collections.map((collection) => this.toCollectionEntity(collection));
+      return user.collections.map((collection) => CollectionsRepository.toCollectionEntity(collection));
     });
   }
 
@@ -206,8 +206,7 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-
-  private toCollectionEntity(collectionDocument: any): CollectionEntity {
+  static toCollectionEntity(collectionDocument: any): CollectionEntity {
     const collection = new CollectionEntity({
       _id: collectionDocument._id,
       name: collectionDocument.name,

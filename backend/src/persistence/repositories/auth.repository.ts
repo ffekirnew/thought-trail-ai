@@ -2,6 +2,7 @@ import { Types } from 'mongoose';
 import UserModel from '../models/user.model';
 import UserEntity from '../../domain/entities/user.entity';
 import { IAuthRepository } from '../../application/contracts/persistence';
+import { CollectionsRepository, JournalsRepository } from '.';
 
 class AuthRepository implements IAuthRepository {
   private async execute<T>(fn: () => Promise<T>): Promise<T> {
@@ -74,6 +75,8 @@ class AuthRepository implements IAuthRepository {
       verificationToken: document.verificationToken,
       notes: document.notes,
       tags: document.tags,
+      journals: document.journals,
+      collections: document.collections,
     });
   }
 
@@ -89,6 +92,8 @@ class AuthRepository implements IAuthRepository {
       verificationToken: entity.verificationToken,
       notes: entity.notes,
       tags: entity.tags,
+      journals: entity.journals,
+      collections: entity.collections,
     };
   }
 }
