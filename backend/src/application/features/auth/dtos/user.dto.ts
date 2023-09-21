@@ -5,6 +5,8 @@ class UserDto {
   username: string;
   email: string;
   profilePicture: string;
+  numberOfJournals: number;
+  numberOfCollections: number;
 
   static fromEntity(userEntity: UserEntity) {
     const userDto = new UserDto();
@@ -12,6 +14,8 @@ class UserDto {
     userDto.username = userEntity.username;
     userDto.email = userEntity.email;
     userDto.profilePicture = userEntity.profilePicture;
+    userDto.numberOfCollections = userEntity.collections.length;
+    userDto.numberOfJournals = userEntity.journals.length;
 
     return userDto;
   }
