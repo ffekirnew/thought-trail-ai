@@ -6,6 +6,10 @@ const useGetCollectionNotes = (collectionSlug: string) => {
   return useQuery<Note[], Error>({
     queryKey: ["collections", collectionSlug, "notes"],
     queryFn: () => collectionsService.getNotes(collectionSlug).then(res => res.data),
+    staleTime: 24 * 60 * 60 * 1000, // 1 day
+    keepPreviousData: true,
+    refetchOnReconnect: false,
+    refetchOnWindowFocus: false,
   });
 }
 

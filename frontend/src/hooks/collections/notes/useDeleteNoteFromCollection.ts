@@ -1,9 +1,10 @@
 import { collectionsService } from "../../../services";
+import { Collection } from "../../../services/collectionsService";
 import { Note } from "../../../services/notesService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface DeleteNoteInCollectionData {
-  collection: string;
+  collectionSlug: string;
   noteId: string;
 }
 
@@ -15,20 +16,22 @@ const useDeleteNoteFromCollection = () => {
   const queryClient = useQueryClient();
 
   const deleteNoteFromCollection = useMutation<void, Error, DeleteNoteInCollectionData, DeleteNoteInCollectionContext>({
-    mutationFn: (data) => collectionsService.deleteNoteFromCollection(data.collection, data.noteId).then((res) => res.data),
+    mutationFn: (data) => collectionsService.deleteNoteFromCollection(data.collectionSlug, data.noteId).then((res) => res.data),
     onMutate: (data) => {
-      const previousNotes = queryClient.getQueryData<Note[]>(['collections', data.collection, 'notes']) || [];
+      const previousNotes = queryClient.getQueryData<Note[]>(['collections', data.collectionSlug, 'notes']) || [];
 
-      queryClient.setQueryData<Note[]>(
-        ['collections', data.collection, 'notes'],
-        notes => notes?.filter(note => note._id !== data.noteId))
-      queryClient.invalidateQueries(['collections', data.collection, 'notes', data.noteId]);
+      queryClient.setQueryData<Collection>(
+        ['collections', data.collectionSlug],
+        (collection) => {
+          return { ...collection, notes: collection?.notes?.filter(note => note._id !== data.noteId) }
+        });
+      queryClient.invalidateQueries(['collections', data.collectionSlug, 'notes', data.noteId]);
 
       return { previousNotes };
     },
     onError: (_, data, context) => {
       queryClient.setQueryData<Note[]>(
-        ['collections', data.collection, 'notes'],
+        ['collections', data.collectionSlug, 'notes'],
         () => context?.previousNotes);
     }
   });
