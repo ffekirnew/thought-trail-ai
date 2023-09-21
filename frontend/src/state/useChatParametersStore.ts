@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { Collection } from "../services/collectionsService";
 
 export type ChatBasis = "Journal" | "Collection";
 export interface CollectionType {
@@ -8,19 +9,19 @@ export interface CollectionType {
 
 export interface ChatParameters {
   chatBasis?: ChatBasis;
-  collectionName?: string;
+  collection?: Collection;
 }
 
 interface UseChatStoreType {
   chatParameters: ChatParameters;
   setChatBasis: (chatBasis: ChatBasis) => void;
-  setCollectionName: (noteSlug: string) => void;
+  setCollection: (collection: Collection) => void;
 }
 
 const useChatParametersStore = create<UseChatStoreType>(set => ({
   chatParameters: { chatBasis: "Journal" },
   setChatBasis: chatBasis => set(() => ({chatParameters: { chatBasis }})),
-  setCollectionName: noteSlug => set(store => ({ chatParameters: { ...store.chatParameters, collectionName: noteSlug }}))
+  setCollection: collection => set(store => ({ chatParameters: { ...store.chatParameters, collection }}))
   })
 );
 
