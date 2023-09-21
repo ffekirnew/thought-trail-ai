@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, HStack, Heading, Input, Spacer, Spinner, Text, Textarea, VStack } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, HStack, Heading, Input, Spacer, Spinner, Text, Textarea, VStack, useToast } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isError } from "@tanstack/react-query";
 import { FieldValues, useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ interface Props {
   onClose: () => void;
 }
 const AddNewCollectionForm = ({onClose}: Props) => {
+  const toast = useToast();
   const {register, handleSubmit, formState: { errors }} = useForm<AddNewCollectionFormSchema>({ resolver: zodResolver(schema) });
 
   const createCollection = useCreateCollection();
@@ -24,6 +25,14 @@ const AddNewCollectionForm = ({onClose}: Props) => {
   const onSubmit = (data: FieldValues) => {
     const newCollection: Collection = { name: data.name, description: data.description, createdAt: new Date(), updatedAt: new Date() };
     createCollection.mutate(newCollection);
+    toast({
+      title: 'New collection created.',
+      description: "We have created your new collection. Start by adding notes to it.",
+      status: 'success',
+      duration: 1500,
+      isClosable: true,
+    })
+    onClose();
   }
 
   return <form onSubmit={handleSubmit(onSubmit)}>

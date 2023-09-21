@@ -28,7 +28,7 @@ const JournalDetail = ({ journal }: Props) => {
   const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setBody(e.target.value);
 
   const onSave = () => {
-    if (journal === undefined) {
+    if (journal === undefined || journal._id === undefined) {
       toast({
         title: 'Journal being created.',
         description: "We have created your new journal.",
@@ -93,7 +93,7 @@ const JournalDetail = ({ journal }: Props) => {
       <Button variant={'solid'} background={'brand.primary'} color={'white'} onClick={onSave} disabled={deleteJournal.isLoading || updateJournal.isLoading || createJournal.isLoading}>
         { createJournal.isLoading ? "Creating..." :
           updateJournal.isLoading ? "Updating..." :
-          journal === undefined ? "Create" : "Save" }
+          journal === undefined || journal._id === undefined ? "Create" : "Save" }
       </Button>
       <Button variant={'outline'} borderColor={'brand.primary'} color={'brand.primary'} onClick={onOpen} disabled={deleteJournal.isLoading}>
         Delete

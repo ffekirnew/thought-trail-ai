@@ -16,7 +16,7 @@ const CollectionsPage = () => {
 
   return <>
     <VStack align={'left'} paddingBottom={5}>
-      <HStack>
+      <HStack paddingBottom={3}>
         <Menu>
           <MenuButton as={Button} rightIcon={<BsChevronDown />}>Order by</MenuButton>
           <MenuList>
@@ -33,12 +33,12 @@ const CollectionsPage = () => {
             <MenuItem>Tag 4</MenuItem>
           </MenuList>
         </Menu>
+        <Button variant={'solid'} leftIcon={<BiPlus />} onClick={onOpen}>Add a new Collection</Button>
       </HStack>
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap={3}>
         { isLoading && collectionSkeletons.map((skeleton) => <CollectionItemSkeleton key={skeleton} />) }
         { collections?.map((collection) => <CollectionItem key={collection._id} collection={collection} />) }
-      </SimpleGrid>
-      <Button variant={'outline'} leftIcon={<BiPlus />} onClick={onOpen}>Add a new Collection</Button>
+      </SimpleGrid> 
     </VStack>
     <Drawer
       isOpen={isOpen}

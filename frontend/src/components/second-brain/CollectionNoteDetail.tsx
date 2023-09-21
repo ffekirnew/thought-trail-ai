@@ -31,13 +31,14 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
     if (note === undefined || note._id === undefined) {
       toast({
         title: 'Note being created.',
-        description: "We're saving your note.",
+        description: "We've added your note to the collection.",
         status: 'info',
         duration: 1500,
         isClosable: true,
       })
-      const newNote: Note = { title: title, body: body, _id: "", tags: [] };
-      addNoteToCollection.mutate({collection: collectionSlug, note: newNote });
+      const newNote: Note = { title: title, body: body, _id: "", tags: [], createdAt: new Date(), updatedAt: new Date() };
+      addNoteToCollection.mutate({collectionSlug: collectionSlug, note: newNote });
+      navigate(`/everything/collections/${collectionSlug}`);
     } else {
       toast({
         title: 'Note being updated.',
@@ -48,8 +49,7 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         colorScheme: 'blue'
       })
       const updatedNote = { ...note, title: title, body: body };
-      updateNoteInCollection.mutate({ collection: collectionSlug, noteId: note._id, note: updatedNote });
-
+      updateNoteInCollection.mutate({ collectionSlug: collectionSlug, noteId: note._id, note: updatedNote });
     }
   }
 
@@ -63,7 +63,7 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         isClosable: true,
         colorScheme: 'blue'
       })
-      deleteNoteFromCollection.mutate({ collection: collectionSlug, noteId: note?._id! });
+      deleteNoteFromCollection.mutate({ collectionSlug: collectionSlug, noteId: note?._id! });
     }
   }
 

@@ -26,10 +26,10 @@ const CollectionItem = ({ collection }: Props) => {
         <Text as={'h3'} fontSize={'2xl'} fontWeight={'bold'} overflow={'hidden'}>{ collection.name }</Text> 
         <Text as={'p'} fontSize={'md'} fontWeight={'light'} overflow={'hidden'}>{ collection.description }</Text>
       </Flex>
-      <HStack paddingX={5} paddingTop={3} borderTopWidth={'1px'}>
-        <Text fontWeight={'light'}>Last Interaction: { formatDate(collection.updatedAt!) }</Text>
+      <HStack paddingX={5}>
+        <Text fontWeight={'semibold'}>Last Interaction: { formatDate(collection.updatedAt!) }</Text>
         <Spacer />
-        <Text fontWeight={'light'}>{ collection.notes?.length } Notes</Text>
+        <Text fontWeight={'bold'}>{ collection.notes?.length } Notes</Text>
       </HStack>
     </VStack>
   </Button>

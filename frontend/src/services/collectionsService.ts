@@ -4,8 +4,8 @@ import { Note } from "./notesService";
 export interface Collection {
   _id?: string;
   slug?: string;
-  name: string;
-  description: string;
+  name?: string;
+  description?: string;
   notes?: Note[];
   createdAt?: Date;
   updatedAt?: Date;
