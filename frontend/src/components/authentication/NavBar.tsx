@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ColorModeSwitch from '../shared/ColorModeSwitch';
 
 const NavBar = () => {
-  return <Flex padding={5} width={'100%'} alignItems={'center'} justifyContent={'space-between'} >
+  return <Flex padding={3} width={'100%'} alignItems={'center'} justifyContent={'space-between'} >
     <HStack gap={5}>
       <Link to={'/'}>
         <HStack>

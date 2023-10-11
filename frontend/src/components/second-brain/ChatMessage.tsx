@@ -46,21 +46,19 @@ const ChatMessage = ({ message }: Props) => {
   return (<Box
     bg={message.sender === 'user' ? userBackgroundColors[colorMode] : botBackgroundColors[colorMode]}
     borderRadius={10}
-    borderBottomRightRadius={message.sender === 'user' ? 0 : 10}
-    borderBottomLeftRadius={message.sender === 'bot' ? 0 : 10}
     paddingY={3}
     paddingX={5}
-    width={'95%'}
+    max-width={'95%'}
     marginLeft={message.sender === 'user' ? 'auto' : 0}
     marginRight={message.sender === 'user' ? 0 : 'auto'}
   >
     { message.sender === 'bot' &&
-      <HStack>
+      <HStack marginBottom={5}>
         <Spacer />
-        <Button size={'sm'} aria-label={"save-this-message"} onClick={onSave} as={Button} variant={'outline'} leftIcon={<BiSave />}>
+        <Button size={'xs'} aria-label={"save-this-message"} onClick={onSave} as={Button} variant={'outline'}>
           Save
         </Button>
-        <Button size={'sm'} aria-label={"save-this-message"} onClick={() => {}} as={Button} variant={'outline'} leftIcon={<BiShare />}>
+        <Button size={'xs'} aria-label={"save-this-message"} onClick={() => {}} as={Button} variant={'outline'}>
           Regenerate
         </Button>
       </HStack>

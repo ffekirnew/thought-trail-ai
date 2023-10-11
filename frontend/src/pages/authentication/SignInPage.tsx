@@ -12,7 +12,7 @@ const schema = z.object({
   password: z.string().min(6, { message: "Password must be at least 6 charachters." })
 });
 
-type SignInFormSchema = z.infer<typeof schema>
+type SignInFormSchema = z.infer<typeof schema>;
 
 const SignInPage = () => {
   const {register, handleSubmit, formState: { errors }} = useForm<SignInFormSchema>({ resolver: zodResolver(schema) });
