@@ -7,22 +7,29 @@ const AuthenticationPage = () => {
   const {colorMode} = useColorMode();
 
   return <HStack>
-    <VStack height={'100vh'} width={'100%'} overflowY={'scroll'}>
-      <Outlet />
-    </VStack>
     <Show above={'lg'}>
       <VStack
         width={'100%'} 
         height={'100vh'}
         className='illustration'
         align={'left'}
+        justifyContent={'center'}
         >
-        <Spacer />
-        <Box bg={colorMode === 'dark'? 'gray.800' : 'gray.50'} margin={5} borderRadius={10} boxShadow={'dark-lg'}>
+        <VStack
+          bg={colorMode === 'dark'? 'gray.800' : 'gray.50'}
+          margin={5}
+          borderRadius={10}
+          boxShadow={'dark-lg'}
+          height={'50%'}
+          justifyContent={'center'}
+        >
           <NavBar />
-        </Box>
+        </VStack>
       </VStack>
     </Show>
+    <VStack height={'100vh'} width={'100%'} overflowY={'scroll'}>
+      <Outlet />
+    </VStack>
   </HStack>
 }
 
