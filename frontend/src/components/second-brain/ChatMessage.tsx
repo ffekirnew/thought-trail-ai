@@ -1,4 +1,4 @@
-import { HStack, Box, Text, useColorMode, Spacer, Button, IconButton } from "@chakra-ui/react";
+import { HStack, Box, Text, useColorMode, Spacer, Button } from "@chakra-ui/react";
 import { Chat } from "../../state/useChatStore";
 import useChatParametersStore from "../../state/useChatParametersStore";
 import { Journal } from "../../services/journalsService";
@@ -6,7 +6,6 @@ import useNewJournalStore from "../../state/useNewJournalStore";
 import { Note } from "../../services/notesService";
 import useNewCollectionNoteStore from "../../state/useNewCollectionNoteStore";
 import { useNavigate } from "react-router-dom";
-import { BiRedo, BiSave, BiShare, BiSolidArchiveOut } from "react-icons/bi";
 
 interface Props {
   message: Chat
