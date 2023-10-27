@@ -1,5 +1,5 @@
 .logo {
-    animation: levitate 2s infinite alternate; 
+  animation: levitate 2s infinite alternate;
 }
 
 @keyframes levitate {
@@ -7,8 +7,6 @@
     transform: translateY(0);
   }
   100% {
-    transform: translateY(-20px); 
+    transform: translateY(-20px);
   }
 }
-
-

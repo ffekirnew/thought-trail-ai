@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm } from "react-hook-form";
-import InputField from "../../components/authentication/InputForm";
-import { Text, Heading, Button, VStack } from "@chakra-ui/react";
-import LoadingRipples from "../../components/ui/loading-ripples/LoadingRipples";
-import { useRegister } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { FieldValues, useForm } from "react-hook-form"
+import InputField from "../../components/authentication/InputForm"
+import { Text, Heading, Button, VStack } from "@chakra-ui/react"
+import LoadingRipples from "../../components/ui/loading-ripples/LoadingRipples"
+import { useRegister } from "../../hooks/auth"
 
 const schema = z
   .object({
@@ -21,11 +21,9 @@ const schema = z
       .regex(/^[a-zA-Z0-9_]+$/, {
         message: "Username can only contain letters, numbers, and underscores.",
       }),
-    email: z
-      .string()
-      .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
-        message: "Email must be a valid email address.",
-      }),
+    email: z.string().regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, {
+      message: "Email must be a valid email address.",
+    }),
     password: z
       .string()
       .min(8, { message: "Password must be at least 8 characters." })
@@ -33,34 +31,32 @@ const schema = z
         message:
           "Password must include at least one lowercase letter, one uppercase letter, one digit, and one special character (@#$%^&+=!).",
       }),
-    passwordConfirmation: z
-      .string()
-      .min(8, {
-        message: "Password confirmation must be at least 8 characters.",
-      }),
+    passwordConfirmation: z.string().min(8, {
+      message: "Password confirmation must be at least 8 characters.",
+    }),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     path: ["passwordConfirmation"],
     message: "Password don't match",
-  });
+  })
 
-type RegisterSchema = z.infer<typeof schema>;
+type RegisterSchema = z.infer<typeof schema>
 
 const RegisterPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegisterSchema>({ resolver: zodResolver(schema) });
-  const navigate = useNavigate();
-  const { register: signUp, isSuccess, isLoading, error } = useRegister();
+  } = useForm<RegisterSchema>({ resolver: zodResolver(schema) })
+  const navigate = useNavigate()
+  const { register: signUp, isSuccess, isLoading, error } = useRegister()
 
   const onRegister = (data: FieldValues) => {
-    signUp(data.name, data.email, data.username, data.password);
-  };
+    signUp(data.name, data.email, data.username, data.password)
+  }
 
   if (isSuccess) {
-    navigate("/everything");
+    navigate("/everything")
   }
 
   return (
@@ -145,7 +141,7 @@ const RegisterPage = () => {
         </Button>
       </Text>
     </VStack>
-  );
-};
+  )
+}
 
-export default RegisterPage;
+export default RegisterPage

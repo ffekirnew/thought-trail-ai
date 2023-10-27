@@ -1,22 +1,21 @@
 import { create } from "zustand"
-import { Collection } from "../services/collectionsService";
+import { Collection } from "../services/collectionsService"
 
-type ChatBasis = "journal" | "note";
+type ChatBasis = "journal" | "note"
 
 export interface ChatParameters {
-  chatBasis?: ChatBasis;
-  noteSlug?: string;
+  chatBasis?: ChatBasis
+  noteSlug?: string
 }
 
 interface UseChatStoreType {
-  collections: Collection[];
-  setCollections: (collections: Collection[]) => void;
+  collections: Collection[]
+  setCollections: (collections: Collection[]) => void
 }
 
-const useCollectionsStore = create<UseChatStoreType>(set => ({
+const useCollectionsStore = create<UseChatStoreType>((set) => ({
   collections: [],
-  setCollections: collections => set(() => ({ collections })),
-  })
-);
+  setCollections: (collections) => set(() => ({ collections })),
+}))
 
-export default useCollectionsStore;
+export default useCollectionsStore

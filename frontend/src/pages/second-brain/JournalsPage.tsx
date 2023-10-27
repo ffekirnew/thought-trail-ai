@@ -11,25 +11,25 @@ import {
   VStack,
   Show,
   Flex,
-} from "@chakra-ui/react";
-import { BsChevronDown } from "react-icons/bs";
-import { useGetJournals } from "../../hooks/journals";
-import JournalListItem from "../../components/second-brain/JournalListItem";
-import JournalListItemSkeleton from "../../components/second-brain/skeletons/JournalListItemSkeleton";
-import { BiGridAlt, BiListOl, BiPlus } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+} from "@chakra-ui/react"
+import { BsChevronDown } from "react-icons/bs"
+import { useGetJournals } from "../../hooks/journals"
+import JournalListItem from "../../components/second-brain/JournalListItem"
+import JournalListItemSkeleton from "../../components/second-brain/skeletons/JournalListItemSkeleton"
+import { BiGridAlt, BiListOl, BiPlus } from "react-icons/bi"
+import { useNavigate } from "react-router-dom"
 
 const JournalsPage = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  const { data: journals, isLoading } = useGetJournals();
+  const { data: journals, isLoading } = useGetJournals()
   const journalSkeletons = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-  ];
+  ]
 
   const onAddNewJournal = () => {
-    navigate(`/everything/journals/new`);
-  };
+    navigate(`/everything/journals/new`)
+  }
 
   return (
     <VStack height={"100%"} align={"left"}>
@@ -94,7 +94,7 @@ const JournalsPage = () => {
         </VStack>
       )}
     </VStack>
-  );
-};
+  )
+}
 
-export default JournalsPage;
+export default JournalsPage

@@ -1,57 +1,66 @@
-import { createBrowserRouter } from "react-router-dom";
-import ErrorPage from "./pages/ErrorPage";
-import Layout from "./pages/Layout";
-import LandingPage from "./pages/LandingPage";
-import SignInPage from "./pages/authentication/SignInPage";
-import RegisterPage from "./pages/authentication/RegisterPage";
-import AuthenticationPage from "./pages/authentication/AuthenticationPage";
-import SecondBrainPage from "./pages/second-brain/SecondBrainPage";
-import ChatPage from "./pages/second-brain/ChatPage";
-import JournalsPage from "./pages/second-brain/JournalsPage";
-import JournalDetailPage from "./pages/second-brain/JournalDetailPage";
-import AddNewJournalPage from "./pages/second-brain/AddNewJournalPage";
-import CollectionsPage from "./pages/second-brain/CollectionsPage";
-import CollectionDetailPage from "./pages/second-brain/CollectionDetailPage";
-import CollectionNotePage from "./pages/second-brain/CollectionNotePage";
-import AddNewCollectionNotePage from "./pages/second-brain/AddNewCollectionNotePage";
-import AccountStatisticsPage from "./pages/second-brain/AccountStatisticsPage";
+import { createBrowserRouter } from "react-router-dom"
+import ErrorPage from "./pages/ErrorPage"
+import Layout from "./pages/Layout"
+import LandingPage from "./pages/LandingPage"
+import SignInPage from "./pages/authentication/SignInPage"
+import RegisterPage from "./pages/authentication/RegisterPage"
+import AuthenticationPage from "./pages/authentication/AuthenticationPage"
+import SecondBrainPage from "./pages/second-brain/SecondBrainPage"
+import ChatPage from "./pages/second-brain/ChatPage"
+import JournalsPage from "./pages/second-brain/JournalsPage"
+import JournalDetailPage from "./pages/second-brain/JournalDetailPage"
+import AddNewJournalPage from "./pages/second-brain/AddNewJournalPage"
+import CollectionsPage from "./pages/second-brain/CollectionsPage"
+import CollectionDetailPage from "./pages/second-brain/CollectionDetailPage"
+import CollectionNotePage from "./pages/second-brain/CollectionNotePage"
+import AddNewCollectionNotePage from "./pages/second-brain/AddNewCollectionNotePage"
+import AccountStatisticsPage from "./pages/second-brain/AccountStatisticsPage"
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: '/', element: <LandingPage /> },
+      { path: "/", element: <LandingPage /> },
       {
-        path: 'auth',
+        path: "auth",
         element: <AuthenticationPage />,
         children: [
-          { path: 'sign-in', element: <SignInPage /> },
-          { path: 'register', element: <RegisterPage /> }
-        ]
+          { path: "sign-in", element: <SignInPage /> },
+          { path: "register", element: <RegisterPage /> },
+        ],
       },
       {
-        path: 'everything',
+        path: "everything",
         element: <SecondBrainPage />,
         children: [
           { index: true, element: <ChatPage /> },
-          { path: 'journals', element: <JournalsPage /> },
-          { path: 'journals/:id', element: <JournalDetailPage /> },
-          { path: 'journals/new', element: <AddNewJournalPage /> },
+          { path: "journals", element: <JournalsPage /> },
+          { path: "journals/:id", element: <JournalDetailPage /> },
+          { path: "journals/new", element: <AddNewJournalPage /> },
 
-          { path: 'collections', element: <CollectionsPage /> },
-          { path: 'collections/:collectionSlug', element: <CollectionDetailPage /> },
-          { path: 'collections/:collectionSlug/notes/:noteId', element: <CollectionNotePage /> },
-          { path: 'collections/:collectionSlug/notes/new', element: <AddNewCollectionNotePage /> },
+          { path: "collections", element: <CollectionsPage /> },
+          {
+            path: "collections/:collectionSlug",
+            element: <CollectionDetailPage />,
+          },
+          {
+            path: "collections/:collectionSlug/notes/:noteId",
+            element: <CollectionNotePage />,
+          },
+          {
+            path: "collections/:collectionSlug/notes/new",
+            element: <AddNewCollectionNotePage />,
+          },
 
-          { path: 'chat', element: <ChatPage /> },
+          { path: "chat", element: <ChatPage /> },
 
-          { path: 'account', element: <AccountStatisticsPage /> }
-        ]
-      }
-    ]
-  }
-]);
+          { path: "account", element: <AccountStatisticsPage /> },
+        ],
+      },
+    ],
+  },
+])
 
-export default router;
+export default router

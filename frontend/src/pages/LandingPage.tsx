@@ -1,7 +1,7 @@
-import { Text, VStack, Divider } from "@chakra-ui/react";
-import NavBar from "../components/langing-page/NavBar";
-import Hero from "../components/langing-page/Hero";
-import FeaturesGrid from "../components/langing-page/FeaturesGrid";
+import { Text, VStack, Divider } from "@chakra-ui/react"
+import NavBar from "../components/langing-page/NavBar"
+import Hero from "../components/langing-page/Hero"
+import FeaturesGrid from "../components/langing-page/FeaturesGrid"
 
 const LandingPage = () => {
   return (
@@ -17,7 +17,7 @@ const LandingPage = () => {
         </Text>
       </VStack>
     </VStack>
-  );
-};
+  )
+}
 
-export default LandingPage;
+export default LandingPage

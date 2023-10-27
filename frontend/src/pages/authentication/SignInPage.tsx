@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FieldValues, useForm } from "react-hook-form";
-import InputField from "../../components/authentication/InputForm";
-import { Text, Heading, Button, VStack } from "@chakra-ui/react";
-import LoadingRipples from "../../components/ui/loading-ripples/LoadingRipples";
-import { useLogin } from "../../hooks/auth";
+import { useNavigate } from "react-router-dom"
+import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { FieldValues, useForm } from "react-hook-form"
+import InputField from "../../components/authentication/InputForm"
+import { Text, Heading, Button, VStack } from "@chakra-ui/react"
+import LoadingRipples from "../../components/ui/loading-ripples/LoadingRipples"
+import { useLogin } from "../../hooks/auth"
 
 const schema = z.object({
   username: z
@@ -14,24 +14,24 @@ const schema = z.object({
   password: z
     .string()
     .min(6, { message: "Password must be at least 6 charachters." }),
-});
+})
 
-type SignInFormSchema = z.infer<typeof schema>;
+type SignInFormSchema = z.infer<typeof schema>
 
 const SignInPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignInFormSchema>({ resolver: zodResolver(schema) });
-  const { login, isLoading, error, isSuccess } = useLogin();
-  const navigate = useNavigate();
+  } = useForm<SignInFormSchema>({ resolver: zodResolver(schema) })
+  const { login, isLoading, error, isSuccess } = useLogin()
+  const navigate = useNavigate()
 
   const onSignIn = (data: FieldValues) => {
-    login(data.username, data.password);
-  };
+    login(data.username, data.password)
+  }
 
-  if (isSuccess) navigate("/everything/chat");
+  if (isSuccess) navigate("/everything/chat")
 
   return (
     <VStack gap={10} align={"left"} padding={10} width={"100%"}>
@@ -85,7 +85,7 @@ const SignInPage = () => {
         </Button>
       </Text>
     </VStack>
-  );
-};
+  )
+}
 
-export default SignInPage;
+export default SignInPage

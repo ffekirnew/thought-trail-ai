@@ -1,6 +1,6 @@
 const useLogout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user"); 
+  localStorage.removeItem("token")
+  localStorage.removeItem("user")
 }
 
-export default useLogout;
+export default useLogout

@@ -1,15 +1,14 @@
-import { create } from "zustand";
-import { Journal } from "../services/journalsService";
+import { create } from "zustand"
+import { Journal } from "../services/journalsService"
 
 interface UseNewJournalStoreType {
-  journal?: Journal;
-  setJournal: (journal?: Journal) => void;
+  journal?: Journal
+  setJournal: (journal?: Journal) => void
 }
 
-const useNewJournalStore = create<UseNewJournalStoreType>(set => ({
+const useNewJournalStore = create<UseNewJournalStoreType>((set) => ({
   journal: {},
-  setJournal: journal => set(() => ({ journal })),
-  })
-);
+  setJournal: (journal) => set(() => ({ journal })),
+}))
 
-export default useNewJournalStore;
+export default useNewJournalStore

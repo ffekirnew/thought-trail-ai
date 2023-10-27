@@ -1,7 +1,7 @@
-import { VStack } from "@chakra-ui/react";
-import ChatBox from "../components/chat-page/ChatBox";
-import Search, { SearchType } from "../components/chat-page/Search";
-import ChatLayout from "../components/chat-page/ChatLayout";
+import { VStack } from "@chakra-ui/react"
+import ChatBox from "../components/chat-page/ChatBox"
+import Search, { SearchType } from "../components/chat-page/Search"
+import ChatLayout from "../components/chat-page/ChatLayout"
 
 const GlobalSearchPage = () => {
   const searches: SearchType[] = [
@@ -23,7 +23,7 @@ const GlobalSearchPage = () => {
     },
     { type: "search", body: "Thanks!" },
     { type: "result", body: "No problem! Have a nice day!" },
-  ];
+  ]
   return (
     <ChatLayout
       body={
@@ -35,7 +35,7 @@ const GlobalSearchPage = () => {
       }
       chatBox={<ChatBox />}
     />
-  );
-};
+  )
+}
 
-export default GlobalSearchPage;
+export default GlobalSearchPage
