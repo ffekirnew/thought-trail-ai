@@ -10,34 +10,34 @@ import {
   MenuItem,
   MenuList,
   Show,
-} from "@chakra-ui/react"
-import { Collection } from "../../services/collectionsService"
-import CollectionNoteItem from "./CollectionNoteItem"
-import { BiPlus, BiSolidTrash } from "react-icons/bi"
-import { useNavigate } from "react-router-dom"
-import { useDeleteCollection } from "../../hooks/collections"
-import React from "react"
-import DeleteCollectionAlertDialog from "./DeleteCollectionAlertDialog"
-import { BsChevronDown } from "react-icons/bs"
+} from "@chakra-ui/react";
+import { Collection } from "../../services/collectionsService";
+import CollectionNoteItem from "./CollectionNoteItem";
+import { BiPlus, BiSolidTrash } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
+import { useDeleteCollection } from "../../hooks/collections";
+import React from "react";
+import DeleteCollectionAlertDialog from "./DeleteCollectionAlertDialog";
+import { BsChevronDown } from "react-icons/bs";
 
 interface Props {
-  collection: Collection
+  collection: Collection;
 }
 const CollectionDetail = ({ collection }: Props) => {
-  const toast = useToast()
+  const toast = useToast();
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef<HTMLButtonElement>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
-  const navigate = useNavigate()
-  const deleteCollection = useDeleteCollection()
+  const navigate = useNavigate();
+  const deleteCollection = useDeleteCollection();
 
   const onAddNoteToCollection = () => {
-    navigate(`/everything/collections/${collection.slug}/notes/new`)
-  }
+    navigate(`/everything/collections/${collection.slug}/notes/new`);
+  };
 
   const onDelete = () => {
-    deleteCollection.mutate(collection._id!)
+    deleteCollection.mutate(collection._id!);
     toast({
       title: "Collection being deleted.",
       description: "We're deleting this the collection.",
@@ -45,9 +45,9 @@ const CollectionDetail = ({ collection }: Props) => {
       duration: 1000,
       isClosable: true,
       colorScheme: "blue",
-    })
-    navigate(`/everything/collections`)
-  }
+    });
+    navigate(`/everything/collections`);
+  };
 
   return (
     <VStack height={"100%"} align={"left"} gap={5}>
@@ -128,7 +128,7 @@ const CollectionDetail = ({ collection }: Props) => {
         action={onDelete}
       />
     </VStack>
-  )
-}
+  );
+};
 
-export default CollectionDetail
+export default CollectionDetail;

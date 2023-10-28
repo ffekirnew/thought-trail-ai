@@ -1,14 +1,14 @@
-import { HStack, Box, Text, Image } from "@chakra-ui/react"
-import userAvatar from "../../assets/user_avatar.png"
-import botAvatar from "../../assets/bot_avatar.png"
+import { HStack, Box, Text, Image } from "@chakra-ui/react";
+import userAvatar from "../../assets/user_avatar.png";
+import botAvatar from "../../assets/bot_avatar.png";
 
 export interface SearchType {
-  type: "search" | "result"
-  body: string
+  type: "search" | "result";
+  body: string;
 }
 
 interface Props {
-  content: SearchType
+  content: SearchType;
 }
 
 const Search = ({ content }: Props) => {
@@ -24,7 +24,7 @@ const Search = ({ content }: Props) => {
         <Text fontSize={"md"}>{content.body}</Text>
       </HStack>
     </Box>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

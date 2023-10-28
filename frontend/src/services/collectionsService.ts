@@ -1,19 +1,19 @@
-import ApiClient, { FetchResponse } from "./apiClient"
-import { Note } from "./notesService"
+import ApiClient, { FetchResponse } from "./apiClient";
+import { Note } from "./notesService";
 
 export interface Collection {
-  _id?: string
-  slug?: string
-  name?: string
-  description?: string
-  notes?: Note[]
-  createdAt?: Date
-  updatedAt?: Date
+  _id?: string;
+  slug?: string;
+  name?: string;
+  description?: string;
+  notes?: Note[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 class CollectionClient extends ApiClient<Collection> {
   constructor() {
-    super("/collections")
+    super("/collections");
   }
 
   getBySlug = async (slug: string) => {
@@ -23,8 +23,8 @@ class CollectionClient extends ApiClient<Collection> {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   getNote = async (slug: string, noteId: string) => {
     return this.axiosInstance
@@ -36,8 +36,8 @@ class CollectionClient extends ApiClient<Collection> {
           },
         },
       )
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   getNotes = async (slug: string) => {
     return this.axiosInstance
@@ -46,8 +46,8 @@ class CollectionClient extends ApiClient<Collection> {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   addNoteToCollection = async (collectionSlug: string, note: Note) => {
     return this.axiosInstance
@@ -60,8 +60,8 @@ class CollectionClient extends ApiClient<Collection> {
           },
         },
       )
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   updateNoteInCollection = async (
     collectionSlug: string,
@@ -78,8 +78,8 @@ class CollectionClient extends ApiClient<Collection> {
           },
         },
       )
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   deleteNoteFromCollection = async (collectionSlug: string, noteId: string) => {
     return this.axiosInstance
@@ -91,8 +91,8 @@ class CollectionClient extends ApiClient<Collection> {
           },
         },
       )
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 }
 
-export default new CollectionClient()
+export default new CollectionClient();

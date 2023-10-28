@@ -1,6 +1,6 @@
-import { Flex, Spacer, Button, Skeleton, Show } from "@chakra-ui/react"
-import { BsPencil } from "react-icons/bs"
-import EditMenu from "../EditMenu"
+import { Flex, Spacer, Button, Skeleton, Show } from "@chakra-ui/react";
+import { BsPencil } from "react-icons/bs";
+import EditMenu from "../EditMenu";
 
 const NoteItemSkeleton = () => {
   return (
@@ -21,7 +21,7 @@ const NoteItemSkeleton = () => {
         <BsPencil />
       </Button>
     </Flex>
-  )
-}
+  );
+};
 
-export default NoteItemSkeleton
+export default NoteItemSkeleton;

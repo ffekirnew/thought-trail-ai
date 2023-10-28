@@ -1,17 +1,17 @@
-import { VStack, Text, HStack, Spacer, Button, Flex } from "@chakra-ui/react"
-import { Collection } from "../../services/collectionsService"
-import { format } from "date-fns"
-import { useNavigate } from "react-router-dom"
+import { VStack, Text, HStack, Spacer, Button, Flex } from "@chakra-ui/react";
+import { Collection } from "../../services/collectionsService";
+import { format } from "date-fns";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (date: Date) => {
-  return format(new Date(date), "MMM dd, yyyy")
-}
+  return format(new Date(date), "MMM dd, yyyy");
+};
 
 interface Props {
-  collection: Collection
+  collection: Collection;
 }
 const CollectionItem = ({ collection }: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <Button
@@ -51,7 +51,7 @@ const CollectionItem = ({ collection }: Props) => {
         </HStack>
       </VStack>
     </Button>
-  )
-}
+  );
+};
 
-export default CollectionItem
+export default CollectionItem;

@@ -4,16 +4,16 @@ import {
   InputRightElement,
   Kbd,
   Show,
-} from "@chakra-ui/react"
-import { useRef } from "react"
+} from "@chakra-ui/react";
+import { useRef } from "react";
 
 const SearchBox = () => {
-  const searchBoxRef = useRef<HTMLInputElement>(null)
+  const searchBoxRef = useRef<HTMLInputElement>(null);
 
   return (
     <form
       onSubmit={(event) => {
-        event.preventDefault()
+        event.preventDefault();
         // use the search
       }}
     >
@@ -37,7 +37,7 @@ const SearchBox = () => {
         </Show>
       </InputGroup>
     </form>
-  )
-}
+  );
+};
 
-export default SearchBox
+export default SearchBox;

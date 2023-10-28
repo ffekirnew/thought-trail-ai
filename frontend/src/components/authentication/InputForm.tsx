@@ -7,24 +7,24 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-} from "@chakra-ui/react"
-import { useState } from "react"
-import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form"
-import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs"
+} from "@chakra-ui/react";
+import { useState } from "react";
+import { FieldError, FieldErrorsImpl, Merge } from "react-hook-form";
+import { BsEyeFill, BsEyeSlashFill } from "react-icons/bs";
 
 interface Props {
-  label: string
-  name: string
-  register: CallableFunction
-  type: "text" | "password" | "email"
-  placeholder?: string
-  helperText?: string
-  disabled: boolean
+  label: string;
+  name: string;
+  register: CallableFunction;
+  type: "text" | "password" | "email";
+  placeholder?: string;
+  helperText?: string;
+  disabled: boolean;
   error:
     | string
     | FieldError
     | Merge<FieldError, FieldErrorsImpl<any>>
-    | undefined
+    | undefined;
 }
 const InputField = ({
   label,
@@ -36,9 +36,9 @@ const InputField = ({
   error,
   helperText,
 }: Props) => {
-  const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const toggleShowPassword = () => setShowPassword(!showPassword)
+  const toggleShowPassword = () => setShowPassword(!showPassword);
 
   return (
     <FormControl isInvalid={error !== undefined} gap={5}>
@@ -68,7 +68,7 @@ const InputField = ({
         <FormErrorMessage>{error.toString()}</FormErrorMessage>
       )}
     </FormControl>
-  )
-}
+  );
+};
 
-export default InputField
+export default InputField;

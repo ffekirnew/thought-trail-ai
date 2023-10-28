@@ -1,5 +1,5 @@
-import { useGetUser } from "../../hooks/auth"
-import userAvatar from "../../assets/user_avatar.png"
+import { useGetUser } from "../../hooks/auth";
+import userAvatar from "../../assets/user_avatar.png";
 import {
   Avatar,
   Text,
@@ -11,14 +11,14 @@ import {
   HStack,
   Spacer,
   VStack,
-} from "@chakra-ui/react"
-import { useGetJournals } from "../../hooks/journals"
-import { useGetCollections } from "../../hooks/collections"
+} from "@chakra-ui/react";
+import { useGetJournals } from "../../hooks/journals";
+import { useGetCollections } from "../../hooks/collections";
 
 const AccountStatisticsPage = () => {
-  const user = useGetUser()
-  const { data: journals } = useGetJournals()
-  const { data: collections } = useGetCollections()
+  const user = useGetUser();
+  const { data: journals } = useGetJournals();
+  const { data: collections } = useGetCollections();
 
   return (
     <VStack
@@ -82,7 +82,7 @@ const AccountStatisticsPage = () => {
         </VStack>
       </form>
     </VStack>
-  )
-}
+  );
+};
 
-export default AccountStatisticsPage
+export default AccountStatisticsPage;

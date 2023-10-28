@@ -5,35 +5,35 @@ import {
   MenuList,
   MenuItem,
   useDisclosure,
-} from "@chakra-ui/react"
-import React from "react"
-import { BsThreeDots } from "react-icons/bs"
-import DeleteNoteAlertDialog from "./DeleteNoteAlertDialog"
-import { useDeleteNote } from "../../hooks/notes"
-import { useNavigate } from "react-router-dom"
+} from "@chakra-ui/react";
+import React from "react";
+import { BsThreeDots } from "react-icons/bs";
+import DeleteNoteAlertDialog from "./DeleteNoteAlertDialog";
+import { useDeleteNote } from "../../hooks/notes";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
-  noteId: string
+  noteId: string;
 }
 
 const EditMenu = ({ noteId }: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef<HTMLButtonElement>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
   const {
     isLoading: deleteNoteLoading,
     isSuccess: deleteNoteSuccess,
     deleteNote,
-  } = useDeleteNote()
+  } = useDeleteNote();
 
   const onDeleteNote = () => {
-    deleteNote(noteId)
-  }
+    deleteNote(noteId);
+  };
 
   if (deleteNoteSuccess) {
-    navigate("/everything")
+    navigate("/everything");
   }
 
   return (
@@ -61,7 +61,7 @@ const EditMenu = ({ noteId }: Props) => {
         action={onDeleteNote}
       />
     </>
-  )
-}
+  );
+};
 
-export default EditMenu
+export default EditMenu;

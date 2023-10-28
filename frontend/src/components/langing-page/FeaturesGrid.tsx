@@ -1,17 +1,17 @@
-import { Flex, Heading, ImageProps, SimpleGrid } from "@chakra-ui/react"
-import FeatureCard from "./FeatureCard"
+import { Flex, Heading, ImageProps, SimpleGrid } from "@chakra-ui/react";
+import FeatureCard from "./FeatureCard";
 
-import fire from "../../assets/fire.svg"
-import robot from "../../assets/robot.svg"
-import goal from "../../assets/goal.svg"
-import journal from "../../assets/journal.svg"
-import collections from "../../assets/collections.svg"
-import security from "../../assets/security.svg"
+import fire from "../../assets/fire.svg";
+import robot from "../../assets/robot.svg";
+import goal from "../../assets/goal.svg";
+import journal from "../../assets/journal.svg";
+import collections from "../../assets/collections.svg";
+import security from "../../assets/security.svg";
 
 export interface FeatureDescription {
-  image: ImageProps
-  title: string
-  body: string
+  image: ImageProps;
+  title: string;
+  body: string;
 }
 
 const FeaturesGrid = () => {
@@ -64,7 +64,7 @@ const FeaturesGrid = () => {
       title: "Data Privacy",
       body: "Rest easy knowing your data is secure, ensuring the confidentiality of your entries.",
     },
-  ]
+  ];
 
   return (
     <Flex flexDir={"column"} paddingX={{ base: 10, lg: 40 }} gap={10}>
@@ -83,7 +83,7 @@ const FeaturesGrid = () => {
         ))}
       </SimpleGrid>
     </Flex>
-  )
-}
+  );
+};
 
-export default FeaturesGrid
+export default FeaturesGrid;

@@ -6,8 +6,8 @@ import {
   HStack,
   Skeleton,
   Text,
-} from "@chakra-ui/react"
-import { BsChevronLeft } from "react-icons/bs"
+} from "@chakra-ui/react";
+import { BsChevronLeft } from "react-icons/bs";
 
 const KnowledgeDetailSkeleton = () => {
   return (
@@ -44,7 +44,7 @@ const KnowledgeDetailSkeleton = () => {
         <Skeleton borderRadius={5} height={"100%"}></Skeleton>
       </GridItem>
     </Grid>
-  )
-}
+  );
+};
 
-export default KnowledgeDetailSkeleton
+export default KnowledgeDetailSkeleton;

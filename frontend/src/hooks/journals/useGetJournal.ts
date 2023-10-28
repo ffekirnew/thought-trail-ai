@@ -1,5 +1,5 @@
-import { useQuery } from "@tanstack/react-query"
-import journalsService, { Journal } from "../../services/journalsService"
+import { useQuery } from "@tanstack/react-query";
+import journalsService, { Journal } from "../../services/journalsService";
 
 const useGetJournal = (id: string) => {
   return useQuery<Journal, Error>({
@@ -9,7 +9,7 @@ const useGetJournal = (id: string) => {
     keepPreviousData: true,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
-  })
-}
+  });
+};
 
-export default useGetJournal
+export default useGetJournal;

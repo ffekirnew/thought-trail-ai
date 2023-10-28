@@ -1,22 +1,22 @@
-import axios from "axios"
+import axios from "axios";
 
 export interface FetchResponse<T> {
-  success: boolean
-  message: string
-  data: T
-  error: any
+  success: boolean;
+  message: string;
+  data: T;
+  error: any;
 }
 
 class ApiClient<T> {
-  endpoint: string
-  axiosInstance
+  endpoint: string;
+  axiosInstance;
 
   constructor(endpoint: string) {
-    this.endpoint = endpoint
+    this.endpoint = endpoint;
     this.axiosInstance = axios.create({
       baseURL: "https://thoughttrail-api.fikernew-birhanu.me",
       // baseURL: "http://localhost:3000"
-    })
+    });
   }
 
   getAll = async () => {
@@ -26,8 +26,8 @@ class ApiClient<T> {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   get = async (_id?: string) => {
     return this.axiosInstance
@@ -36,8 +36,8 @@ class ApiClient<T> {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   create = async (data: T) => {
     return this.axiosInstance
@@ -46,8 +46,8 @@ class ApiClient<T> {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   update = async (_id: string, data: T) => {
     return this.axiosInstance
@@ -56,8 +56,8 @@ class ApiClient<T> {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 
   delete = async (_id: string) => {
     return this.axiosInstance
@@ -66,8 +66,8 @@ class ApiClient<T> {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       })
-      .then((res) => res.data)
-  }
+      .then((res) => res.data);
+  };
 }
 
-export default ApiClient
+export default ApiClient;

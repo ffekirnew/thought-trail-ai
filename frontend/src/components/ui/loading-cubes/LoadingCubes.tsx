@@ -1,8 +1,8 @@
-import { Box } from "@chakra-ui/react"
-import styles from "./LoadingCubes.module.css"
+import { Box } from "@chakra-ui/react";
+import styles from "./LoadingCubes.module.css";
 
 interface Props {
-  color: string
+  color: string;
 }
 const LoadingCubes = ({ color }: Props) => {
   return (
@@ -17,7 +17,7 @@ const LoadingCubes = ({ color }: Props) => {
       <Box bg={color} className={styles["sk-cube sk-cube8"]}></Box>
       <Box bg={color} className={styles["sk-cube sk-cube9"]}></Box>
     </Box>
-  )
-}
+  );
+};
 
-export default LoadingCubes
+export default LoadingCubes;

@@ -1,5 +1,5 @@
-import { Grid, GridItem, Flex, Skeleton, Button } from "@chakra-ui/react"
-import { BsChevronLeft } from "react-icons/bs"
+import { Grid, GridItem, Flex, Skeleton, Button } from "@chakra-ui/react";
+import { BsChevronLeft } from "react-icons/bs";
 
 const CollectionNoteDetailSkeleton = () => {
   return (
@@ -29,7 +29,7 @@ const CollectionNoteDetailSkeleton = () => {
         <Skeleton borderRadius={5} height={"100%"}></Skeleton>
       </GridItem>
     </Grid>
-  )
-}
+  );
+};
 
-export default CollectionNoteDetailSkeleton
+export default CollectionNoteDetailSkeleton;

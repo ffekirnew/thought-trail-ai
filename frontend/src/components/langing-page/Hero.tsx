@@ -8,13 +8,13 @@ import {
   Spacer,
   GridItem,
   Flex,
-} from "@chakra-ui/react"
-import logo from "../../assets/logo.svg"
-import style from "./Hero.module.css"
-import { useNavigate } from "react-router-dom"
+} from "@chakra-ui/react";
+import logo from "../../assets/logo.svg";
+import style from "./Hero.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <Grid
@@ -86,7 +86,7 @@ const Hero = () => {
         </VStack>
       </GridItem>
     </Grid>
-  )
-}
+  );
+};
 
-export default Hero
+export default Hero;

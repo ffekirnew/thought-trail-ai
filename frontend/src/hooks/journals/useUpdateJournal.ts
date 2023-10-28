@@ -1,17 +1,17 @@
-import journalsService, { Journal } from "../../services/journalsService"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
+import journalsService, { Journal } from "../../services/journalsService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export interface UpdateJournalInterface {
-  id: string
-  journal: Journal
+  id: string;
+  journal: Journal;
 }
 
 interface UpdateJournalContext {
-  previousJournals: Journal[]
+  previousJournals: Journal[];
 }
 
 const useUpdateJournal = () => {
-  const queryClient = useQueryClient()
+  const queryClient = useQueryClient();
 
   const updateJournal = useMutation<
     Journal,
@@ -25,7 +25,7 @@ const useUpdateJournal = () => {
         .then((res) => res.data),
     onMutate: (data) => {
       const previousJournals =
-        queryClient.getQueryData<Journal[]>(["journals"]) || []
+        queryClient.getQueryData<Journal[]>(["journals"]) || [];
 
       queryClient.setQueryData<Journal[]>(
         ["journals"],
@@ -33,17 +33,17 @@ const useUpdateJournal = () => {
           journals?.map((journal) =>
             journal._id === data.id ? data.journal : journal,
           ),
-      )
-      queryClient.invalidateQueries(["journals", data.id])
+      );
+      queryClient.invalidateQueries(["journals", data.id]);
 
-      return { previousJournals }
+      return { previousJournals };
     },
     onError: (_error, _id, context) => {
-      queryClient.setQueryData(["journals"], () => context?.previousJournals)
+      queryClient.setQueryData(["journals"], () => context?.previousJournals);
     },
-  })
+  });
 
-  return updateJournal
-}
+  return updateJournal;
+};
 
-export default useUpdateJournal
+export default useUpdateJournal;

@@ -7,14 +7,14 @@ import {
   AlertDialogBody,
   AlertDialogFooter,
   Button,
-} from "@chakra-ui/react"
-import { RefObject } from "react"
+} from "@chakra-ui/react";
+import { RefObject } from "react";
 
 interface Props {
-  cancelRef: RefObject<HTMLButtonElement>
-  onClose: () => void
-  isOpen: boolean
-  action: () => void
+  cancelRef: RefObject<HTMLButtonElement>;
+  onClose: () => void;
+  isOpen: boolean;
+  action: () => void;
 }
 const DeleteCollectionAlertDialog = ({
   cancelRef,
@@ -23,9 +23,9 @@ const DeleteCollectionAlertDialog = ({
   action,
 }: Props) => {
   const onActionClick = () => {
-    action()
-    onClose()
-  }
+    action();
+    onClose();
+  };
   return (
     <AlertDialog
       motionPreset="slideInBottom"
@@ -52,7 +52,7 @@ const DeleteCollectionAlertDialog = ({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
-}
+  );
+};
 
-export default DeleteCollectionAlertDialog
+export default DeleteCollectionAlertDialog;

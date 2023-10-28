@@ -1,10 +1,10 @@
-import JournalDetail from "../../components/second-brain/JournalDetail"
-import useNewJournalStore from "../../state/useNewJournalStore"
+import JournalDetail from "../../components/second-brain/JournalDetail";
+import useNewJournalStore from "../../state/useNewJournalStore";
 
 const AddNewJournalPage = () => {
-  const journal = useNewJournalStore((s) => s.journal)
+  const journal = useNewJournalStore((s) => s.journal);
 
-  return <JournalDetail journal={journal} />
-}
+  return <JournalDetail journal={journal} />;
+};
 
-export default AddNewJournalPage
+export default AddNewJournalPage;

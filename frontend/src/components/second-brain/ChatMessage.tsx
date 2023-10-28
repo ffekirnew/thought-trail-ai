@@ -5,51 +5,51 @@ import {
   useColorMode,
   Spacer,
   Button,
-} from "@chakra-ui/react"
-import { Chat } from "../../state/useChatStore"
-import useChatParametersStore from "../../state/useChatParametersStore"
-import { Journal } from "../../services/journalsService"
-import useNewJournalStore from "../../state/useNewJournalStore"
-import { Note } from "../../services/notesService"
-import useNewCollectionNoteStore from "../../state/useNewCollectionNoteStore"
-import { useNavigate } from "react-router-dom"
+} from "@chakra-ui/react";
+import { Chat } from "../../state/useChatStore";
+import useChatParametersStore from "../../state/useChatParametersStore";
+import { Journal } from "../../services/journalsService";
+import useNewJournalStore from "../../state/useNewJournalStore";
+import { Note } from "../../services/notesService";
+import useNewCollectionNoteStore from "../../state/useNewCollectionNoteStore";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
-  message: Chat
+  message: Chat;
 }
 
 const botBackgroundColors = {
   dark: "gray.600",
   light: "gray.200",
-}
+};
 
 const userBackgroundColors = {
   dark: "gray.700",
   light: "gray.300",
-}
+};
 
 const ChatMessage = ({ message }: Props) => {
-  const { colorMode } = useColorMode()
-  const { chatParameters } = useChatParametersStore()
+  const { colorMode } = useColorMode();
+  const { chatParameters } = useChatParametersStore();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const setJournal = useNewJournalStore((s) => s.setJournal)
-  const setCollectionNote = useNewCollectionNoteStore((s) => s.setNote)
+  const setJournal = useNewJournalStore((s) => s.setJournal);
+  const setCollectionNote = useNewCollectionNoteStore((s) => s.setNote);
 
   const onSave = () => {
     if (chatParameters.chatBasis === "Journal") {
-      const newJournal: Journal = { body: message.body }
-      setJournal(newJournal)
-      navigate(`/everything/journals/new`)
+      const newJournal: Journal = { body: message.body };
+      setJournal(newJournal);
+      navigate(`/everything/journals/new`);
     } else {
-      const newNote: Note = { body: message.body }
-      setCollectionNote(newNote)
+      const newNote: Note = { body: message.body };
+      setCollectionNote(newNote);
       navigate(
         `/everything/collections/${chatParameters.collection?.slug}/notes/new`,
-      )
+      );
     }
-  }
+  };
 
   return (
     <Box
@@ -92,7 +92,7 @@ const ChatMessage = ({ message }: Props) => {
         <Text fontSize={"md"}>{message.body}</Text>
       </HStack>
     </Box>
-  )
-}
+  );
+};
 
-export default ChatMessage
+export default ChatMessage;

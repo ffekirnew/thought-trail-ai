@@ -1,16 +1,16 @@
-import { Box } from "@chakra-ui/react"
-import styles from "./LoadingRipples.module.css"
+import { Box } from "@chakra-ui/react";
+import styles from "./LoadingRipples.module.css";
 
 const sizes = {
   sm: 4,
   md: 16,
   lg: 24,
   xl: 32,
-}
+};
 
 interface Props {
-  color: string
-  size: "sm" | "md" | "lg" | "xl"
+  color: string;
+  size: "sm" | "md" | "lg" | "xl";
 }
 const LoadingRipples = ({ color, size }: Props) => {
   return (
@@ -34,7 +34,7 @@ const LoadingRipples = ({ color, size }: Props) => {
         className={styles.bounce3}
       ></Box>
     </Box>
-  )
-}
+  );
+};
 
-export default LoadingRipples
+export default LoadingRipples;

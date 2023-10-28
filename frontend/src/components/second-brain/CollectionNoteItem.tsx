@@ -6,23 +6,23 @@ import {
   Spacer,
   Text,
   useColorMode,
-} from "@chakra-ui/react"
-import { useNavigate } from "react-router-dom"
-import { Note } from "../../services/notesService"
-import { format } from "date-fns"
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { Note } from "../../services/notesService";
+import { format } from "date-fns";
 
 const formatDate = (date: Date) => {
-  return format(new Date(date), "MMM dd")
-}
+  return format(new Date(date), "MMM dd");
+};
 
 interface Props {
-  collectionSlug: string
-  note: Note
+  collectionSlug: string;
+  note: Note;
 }
 const CollectionNoteItem = ({ collectionSlug, note }: Props) => {
-  const navigate = useNavigate()
-  const { colorMode } = useColorMode()
-  const formattedDate = formatDate(note.updatedAt!)
+  const navigate = useNavigate();
+  const { colorMode } = useColorMode();
+  const formattedDate = formatDate(note.updatedAt!);
 
   return (
     <HStack
@@ -59,7 +59,7 @@ const CollectionNoteItem = ({ collectionSlug, note }: Props) => {
         </HStack>
       </Button>
     </HStack>
-  )
-}
+  );
+};
 
-export default CollectionNoteItem
+export default CollectionNoteItem;

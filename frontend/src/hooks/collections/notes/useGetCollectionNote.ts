@@ -1,6 +1,6 @@
-import { collectionsService } from "../../../services"
-import { Note } from "../../../services/notesService"
-import { useQuery } from "@tanstack/react-query"
+import { collectionsService } from "../../../services";
+import { Note } from "../../../services/notesService";
+import { useQuery } from "@tanstack/react-query";
 
 const useGetCollectionNote = (collectionSlug: string, noteId: string) => {
   return useQuery<Note, Error>({
@@ -9,7 +9,7 @@ const useGetCollectionNote = (collectionSlug: string, noteId: string) => {
       collectionsService
         .getNote(collectionSlug, noteId)
         .then((res) => res.data),
-  })
-}
+  });
+};
 
-export default useGetCollectionNote
+export default useGetCollectionNote;

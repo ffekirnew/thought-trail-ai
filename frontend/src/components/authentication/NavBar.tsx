@@ -1,7 +1,14 @@
-import logo from "../../assets/logo.svg"
-import { Flex, HStack, StackDivider, Image, Text, Show } from "@chakra-ui/react"
-import { Link } from "react-router-dom"
-import ColorModeSwitch from "../shared/ColorModeSwitch"
+import logo from "../../assets/logo.svg";
+import {
+  Flex,
+  HStack,
+  StackDivider,
+  Image,
+  Text,
+  Show,
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import ColorModeSwitch from "../shared/ColorModeSwitch";
 
 const NavBar = () => {
   return (
@@ -29,7 +36,7 @@ const NavBar = () => {
         <ColorModeSwitch />
       </HStack>
     </Flex>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

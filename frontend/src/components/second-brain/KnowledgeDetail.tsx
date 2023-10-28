@@ -10,44 +10,44 @@ import {
   useToast,
   Grid,
   GridItem,
-} from "@chakra-ui/react"
-import { BsChevronLeft } from "react-icons/bs"
-import { useNavigate } from "react-router-dom"
-import { useState } from "react"
-import { Note } from "../../services/notesService"
-import React from "react"
-import DeleteNoteAlertDialog from "./DeleteNoteAlertDialog"
-import { useCreateNote, useUpdateNote, useDeleteNote } from "../../hooks/notes"
+} from "@chakra-ui/react";
+import { BsChevronLeft } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Note } from "../../services/notesService";
+import React from "react";
+import DeleteNoteAlertDialog from "./DeleteNoteAlertDialog";
+import { useCreateNote, useUpdateNote, useDeleteNote } from "../../hooks/notes";
 
 interface Props {
-  note?: Note
+  note?: Note;
 }
 const KnowledgeDetail = ({ note }: Props) => {
-  const navigate = useNavigate()
-  const toast = useToast()
+  const navigate = useNavigate();
+  const toast = useToast();
 
   const {
     isLoading: createNoteLoading,
     isSuccess: createNoteSuccess,
     createNote,
-  } = useCreateNote()
-  const { isLoading: updateNoteLoading, updateNote } = useUpdateNote()
+  } = useCreateNote();
+  const { isLoading: updateNoteLoading, updateNote } = useUpdateNote();
   const {
     isLoading: deleteNoteLoading,
     isSuccess: deleteNoteSuccess,
     deleteNote,
-  } = useDeleteNote()
+  } = useDeleteNote();
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef<HTMLButtonElement>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
-  const [title, setTitle] = useState<string>(note?.title || "")
+  const [title, setTitle] = useState<string>(note?.title || "");
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setTitle(e.target.value)
+    setTitle(e.target.value);
 
-  const [body, setBody] = useState<string>(note?.body || "")
+  const [body, setBody] = useState<string>(note?.body || "");
   const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setBody(e.target.value)
+    setBody(e.target.value);
 
   const onSave = () => {
     if (note === undefined) {
@@ -57,9 +57,9 @@ const KnowledgeDetail = ({ note }: Props) => {
         status: "info",
         duration: 1500,
         isClosable: true,
-      })
-      const newNote: Note = { title: title, body: body, _id: "", tags: [] }
-      createNote(newNote)
+      });
+      const newNote: Note = { title: title, body: body, _id: "", tags: [] };
+      createNote(newNote);
     } else {
       toast({
         title: "Note being updated.",
@@ -68,11 +68,11 @@ const KnowledgeDetail = ({ note }: Props) => {
         duration: 1500,
         isClosable: true,
         colorScheme: "blue",
-      })
-      const updatedNote = { ...note, title: title, body: body }
-      updateNote(note?._id!, updatedNote)
+      });
+      const updatedNote = { ...note, title: title, body: body };
+      updateNote(note?._id!, updatedNote);
     }
-  }
+  };
 
   const onDelete = () => {
     if (note !== undefined) {
@@ -83,13 +83,13 @@ const KnowledgeDetail = ({ note }: Props) => {
         duration: 1000,
         isClosable: true,
         colorScheme: "blue",
-      })
-      deleteNote(note?._id!)
+      });
+      deleteNote(note?._id!);
     }
-  }
+  };
 
   if (createNoteSuccess || deleteNoteSuccess) {
-    navigate("/everything/notes")
+    navigate("/everything/notes");
   }
 
   return (
@@ -176,7 +176,7 @@ const KnowledgeDetail = ({ note }: Props) => {
         action={onDelete}
       />
     </>
-  )
-}
+  );
+};
 
-export default KnowledgeDetail
+export default KnowledgeDetail;

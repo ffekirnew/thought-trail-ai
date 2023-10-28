@@ -5,7 +5,7 @@ import {
   Spacer,
   Button,
   Skeleton,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 
 const CollectionItemSkeleton = () => {
   return (
@@ -36,7 +36,7 @@ const CollectionItemSkeleton = () => {
         </VStack>
       </Button>
     </Skeleton>
-  )
-}
+  );
+};
 
-export default CollectionItemSkeleton
+export default CollectionItemSkeleton;

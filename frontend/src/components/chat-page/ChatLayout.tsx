@@ -1,11 +1,11 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react"
-import SideBar from "./SideBar"
-import NavBar from "./NavBar"
-import { ReactNode } from "react"
+import { Grid, GridItem, Show } from "@chakra-ui/react";
+import SideBar from "./SideBar";
+import NavBar from "./NavBar";
+import { ReactNode } from "react";
 
 interface Props {
-  body: ReactNode
-  chatBox: ReactNode
+  body: ReactNode;
+  chatBox: ReactNode;
 }
 const ChatLayout = ({ body, chatBox }: Props) => {
   return (
@@ -38,7 +38,7 @@ const ChatLayout = ({ body, chatBox }: Props) => {
       </GridItem>
       <GridItem area="chatbox">{chatBox}</GridItem>
     </Grid>
-  )
-}
+  );
+};
 
-export default ChatLayout
+export default ChatLayout;

@@ -7,22 +7,22 @@ import {
   AlertDialogBody,
   AlertDialogFooter,
   Button,
-} from "@chakra-ui/react"
-import { RefObject } from "react"
+} from "@chakra-ui/react";
+import { RefObject } from "react";
 
 export interface AlertDetails {
-  header: string
-  description: string
-  actionButtonMessage: string
-  cancelButtonMesage: string
+  header: string;
+  description: string;
+  actionButtonMessage: string;
+  cancelButtonMesage: string;
 }
 
 interface Props {
-  alertDetails: AlertDetails
-  cancelRef: RefObject<HTMLButtonElement>
-  onClose: () => void
-  isOpen: boolean
-  action: () => void
+  alertDetails: AlertDetails;
+  cancelRef: RefObject<HTMLButtonElement>;
+  onClose: () => void;
+  isOpen: boolean;
+  action: () => void;
 }
 const MessageAlertDialog = ({
   alertDetails,
@@ -32,9 +32,9 @@ const MessageAlertDialog = ({
   action,
 }: Props) => {
   const onActionClick = () => {
-    action()
-    onClose()
-  }
+    action();
+    onClose();
+  };
   return (
     <AlertDialog
       motionPreset="slideInBottom"
@@ -59,7 +59,7 @@ const MessageAlertDialog = ({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
-}
+  );
+};
 
-export default MessageAlertDialog
+export default MessageAlertDialog;

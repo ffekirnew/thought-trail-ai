@@ -1,21 +1,21 @@
-import { create } from "zustand"
-import { Collection } from "../services/collectionsService"
+import { create } from "zustand";
+import { Collection } from "../services/collectionsService";
 
-export type ChatBasis = "Journal" | "Collection"
+export type ChatBasis = "Journal" | "Collection";
 export interface CollectionType {
-  name?: string
-  slug?: string
+  name?: string;
+  slug?: string;
 }
 
 export interface ChatParameters {
-  chatBasis?: ChatBasis
-  collection?: Collection
+  chatBasis?: ChatBasis;
+  collection?: Collection;
 }
 
 interface UseChatStoreType {
-  chatParameters: ChatParameters
-  setChatBasis: (chatBasis: ChatBasis) => void
-  setCollection: (collection: Collection) => void
+  chatParameters: ChatParameters;
+  setChatBasis: (chatBasis: ChatBasis) => void;
+  setCollection: (collection: Collection) => void;
 }
 
 const useChatParametersStore = create<UseChatStoreType>((set) => ({
@@ -25,6 +25,6 @@ const useChatParametersStore = create<UseChatStoreType>((set) => ({
     set((store) => ({
       chatParameters: { ...store.chatParameters, collection },
     })),
-}))
+}));
 
-export default useChatParametersStore
+export default useChatParametersStore;

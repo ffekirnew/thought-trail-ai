@@ -7,40 +7,40 @@ import {
   useToast,
   Grid,
   GridItem,
-} from "@chakra-ui/react"
-import { BsChevronLeft } from "react-icons/bs"
-import { useNavigate } from "react-router-dom"
-import { useState } from "react"
-import { Journal } from "../../services/journalsService"
-import React from "react"
-import DeleteJournalAlertDialog from "./DeleteJournalAlertDialog"
+} from "@chakra-ui/react";
+import { BsChevronLeft } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Journal } from "../../services/journalsService";
+import React from "react";
+import DeleteJournalAlertDialog from "./DeleteJournalAlertDialog";
 import {
   useCreateJournal,
   useUpdateJournal,
   useDeleteJournal,
-} from "../../hooks/journals"
+} from "../../hooks/journals";
 
 interface Props {
-  journal?: Journal
+  journal?: Journal;
 }
 const JournalDetail = ({ journal }: Props) => {
-  const navigate = useNavigate()
-  const toast = useToast()
+  const navigate = useNavigate();
+  const toast = useToast();
 
-  const createJournal = useCreateJournal()
-  const updateJournal = useUpdateJournal()
-  const deleteJournal = useDeleteJournal()
+  const createJournal = useCreateJournal();
+  const updateJournal = useUpdateJournal();
+  const deleteJournal = useDeleteJournal();
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef<HTMLButtonElement>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
-  const [title, setTitle] = useState<string>(journal?.title || "")
+  const [title, setTitle] = useState<string>(journal?.title || "");
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setTitle(e.target.value)
+    setTitle(e.target.value);
 
-  const [body, setBody] = useState<string>(journal?.body || "")
+  const [body, setBody] = useState<string>(journal?.body || "");
   const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setBody(e.target.value)
+    setBody(e.target.value);
 
   const onSave = () => {
     if (journal === undefined || journal._id === undefined) {
@@ -50,16 +50,16 @@ const JournalDetail = ({ journal }: Props) => {
         status: "info",
         duration: 1500,
         isClosable: true,
-      })
+      });
       const newJournal: Journal = {
         title: title,
         body: body,
         _id: "",
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
-      createJournal.mutate(newJournal)
-      navigate("/everything/journals")
+      };
+      createJournal.mutate(newJournal);
+      navigate("/everything/journals");
     } else {
       toast({
         title: "Journal being updated.",
@@ -68,11 +68,11 @@ const JournalDetail = ({ journal }: Props) => {
         duration: 1500,
         isClosable: true,
         colorScheme: "blue",
-      })
-      const updatedJournal = { ...journal, title: title, body: body }
-      updateJournal.mutate({ id: journal?._id!, journal: updatedJournal })
+      });
+      const updatedJournal = { ...journal, title: title, body: body };
+      updateJournal.mutate({ id: journal?._id!, journal: updatedJournal });
     }
-  }
+  };
 
   const onDelete = () => {
     if (journal !== undefined) {
@@ -83,11 +83,11 @@ const JournalDetail = ({ journal }: Props) => {
         duration: 1000,
         isClosable: true,
         colorScheme: "blue",
-      })
-      deleteJournal.mutate(journal?._id!)
-      navigate("/everything/journals")
+      });
+      deleteJournal.mutate(journal?._id!);
+      navigate("/everything/journals");
     }
-  }
+  };
 
   if (createJournal.isSuccess || deleteJournal.isSuccess) {
   }
@@ -169,7 +169,7 @@ const JournalDetail = ({ journal }: Props) => {
         action={onDelete}
       />
     </>
-  )
-}
+  );
+};
 
-export default JournalDetail
+export default JournalDetail;

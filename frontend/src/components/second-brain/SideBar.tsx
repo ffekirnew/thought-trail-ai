@@ -5,18 +5,22 @@ import {
   HStack,
   Text,
   useColorMode,
-} from "@chakra-ui/react"
-import { Link } from "react-router-dom"
-import { BiMessageSquare, BiSolidInbox, BiSolidDashboard } from "react-icons/bi"
-import SideBarOption from "./SideBarOption"
+} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import {
+  BiMessageSquare,
+  BiSolidInbox,
+  BiSolidDashboard,
+} from "react-icons/bi";
+import SideBarOption from "./SideBarOption";
 
-import logo from "../../assets/logo.svg"
-import ColorModeSwitch from "../shared/ColorModeSwitch"
-import SideBarUserComponent from "./SideBarUserComponent"
-import { BsFillJournalBookmarkFill } from "react-icons/bs"
+import logo from "../../assets/logo.svg";
+import ColorModeSwitch from "../shared/ColorModeSwitch";
+import SideBarUserComponent from "./SideBarUserComponent";
+import { BsFillJournalBookmarkFill } from "react-icons/bs";
 
 const SideBar = () => {
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
 
   return (
     <VStack
@@ -54,7 +58,7 @@ const SideBar = () => {
       <Spacer />
       <SideBarUserComponent />
     </VStack>
-  )
-}
+  );
+};
 
-export default SideBar
+export default SideBar;

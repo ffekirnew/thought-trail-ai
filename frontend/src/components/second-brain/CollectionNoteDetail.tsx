@@ -7,40 +7,40 @@ import {
   Button,
   Input,
   Textarea,
-} from "@chakra-ui/react"
-import React, { useState } from "react"
-import { BsChevronLeft } from "react-icons/bs"
-import { useNavigate } from "react-router-dom"
-import DeleteNoteAlertDialog from "./DeleteNoteAlertDialog"
-import { Note } from "../../services/notesService"
+} from "@chakra-ui/react";
+import React, { useState } from "react";
+import { BsChevronLeft } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import DeleteNoteAlertDialog from "./DeleteNoteAlertDialog";
+import { Note } from "../../services/notesService";
 import {
   useAddNoteToCollection,
   useDeleteNoteFromCollection,
   useUpdateNoteInCollection,
-} from "../../hooks/collections/notes"
+} from "../../hooks/collections/notes";
 
 interface Props {
-  collectionSlug: string
-  note?: Note
+  collectionSlug: string;
+  note?: Note;
 }
 const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
-  const navigate = useNavigate()
-  const toast = useToast()
+  const navigate = useNavigate();
+  const toast = useToast();
 
-  const addNoteToCollection = useAddNoteToCollection()
-  const updateNoteInCollection = useUpdateNoteInCollection()
-  const deleteNoteFromCollection = useDeleteNoteFromCollection()
+  const addNoteToCollection = useAddNoteToCollection();
+  const updateNoteInCollection = useUpdateNoteInCollection();
+  const deleteNoteFromCollection = useDeleteNoteFromCollection();
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const cancelRef = React.useRef<HTMLButtonElement>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement>(null);
 
-  const [title, setTitle] = useState<string>(note?.title || "")
+  const [title, setTitle] = useState<string>(note?.title || "");
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setTitle(e.target.value)
+    setTitle(e.target.value);
 
-  const [body, setBody] = useState<string>(note?.body || "")
+  const [body, setBody] = useState<string>(note?.body || "");
   const handleBodyChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
-    setBody(e.target.value)
+    setBody(e.target.value);
 
   const onSave = () => {
     if (note === undefined || note._id === undefined) {
@@ -50,7 +50,7 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         status: "info",
         duration: 1500,
         isClosable: true,
-      })
+      });
       const newNote: Note = {
         title: title,
         body: body,
@@ -58,12 +58,12 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         tags: [],
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      };
       addNoteToCollection.mutate({
         collectionSlug: collectionSlug,
         note: newNote,
-      })
-      navigate(`/everything/collections/${collectionSlug}`)
+      });
+      navigate(`/everything/collections/${collectionSlug}`);
     } else {
       toast({
         title: "Note being updated.",
@@ -72,15 +72,15 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         duration: 1500,
         isClosable: true,
         colorScheme: "blue",
-      })
-      const updatedNote = { ...note, title: title, body: body }
+      });
+      const updatedNote = { ...note, title: title, body: body };
       updateNoteInCollection.mutate({
         collectionSlug: collectionSlug,
         noteId: note._id,
         note: updatedNote,
-      })
+      });
     }
-  }
+  };
 
   const onDelete = () => {
     if (note !== undefined) {
@@ -91,16 +91,16 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         duration: 1000,
         isClosable: true,
         colorScheme: "blue",
-      })
+      });
       deleteNoteFromCollection.mutate({
         collectionSlug: collectionSlug,
         noteId: note?._id!,
-      })
+      });
     }
-  }
+  };
 
   if (addNoteToCollection.isSuccess || deleteNoteFromCollection.isSuccess) {
-    navigate(`/everything/collections/${collectionSlug}/`)
+    navigate(`/everything/collections/${collectionSlug}/`);
   }
 
   return (
@@ -176,7 +176,7 @@ const CollectionNoteDetail = ({ collectionSlug, note }: Props) => {
         action={onDelete}
       />
     </>
-  )
-}
+  );
+};
 
-export default CollectionNoteDetail
+export default CollectionNoteDetail;

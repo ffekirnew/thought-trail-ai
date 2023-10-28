@@ -1,4 +1,4 @@
-import avatar from "../../assets/user_avatar.png"
+import avatar from "../../assets/user_avatar.png";
 import {
   HStack,
   VStack,
@@ -12,20 +12,20 @@ import {
   MenuList,
   Spacer,
   useColorMode,
-} from "@chakra-ui/react"
-import { User } from "../../services/authClient"
-import { BsThreeDots } from "react-icons/bs"
-import { useNavigate } from "react-router-dom"
-import { useGetUser } from "../../hooks/auth"
+} from "@chakra-ui/react";
+import { User } from "../../services/authClient";
+import { BsThreeDots } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import { useGetUser } from "../../hooks/auth";
 
 const SideBarUserComponent = () => {
-  const navigate = useNavigate()
-  const user: User = useGetUser()
-  const { colorMode } = useColorMode()
+  const navigate = useNavigate();
+  const user: User = useGetUser();
+  const { colorMode } = useColorMode();
 
   const onLogout = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   return (
     <HStack
@@ -56,7 +56,7 @@ const SideBarUserComponent = () => {
         </MenuList>
       </Menu>
     </HStack>
-  )
-}
+  );
+};
 
-export default SideBarUserComponent
+export default SideBarUserComponent;

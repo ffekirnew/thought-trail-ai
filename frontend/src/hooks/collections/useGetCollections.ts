@@ -1,7 +1,7 @@
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query";
 import collectionsService, {
   Collection,
-} from "../../services/collectionsService"
+} from "../../services/collectionsService";
 
 const useGetCollections = () => {
   return useQuery<Collection[], Error>({
@@ -11,7 +11,7 @@ const useGetCollections = () => {
     keepPreviousData: true,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
-  })
-}
+  });
+};
 
-export default useGetCollections
+export default useGetCollections;

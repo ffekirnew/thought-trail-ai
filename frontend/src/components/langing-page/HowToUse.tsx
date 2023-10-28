@@ -1,8 +1,8 @@
-import { Flex, Heading, Image } from "@chakra-ui/react"
+import { Flex, Heading, Image } from "@chakra-ui/react";
 
-import addJournal from "../../assets/addJournal.png"
-import addCollection from "../../assets/addCollection.png"
-import chat from "../../assets/chat.png"
+import addJournal from "../../assets/addJournal.png";
+import addCollection from "../../assets/addCollection.png";
+import chat from "../../assets/chat.png";
 
 const HowToUse = () => {
   return (
@@ -22,7 +22,7 @@ const HowToUse = () => {
       />
       <Image src={chat} width={"60%"} borderRadius={10} borderWidth={"1px"} />
     </Flex>
-  )
-}
+  );
+};
 
-export default HowToUse
+export default HowToUse;

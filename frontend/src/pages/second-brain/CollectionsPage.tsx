@@ -17,21 +17,21 @@ import {
   Heading,
   Flex,
   Show,
-} from "@chakra-ui/react"
-import { BsChevronDown } from "react-icons/bs"
-import { useGetCollections } from "../../hooks/collections"
-import CollectionItem from "../../components/second-brain/CollectionItem"
-import CollectionItemSkeleton from "../../components/second-brain/skeletons/CollectionItemSkeleton"
-import { useRef } from "react"
-import AddNewCollectionForm from "../../components/second-brain/AddNewCollectionForm"
-import { BiGridAlt, BiListOl, BiPlus } from "react-icons/bi"
+} from "@chakra-ui/react";
+import { BsChevronDown } from "react-icons/bs";
+import { useGetCollections } from "../../hooks/collections";
+import CollectionItem from "../../components/second-brain/CollectionItem";
+import CollectionItemSkeleton from "../../components/second-brain/skeletons/CollectionItemSkeleton";
+import { useRef } from "react";
+import AddNewCollectionForm from "../../components/second-brain/AddNewCollectionForm";
+import { BiGridAlt, BiListOl, BiPlus } from "react-icons/bi";
 
 const CollectionsPage = () => {
-  const { data: collections, isLoading } = useGetCollections()
-  const collectionSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const { data: collections, isLoading } = useGetCollections();
+  const collectionSkeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef<HTMLButtonElement>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef<HTMLButtonElement>(null);
 
   return (
     <>
@@ -105,6 +105,6 @@ const CollectionsPage = () => {
         </DrawerContent>
       </Drawer>
     </>
-  )
-}
-export default CollectionsPage
+  );
+};
+export default CollectionsPage;

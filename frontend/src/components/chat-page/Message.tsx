@@ -1,10 +1,10 @@
-import userAvatar from "../../assets/user_avatar.png"
-import botAvatar from "../../assets/bot_avatar.png"
-import { Box, Text, HStack, Image } from "@chakra-ui/react"
+import userAvatar from "../../assets/user_avatar.png";
+import botAvatar from "../../assets/bot_avatar.png";
+import { Box, Text, HStack, Image } from "@chakra-ui/react";
 
 interface Props {
-  role: "user" | "bot"
-  body: string
+  role: "user" | "bot";
+  body: string;
 }
 const Message = ({ role, body }: Props) => {
   return (
@@ -23,7 +23,7 @@ const Message = ({ role, body }: Props) => {
         <Text fontSize={"md"}>{body}</Text>
       </HStack>
     </Box>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;

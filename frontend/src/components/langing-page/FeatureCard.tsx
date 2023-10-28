@@ -1,11 +1,11 @@
-import { Heading, Image, Text, VStack, useColorMode } from "@chakra-ui/react"
-import { FeatureDescription } from "./FeaturesGrid"
+import { Heading, Image, Text, VStack, useColorMode } from "@chakra-ui/react";
+import { FeatureDescription } from "./FeaturesGrid";
 
 interface Props {
-  feature: FeatureDescription
+  feature: FeatureDescription;
 }
 const FeatureCard = ({ feature }: Props) => {
-  const { colorMode } = useColorMode()
+  const { colorMode } = useColorMode();
   return (
     <VStack
       cursor={"pointer"}
@@ -27,7 +27,7 @@ const FeatureCard = ({ feature }: Props) => {
         {feature.body}
       </Text>
     </VStack>
-  )
-}
+  );
+};
 
-export default FeatureCard
+export default FeatureCard;

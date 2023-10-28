@@ -14,41 +14,37 @@ import {
   Textarea,
   VStack,
   useToast,
-} from "@chakra-ui/react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { isError } from "@tanstack/react-query"
-import { FieldValues, useForm } from "react-hook-form"
-import { z } from "zod"
-import { useCreateCollection } from "../../hooks/collections"
-import { Collection } from "../../services/collectionsService"
+} from "@chakra-ui/react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { isError } from "@tanstack/react-query";
+import { FieldValues, useForm } from "react-hook-form";
+import { z } from "zod";
+import { useCreateCollection } from "../../hooks/collections";
+import { Collection } from "../../services/collectionsService";
 
 const schema = z.object({
-  name: z
-    .string()
-    .min(3, {
-      message: "Collection name needs needs to be at least 3 letters long.",
-    }),
-  description: z
-    .string()
-    .min(10, {
-      message: "Collection description needs to be longer than 10 letters.",
-    }),
-})
+  name: z.string().min(3, {
+    message: "Collection name needs needs to be at least 3 letters long.",
+  }),
+  description: z.string().min(10, {
+    message: "Collection description needs to be longer than 10 letters.",
+  }),
+});
 
-type AddNewCollectionFormSchema = z.infer<typeof schema>
+type AddNewCollectionFormSchema = z.infer<typeof schema>;
 
 interface Props {
-  onClose: () => void
+  onClose: () => void;
 }
 const AddNewCollectionForm = ({ onClose }: Props) => {
-  const toast = useToast()
+  const toast = useToast();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AddNewCollectionFormSchema>({ resolver: zodResolver(schema) })
+  } = useForm<AddNewCollectionFormSchema>({ resolver: zodResolver(schema) });
 
-  const createCollection = useCreateCollection()
+  const createCollection = useCreateCollection();
 
   const onSubmit = (data: FieldValues) => {
     const newCollection: Collection = {
@@ -56,8 +52,8 @@ const AddNewCollectionForm = ({ onClose }: Props) => {
       description: data.description,
       createdAt: new Date(),
       updatedAt: new Date(),
-    }
-    createCollection.mutate(newCollection)
+    };
+    createCollection.mutate(newCollection);
     toast({
       title: "New collection created.",
       description:
@@ -65,9 +61,9 @@ const AddNewCollectionForm = ({ onClose }: Props) => {
       status: "success",
       duration: 1500,
       isClosable: true,
-    })
-    onClose()
-  }
+    });
+    onClose();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -140,7 +136,7 @@ const AddNewCollectionForm = ({ onClose }: Props) => {
         </HStack>
       </VStack>
     </form>
-  )
-}
+  );
+};
 
-export default AddNewCollectionForm
+export default AddNewCollectionForm;

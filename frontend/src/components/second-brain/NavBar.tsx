@@ -8,26 +8,26 @@ import {
   DrawerOverlay,
   DrawerBody,
   DrawerContent,
-} from "@chakra-ui/react"
-import { useNavigate } from "react-router-dom"
-import SearchBox from "./SearchBox"
-import { BiMenu } from "react-icons/bi"
-import { useRef } from "react"
-import SideBar from "./SideBar"
-import useNewJournalStore from "../../state/useNewJournalStore"
+} from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import SearchBox from "./SearchBox";
+import { BiMenu } from "react-icons/bi";
+import { useRef } from "react";
+import SideBar from "./SideBar";
+import useNewJournalStore from "../../state/useNewJournalStore";
 
 const NavBar = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const btnRef = useRef<HTMLButtonElement>(null)
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef<HTMLButtonElement>(null);
 
-  const setJournal = useNewJournalStore((s) => s.setJournal)
+  const setJournal = useNewJournalStore((s) => s.setJournal);
 
   const onAddJournal = () => {
-    setJournal(undefined)
-    navigate("/everything/journals/new")
-  }
+    setJournal(undefined);
+    navigate("/everything/journals/new");
+  };
 
   return (
     <HStack
@@ -77,7 +77,7 @@ const NavBar = () => {
         </DrawerContent>
       </Drawer>
     </HStack>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

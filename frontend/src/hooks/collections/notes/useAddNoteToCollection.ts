@@ -1,21 +1,21 @@
-import { collectionsService } from "../../../services"
-import { Collection } from "../../../services/collectionsService"
-import { Note } from "../../../services/notesService"
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import useNewCollectionNoteStore from "../../../state/useNewCollectionNoteStore"
+import { collectionsService } from "../../../services";
+import { Collection } from "../../../services/collectionsService";
+import { Note } from "../../../services/notesService";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import useNewCollectionNoteStore from "../../../state/useNewCollectionNoteStore";
 
 interface AddNoteToCollectionData {
-  collectionSlug: string
-  note: Note
+  collectionSlug: string;
+  note: Note;
 }
 
 interface UseAddNoteCollectionContext {
-  previousNotes: Note[]
+  previousNotes: Note[];
 }
 
 const useAddNoteToCollection = () => {
-  const setNote = useNewCollectionNoteStore((s) => s.setNote)
-  const queryClient = useQueryClient()
+  const setNote = useNewCollectionNoteStore((s) => s.setNote);
+  const queryClient = useQueryClient();
 
   const addNoteToCollection = useMutation<
     void,
@@ -33,7 +33,7 @@ const useAddNoteToCollection = () => {
           "collections",
           data.collectionSlug,
           "notes",
-        ]) || []
+        ]) || [];
 
       queryClient.setQueryData<Collection>(
         ["collections", data.collectionSlug],
@@ -41,28 +41,28 @@ const useAddNoteToCollection = () => {
           const coll: Collection = {
             ...collection,
             notes: [...(collection?.notes || []), data.note],
-          }
-          return coll
+          };
+          return coll;
         },
-      )
+      );
 
-      return { previousNotes }
+      return { previousNotes };
     },
     onSuccess: (_savedNote, data) => {
       queryClient.invalidateQueries({
         queryKey: ["collections", data.collectionSlug],
-      })
-      setNote({} as Note)
+      });
+      setNote({} as Note);
     },
     onError: (_error, data, context) => {
       queryClient.setQueryData<Note[]>(
         ["collections", data.collectionSlug],
         () => context?.previousNotes,
-      )
+      );
     },
-  })
+  });
 
-  return addNoteToCollection
-}
+  return addNoteToCollection;
+};
 
-export default useAddNoteToCollection
+export default useAddNoteToCollection;

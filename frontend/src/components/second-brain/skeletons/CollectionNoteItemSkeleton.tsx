@@ -6,7 +6,7 @@ import {
   Spacer,
   Text,
   Skeleton,
-} from "@chakra-ui/react"
+} from "@chakra-ui/react";
 
 const CollectionNoteItemSkeleton = () => {
   return (
@@ -27,7 +27,7 @@ const CollectionNoteItemSkeleton = () => {
         </Button>
       </HStack>
     </Skeleton>
-  )
-}
+  );
+};
 
-export default CollectionNoteItemSkeleton
+export default CollectionNoteItemSkeleton;

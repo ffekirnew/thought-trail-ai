@@ -1,21 +1,21 @@
-import { Image, Flex, Spacer, HStack, Button } from "@chakra-ui/react"
-import { Link, useNavigate } from "react-router-dom"
-import logo from "../../assets/logo.svg"
-import { useState } from "react"
-import ColorModeSwitch from "../shared/ColorModeSwitch"
+import { Image, Flex, Spacer, HStack, Button } from "@chakra-ui/react";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.svg";
+import { useState } from "react";
+import ColorModeSwitch from "../shared/ColorModeSwitch";
 
 interface Option {
-  title: string
-  route: string
+  title: string;
+  route: string;
 }
 
 const NavBar = () => {
   const options: Option[] = [
     { title: "Global Search", route: "global-search" },
     { title: "Second Brain", route: "second-brain" },
-  ]
-  const navigate = useNavigate()
-  const [mode, setMode] = useState<string>(options[0].route)
+  ];
+  const navigate = useNavigate();
+  const [mode, setMode] = useState<string>(options[0].route);
 
   return (
     <Flex height={"100%"} alignItems={"center"}>
@@ -27,8 +27,8 @@ const NavBar = () => {
         {options.map(({ title, route }, index) => (
           <Button
             onClick={() => {
-              setMode(title)
-              navigate("/" + route)
+              setMode(title);
+              navigate("/" + route);
             }}
             key={index}
             variant={mode === title ? "solid" : "ghost"}
@@ -40,7 +40,7 @@ const NavBar = () => {
       <Spacer />
       <ColorModeSwitch />
     </Flex>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

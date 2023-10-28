@@ -6,24 +6,24 @@ import {
   Text,
   VStack,
   useColorMode,
-} from "@chakra-ui/react"
-import { format } from "date-fns"
-import { Journal } from "../../services/journalsService"
-import { useNavigate } from "react-router-dom"
+} from "@chakra-ui/react";
+import { format } from "date-fns";
+import { Journal } from "../../services/journalsService";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (date: Date) => {
-  if (date) return format(new Date(date), "MMM. dd, yyyy")
-  return format(new Date(), "MMM. dd, yyyy")
-}
+  if (date) return format(new Date(date), "MMM. dd, yyyy");
+  return format(new Date(), "MMM. dd, yyyy");
+};
 
 interface Props {
-  journal: Journal
+  journal: Journal;
 }
 
 const JournalListItem = ({ journal }: Props) => {
-  const { colorMode } = useColorMode()
-  const navigate = useNavigate()
-  const formattedDate = formatDate(journal.createdAt!)
+  const { colorMode } = useColorMode();
+  const navigate = useNavigate();
+  const formattedDate = formatDate(journal.createdAt!);
 
   return (
     <VStack
@@ -59,7 +59,7 @@ const JournalListItem = ({ journal }: Props) => {
         </VStack>
       </Button>
     </VStack>
-  )
-}
+  );
+};
 
-export default JournalListItem
+export default JournalListItem;

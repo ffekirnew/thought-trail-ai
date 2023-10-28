@@ -1,6 +1,6 @@
-import { collectionsService } from "../../../services"
-import { Note } from "../../../services/notesService"
-import { useQuery } from "@tanstack/react-query"
+import { collectionsService } from "../../../services";
+import { Note } from "../../../services/notesService";
+import { useQuery } from "@tanstack/react-query";
 
 const useGetCollectionNotes = (collectionSlug: string) => {
   return useQuery<Note[], Error>({
@@ -11,7 +11,7 @@ const useGetCollectionNotes = (collectionSlug: string) => {
     keepPreviousData: true,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
-  })
-}
+  });
+};
 
-export default useGetCollectionNotes
+export default useGetCollectionNotes;

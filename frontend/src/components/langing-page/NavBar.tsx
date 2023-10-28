@@ -6,10 +6,10 @@ import {
   Button,
   StackDivider,
   Show,
-} from "@chakra-ui/react"
-import logo from "../../assets/logo.svg"
-import { Link } from "react-router-dom"
-import ColorModeSwitch from "../shared/ColorModeSwitch"
+} from "@chakra-ui/react";
+import logo from "../../assets/logo.svg";
+import { Link } from "react-router-dom";
+import ColorModeSwitch from "../shared/ColorModeSwitch";
 
 const NavBar = () => {
   return (
@@ -65,7 +65,7 @@ const NavBar = () => {
         </Show>
       </HStack>
     </Flex>
-  )
-}
+  );
+};
 
-export default NavBar
+export default NavBar;

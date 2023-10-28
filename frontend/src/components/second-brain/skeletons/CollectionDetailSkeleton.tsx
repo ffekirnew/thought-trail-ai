@@ -7,12 +7,12 @@ import {
   SkeletonText,
   Skeleton,
   Text,
-} from "@chakra-ui/react"
-import { BiPlus, BiSolidTrash } from "react-icons/bi"
-import CollectionNoteItemSkeleton from "./CollectionNoteItemSkeleton"
+} from "@chakra-ui/react";
+import { BiPlus, BiSolidTrash } from "react-icons/bi";
+import CollectionNoteItemSkeleton from "./CollectionNoteItemSkeleton";
 
 const CollectionDetailSkeleton = () => {
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
   return (
     <VStack align={"left"} gap={5}>
@@ -45,7 +45,7 @@ const CollectionDetailSkeleton = () => {
         </Skeleton>
       </HStack>
     </VStack>
-  )
-}
+  );
+};
 
-export default CollectionDetailSkeleton
+export default CollectionDetailSkeleton;

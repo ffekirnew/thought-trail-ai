@@ -1,22 +1,22 @@
-import { Flex, Grid, GridItem, Text } from "@chakra-ui/react"
-import useChatStore from "../../state/useChatStore"
-import ChatMessage from "../../components/second-brain/ChatMessage"
-import { useRef, useEffect } from "react"
-import ChatBox from "../../components/second-brain/ChatBox"
-import ChatMenu from "../../components/second-brain/ChatMenu"
+import { Flex, Grid, GridItem, Text } from "@chakra-ui/react";
+import useChatStore from "../../state/useChatStore";
+import ChatMessage from "../../components/second-brain/ChatMessage";
+import { useRef, useEffect } from "react";
+import ChatBox from "../../components/second-brain/ChatBox";
+import ChatMenu from "../../components/second-brain/ChatMenu";
 
 const ChatPage = () => {
-  const { chats } = useChatStore()
-  const chatRef = useRef<HTMLDivElement>(null)
+  const { chats } = useChatStore();
+  const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (chatRef.current) {
       chatRef.current.scrollTo({
         top: chatRef.current.scrollHeight,
         behavior: "smooth",
-      })
+      });
     }
-  }, [chats.length])
+  }, [chats.length]);
 
   return (
     <Grid
@@ -53,7 +53,7 @@ const ChatPage = () => {
         <ChatBox />
       </GridItem>
     </Grid>
-  )
-}
+  );
+};
 
-export default ChatPage
+export default ChatPage;

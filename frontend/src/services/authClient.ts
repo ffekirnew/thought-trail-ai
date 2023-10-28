@@ -1,30 +1,30 @@
-import axios from "axios"
-import { FetchResponse } from "./apiClient"
+import axios from "axios";
+import { FetchResponse } from "./apiClient";
 
 const axiosInstance = axios.create({
   baseURL: "https://thoughttrail-api.fikernew-birhanu.me/",
-})
+});
 
 export interface User {
-  _id: string
-  name: string
-  username: string
-  email: string
-  profilePicture: string
-  numberOfJournals: number
-  numberOfCollections: number
+  _id: string;
+  name: string;
+  username: string;
+  email: string;
+  profilePicture: string;
+  numberOfJournals: number;
+  numberOfCollections: number;
 }
 
 export interface LoggedInUser {
-  user: User
-  token: string
+  user: User;
+  token: string;
 }
 
 class AuthClient {
-  endpoint: string
+  endpoint: string;
 
   constructor() {
-    this.endpoint = "/auth"
+    this.endpoint = "/auth";
   }
 
   login = async (username: string, password: string) => {
@@ -34,12 +34,12 @@ class AuthClient {
         password: password,
       })
       .then((res) => {
-        return res.data
+        return res.data;
       })
       .catch((error) => {
-        throw new Error(error.response.data.error)
-      })
-  }
+        throw new Error(error.response.data.error);
+      });
+  };
 
   register = async (
     username: string,
@@ -58,12 +58,12 @@ class AuthClient {
         },
       )
       .then((res) => {
-        return res.data
+        return res.data;
       })
       .catch((error) => {
-        throw new Error(error.response.data.error)
-      })
-  }
+        throw new Error(error.response.data.error);
+      });
+  };
 }
 
-export default new AuthClient()
+export default new AuthClient();

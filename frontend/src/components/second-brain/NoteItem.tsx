@@ -1,14 +1,14 @@
-import { Flex, Spacer, Button, Show } from "@chakra-ui/react"
-import { BsPencil } from "react-icons/bs"
-import EditMenu from "./EditMenu"
-import { useNavigate } from "react-router-dom"
-import { Note } from "../../services/notesService"
+import { Flex, Spacer, Button, Show } from "@chakra-ui/react";
+import { BsPencil } from "react-icons/bs";
+import EditMenu from "./EditMenu";
+import { useNavigate } from "react-router-dom";
+import { Note } from "../../services/notesService";
 
 interface Props {
-  note: Note
+  note: Note;
 }
 const NoteItem = ({ note }: Props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <Flex
       borderColor={"gray.700"}
@@ -38,7 +38,7 @@ const NoteItem = ({ note }: Props) => {
         <BsPencil />
       </Button>
     </Flex>
-  )
-}
+  );
+};
 
-export default NoteItem
+export default NoteItem;

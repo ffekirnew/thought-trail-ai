@@ -1,9 +1,9 @@
-import { Button, Flex, Text } from "@chakra-ui/react"
-import { ReactNode } from "react"
+import { Button, Flex, Text } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
 interface Props {
-  text: string
-  icon: ReactNode
+  text: string;
+  icon: ReactNode;
 }
 const SideBarOption = ({ text, icon }: Props) => {
   return (
@@ -13,7 +13,7 @@ const SideBarOption = ({ text, icon }: Props) => {
         <Text fontWeight={"normal"}>{text}</Text>
       </Flex>
     </Button>
-  )
-}
+  );
+};
 
-export default SideBarOption
+export default SideBarOption;

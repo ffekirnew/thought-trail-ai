@@ -1,9 +1,9 @@
-import { create } from "zustand"
-import { Note } from "../services/notesService"
+import { create } from "zustand";
+import { Note } from "../services/notesService";
 
 interface UseNewCollectionNoteStoreType {
-  note?: Note
-  setNote: (note: Note) => void
+  note?: Note;
+  setNote: (note: Note) => void;
 }
 
 const useNewCollectionNoteStore = create<UseNewCollectionNoteStoreType>(
@@ -11,6 +11,6 @@ const useNewCollectionNoteStore = create<UseNewCollectionNoteStoreType>(
     note: {},
     setNote: (note) => set(() => ({ note })),
   }),
-)
+);
 
-export default useNewCollectionNoteStore
+export default useNewCollectionNoteStore;
