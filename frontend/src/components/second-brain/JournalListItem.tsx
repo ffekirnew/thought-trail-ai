@@ -52,7 +52,11 @@ const JournalListItem = ({ journal }: Props) => {
             </Text>
           </HStack>
           <Show above={"lg"}>
-            <Text fontWeight={"light"} overflow={"hidden"}>
+            <Text
+              fontWeight={"light"}
+              overflow={"hidden"}
+              color={colorMode == "dark" ? "gray.200" : "gray.600"}
+            >
               {journal?.body}
             </Text>
           </Show>
