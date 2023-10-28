@@ -4,7 +4,6 @@ import {
   HStack,
   Spacer,
   Button,
-  SkeletonText,
   Skeleton,
   Text,
 } from "@chakra-ui/react";
@@ -26,24 +25,11 @@ const CollectionDetailSkeleton = () => {
           <Button leftIcon={<BiSolidTrash />}>Delete Collection</Button>
         </Skeleton>
       </HStack>
-      <SkeletonText
-        mt="2"
-        noOfLines={3}
-        spacing="2"
-        skeletonHeight="4"
-        borderRadius={10}
-      />
       <Flex flexDir={"column"} gap={2}>
         {skeletons.map((skeleton) => (
           <CollectionNoteItemSkeleton key={skeleton} />
         ))}
       </Flex>
-      <HStack>
-        <Spacer />
-        <Skeleton>
-          <Button leftIcon={<BiPlus />}>Add a new note</Button>
-        </Skeleton>
-      </HStack>
     </VStack>
   );
 };

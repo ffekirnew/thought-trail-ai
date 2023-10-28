@@ -6,6 +6,7 @@ import {
   Spacer,
   Text,
   useColorMode,
+  VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { Note } from "../../services/notesService";
@@ -25,40 +26,37 @@ const CollectionNoteItem = ({ collectionSlug, note }: Props) => {
   const formattedDate = formatDate(note.updatedAt!);
 
   return (
-    <HStack
+    <VStack
       width={"100%"}
-      border={"1px"}
       paddingX={5}
       borderRadius={10}
-      borderColor={colorMode === "dark" ? "gray.700" : "gray.100"}
+      bg={colorMode === "dark" ? "gray.700" : "gray.100"}
       gap={5}
     >
-      <Checkbox />
       <Button
         variant={"unstyled"}
-        onClick={() =>
-          navigate(
-            `/everything/collections/${collectionSlug}/notes/${note._id}`,
-          )
-        }
+        height={"auto"}
+        textAlign={"left"}
+        onClick={() => navigate("/everything/journals/" + collectionSlug)}
         width={"100%"}
+        gap={5}
       >
-        <HStack width={"100%"}>
-          <Text fontWeight={"bold"} overflow={"hidden"}>
-            {note.title}
-          </Text>
+        <VStack gap={2} paddingY={2} align={"left"} width={"100%"}>
+          <HStack width={"100%"} gap={5}>
+            <Text fontWeight={"bold"} overflow={"hidden"}>
+              {note?.title}
+            </Text>
+            <Spacer />
+            <Text fontWeight={"light"}>{formattedDate}</Text>
+          </HStack>
           <Show above={"lg"}>
             <Text fontWeight={"light"} overflow={"hidden"}>
-              {note.body}
+              {note?.body}
             </Text>
           </Show>
-          <Spacer />
-          <Text fontWeight={"bold"} width={"6rem"}>
-            {formattedDate}
-          </Text>
-        </HStack>
+        </VStack>
       </Button>
-    </HStack>
+    </VStack>
   );
 };
 
