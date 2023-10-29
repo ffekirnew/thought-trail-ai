@@ -1,9 +1,16 @@
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
-import { AuthRouter, CollectionsRouter, NotesRouter, TagsRouter, UsersRouter, JournalsRouter } from './routes';
-import { config, db } from './core';
-import swaggerUi from 'swagger-ui-express';
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import {
+  AuthRouter,
+  CollectionsRouter,
+  NotesRouter,
+  TagsRouter,
+  UsersRouter,
+  JournalsRouter,
+} from "./routes";
+import { config, db } from "./core";
+import swaggerUi from "swagger-ui-express";
 
 const app = express();
 const configuration = { db: db };
@@ -15,12 +22,12 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // Use controllers
-app.use('/auth', AuthRouter);
-app.use('/collections', CollectionsRouter);
-app.use('/notes', NotesRouter);
-app.use('/journals', JournalsRouter);
-app.use('/me', UsersRouter);
-app.use('/tags', TagsRouter);
+app.use("/auth", AuthRouter);
+app.use("/collections", CollectionsRouter);
+app.use("/notes", NotesRouter);
+app.use("/journals", JournalsRouter);
+app.use("/me", UsersRouter);
+app.use("/tags", TagsRouter);
 
 // Swagger Documentation
 app.use(
@@ -30,8 +37,7 @@ app.use(
     swaggerOptions: {
       url: "./swagger.json",
     },
-  })
+  }),
 );
 
 export default app;
-

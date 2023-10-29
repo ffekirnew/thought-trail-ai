@@ -1,8 +1,8 @@
-import bcrypt from 'bcrypt';
-import IPasswordHasher from '../../application/contracts/infrastructure/password-hasher.contract';
+import bcrypt from "bcrypt";
+import IPasswordHasher from "../../application/contracts/infrastructure/password-hasher.contract";
 
 class PasswordHasher implements IPasswordHasher {
-  private readonly saltRounds: number; 
+  private readonly saltRounds: number;
 
   constructor(saltRounds: number) {
     this.saltRounds = saltRounds;
@@ -18,7 +18,10 @@ class PasswordHasher implements IPasswordHasher {
     return hashedPassword;
   }
 
-  async validate(userGivenPassword: string, hashedPassword: string): Promise<boolean> {
+  async validate(
+    userGivenPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean> {
     const match = await bcrypt.compare(userGivenPassword, hashedPassword);
     return match;
   }

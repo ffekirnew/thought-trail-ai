@@ -1,7 +1,13 @@
 import { Request, Response } from "express";
 import TagsApplication from "../../application/features/tags/tags.application";
 import { TagsRepository } from "../../persistence/repositories";
-import { CreateTagDto, DeleteTagDto, GetAllTagsDto, GetTagDto, UpdateTagDto } from "../../application/features/tags/dtos";
+import {
+  CreateTagDto,
+  DeleteTagDto,
+  GetAllTagsDto,
+  GetTagDto,
+  UpdateTagDto,
+} from "../../application/features/tags/dtos";
 import { Types } from "mongoose";
 
 class TagsController {
@@ -18,11 +24,9 @@ class TagsController {
 
     const response = await this.tagsApplication.create(createTagDto);
 
-    if (response.success)
-      res.status(201).json(response);
-    else
-      res.status(400).json(response);
-  }
+    if (response.success) res.status(201).json(response);
+    else res.status(400).json(response);
+  };
 
   getAll = async (req: Request, res: Response) => {
     const { userId } = req.body;
@@ -32,7 +36,7 @@ class TagsController {
 
     if (response.success) res.status(200).json(response);
     else res.status(400).json(response);
-  }
+  };
 
   get = async (req: Request, res: Response) => {
     const { tagId } = req.params;
@@ -43,18 +47,22 @@ class TagsController {
 
     if (response.success) res.status(200).json(response);
     else res.status(400).json(response);
-  }
+  };
 
   update = async (req: Request, res: Response) => {
     const { tagId } = req.params;
     const { userId, name } = req.body;
 
-    const updateTagDto = new UpdateTagDto(name, userId, new Types.ObjectId(tagId));
+    const updateTagDto = new UpdateTagDto(
+      name,
+      userId,
+      new Types.ObjectId(tagId),
+    );
     const response = await this.tagsApplication.update(updateTagDto);
 
     if (response.success) res.status(204).json(response);
     else res.status(400).json(response);
-  }
+  };
 
   delete = async (req: Request, res: Response) => {
     const { tagId } = req.params;
@@ -65,7 +73,7 @@ class TagsController {
 
     if (response.success) res.status(204).json(response);
     else res.status(400).json(response);
-  } 
+  };
 }
 
 export default TagsController;

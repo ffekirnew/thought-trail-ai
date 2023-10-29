@@ -9,12 +9,12 @@ class GetAllNotesDto implements Dto {
   }
 
   validate(): void {
-    const validator = z.object({ 
-      userId: z.string().min(1, {message: 'User ID is required'}),
+    const validator = z.object({
+      userId: z.string().min(1, { message: "User ID is required" }),
     });
 
     const validationResult = validator.safeParse(this);
-    
+
     if (validationResult.success === false) {
       throw new Error(validationResult.error.message);
     }

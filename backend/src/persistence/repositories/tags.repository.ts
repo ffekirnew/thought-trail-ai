@@ -1,4 +1,3 @@
-
 import { Types } from "mongoose";
 import { ITagRepository } from "../../application/contracts/persistence";
 import { TagEntity } from "../../domain/entities";
@@ -13,7 +12,10 @@ class TagsRepository implements ITagRepository {
     }
   }
 
-  async getTag(userId: Types.ObjectId, tagId: Types.ObjectId): Promise<TagEntity> {
+  async getTag(
+    userId: Types.ObjectId,
+    tagId: Types.ObjectId,
+  ): Promise<TagEntity> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -40,7 +42,10 @@ class TagsRepository implements ITagRepository {
     });
   }
 
-  async createTag(userId: Types.ObjectId, tag: TagEntity): Promise<Types.ObjectId> {
+  async createTag(
+    userId: Types.ObjectId,
+    tag: TagEntity,
+  ): Promise<Types.ObjectId> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -55,7 +60,10 @@ class TagsRepository implements ITagRepository {
     });
   }
 
-  async deleteTag(userId: Types.ObjectId, tagId: Types.ObjectId): Promise<void> {
+  async deleteTag(
+    userId: Types.ObjectId,
+    tagId: Types.ObjectId,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -72,7 +80,11 @@ class TagsRepository implements ITagRepository {
     });
   }
 
-  async updateTag(userId: Types.ObjectId, tagId: Types.ObjectId, tag: TagEntity): Promise<void> {
+  async updateTag(
+    userId: Types.ObjectId,
+    tagId: Types.ObjectId,
+    tag: TagEntity,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -111,4 +123,3 @@ class TagsRepository implements ITagRepository {
 }
 
 export default TagsRepository;
-

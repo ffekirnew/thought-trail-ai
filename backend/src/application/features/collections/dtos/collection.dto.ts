@@ -10,7 +10,15 @@ class CollectionDto {
   createdAt: Date;
   updatedAt: Date;
 
-  constructor(id: string, slug: string, name: string, description: string, createdAt: Date, updatedAt: Date, notes: NoteDto[]) {
+  constructor(
+    id: string,
+    slug: string,
+    name: string,
+    description: string,
+    createdAt: Date,
+    updatedAt: Date,
+    notes: NoteDto[],
+  ) {
     this._id = id;
     this.slug = slug;
     this.name = name;
@@ -21,9 +29,16 @@ class CollectionDto {
   }
 
   static fromEntity(collection: CollectionEntity) {
-    return new CollectionDto(collection._id.toString(), collection.slug, collection.name, collection.description, collection.createdAt, collection.updatedAt, collection.notes.map(note => NoteDto.fromEntity(note)));
+    return new CollectionDto(
+      collection._id.toString(),
+      collection.slug,
+      collection.name,
+      collection.description,
+      collection.createdAt,
+      collection.updatedAt,
+      collection.notes.map((note) => NoteDto.fromEntity(note)),
+    );
   }
-
 }
 
 export default CollectionDto;

@@ -2,6 +2,18 @@ import { Types } from "mongoose";
 import { IJournalsRepository } from "../../application/contracts/persistence";
 import { JournalEntity } from "../../domain/entities";
 import { UserModel } from "../models";
+import { IJournalDocument } from "../models/journal.model";
+
+export type Ordering = "ascending" | "descending";
+export type OrderBy = "CreatedAt" | "UpdatedAt";
+const filter = (orderBy: string, ordering: string): any => {
+  let orderingType: number = ordering == "ascending" ? 1 : -1;
+
+  if (orderBy === "CreatedAt") {
+    return { createdAt: orderingType };
+  }
+  return { updatedAt: orderingType };
+};
 
 class JournalRepository implements IJournalsRepository {
   private async execute<T>(fn: () => Promise<T>): Promise<T> {
@@ -12,13 +24,18 @@ class JournalRepository implements IJournalsRepository {
     }
   }
 
-  async getJournal(userId: Types.ObjectId, journalId: Types.ObjectId): Promise<JournalEntity | null> {
+  async getJournal(
+    userId: Types.ObjectId,
+    journalId: Types.ObjectId,
+  ): Promise<JournalEntity | null> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const journal = user.journals.find((journal) => journal._id.equals(journalId));
+      const journal = user.journals.find((journal) =>
+        journal._id.equals(journalId),
+      );
 
       if (!journal) {
         throw new Error("Journal not found");
@@ -27,17 +44,29 @@ class JournalRepository implements IJournalsRepository {
     });
   }
 
-  async getAllJournals(userId: Types.ObjectId): Promise<JournalEntity[]> {
+  async getAllJournals(
+    userId: Types.ObjectId,
+    orderBy: string,
+    ordering: string,
+  ): Promise<JournalEntity[]> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      return user.journals.map((journal) => this.toJournalEntity(journal));
+
+      const journalsFilter = filter(orderBy, ordering);
+      console.log(journalsFilter);
+      return user.journals
+        .sort(journalsFilter)
+        .map((journal) => this.toJournalEntity(journal));
     });
   }
 
-  async createJournal(userId: Types.ObjectId, journal: JournalEntity): Promise<Types.ObjectId> {
+  async createJournal(
+    userId: Types.ObjectId,
+    journal: JournalEntity,
+  ): Promise<Types.ObjectId> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -52,14 +81,19 @@ class JournalRepository implements IJournalsRepository {
     });
   }
 
-  async deleteJournal(userId: Types.ObjectId, journalId: Types.ObjectId): Promise<void> {
+  async deleteJournal(
+    userId: Types.ObjectId,
+    journalId: Types.ObjectId,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
 
-      const journalIndex = user.journals.findIndex((journal) => journal._id.equals(journalId));
+      const journalIndex = user.journals.findIndex((journal) =>
+        journal._id.equals(journalId),
+      );
       if (journalIndex === -1) {
         throw new Error("Journal not found");
       }
@@ -69,14 +103,20 @@ class JournalRepository implements IJournalsRepository {
     });
   }
 
-  async updateJournal(userId: Types.ObjectId, journalId: Types.ObjectId, journal: JournalEntity): Promise<void> {
+  async updateJournal(
+    userId: Types.ObjectId,
+    journalId: Types.ObjectId,
+    journal: JournalEntity,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
 
-      const journalIndex = user.journals.findIndex((n) => n._id.equals(journalId));
+      const journalIndex = user.journals.findIndex((n) =>
+        n._id.equals(journalId),
+      );
       if (journalIndex === -1) {
         throw new Error("Journal not found");
       }
@@ -92,7 +132,7 @@ class JournalRepository implements IJournalsRepository {
       title: journalDocument.title,
       body: journalDocument.body,
       createdAt: journalDocument.createdAt,
-      updatedAt: journalDocument.updatedAt
+      updatedAt: journalDocument.updatedAt,
     });
     return journal;
   }
@@ -107,4 +147,3 @@ class JournalRepository implements IJournalsRepository {
 }
 
 export default JournalRepository;
-

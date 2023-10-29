@@ -17,7 +17,7 @@ class BaseResponse<T> {
 
   static error<T>(message: string, error: any) {
     return new BaseResponse<T>(false, message, null as T, error);
-  } 
+  }
 }
 
 export default BaseResponse;

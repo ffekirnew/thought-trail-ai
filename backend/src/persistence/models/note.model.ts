@@ -9,11 +9,14 @@ export interface INoteDocument extends Document {
   updatedAt: Date;
 }
 
-export const noteSchema = new Schema<INoteDocument>({
-  title: { type: String, required: true },
-  body: { type: String, required: true },
-  tags: { type: [tagSchema], default: [] },
-}, { timestamps: true });
+export const noteSchema = new Schema<INoteDocument>(
+  {
+    title: { type: String, required: true },
+    body: { type: String, required: true },
+    tags: { type: [tagSchema], default: [] },
+  },
+  { timestamps: true },
+);
 
 const NoteModel: Model<INoteDocument> = mongoose.model("Note", noteSchema);
 

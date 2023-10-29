@@ -27,7 +27,7 @@ class EmailSender implements IEmailSender {
         text: body,
       };
 
-       await this.transporter.sendMail(mailOptions);
+      await this.transporter.sendMail(mailOptions);
 
       return true;
     } catch (error) {

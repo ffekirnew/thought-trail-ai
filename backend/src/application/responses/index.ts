@@ -1,1 +1,1 @@
-export { default as BaseResponse } from './base.response';
+export { default as BaseResponse } from "./base.response";

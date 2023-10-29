@@ -6,9 +6,12 @@ export interface ITagDocument extends Document {
   updatedAt: Date;
 }
 
-export const tagSchema = new Schema<ITagDocument>({
-  name: { type: String, required: true },
-}, { timestamps: true });
+export const tagSchema = new Schema<ITagDocument>(
+  {
+    name: { type: String, required: true },
+  },
+  { timestamps: true },
+);
 
 const TagModel: Model<ITagDocument> = mongoose.model("Tag", tagSchema);
 

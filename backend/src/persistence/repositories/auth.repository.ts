@@ -1,8 +1,8 @@
-import { Types } from 'mongoose';
-import UserModel from '../models/user.model';
-import UserEntity from '../../domain/entities/user.entity';
-import { IAuthRepository } from '../../application/contracts/persistence';
-import { CollectionsRepository, JournalsRepository } from '.';
+import { Types } from "mongoose";
+import UserModel from "../models/user.model";
+import UserEntity from "../../domain/entities/user.entity";
+import { IAuthRepository } from "../../application/contracts/persistence";
+import { CollectionsRepository, JournalsRepository } from ".";
 
 class AuthRepository implements IAuthRepository {
   private async execute<T>(fn: () => Promise<T>): Promise<T> {
@@ -99,4 +99,3 @@ class AuthRepository implements IAuthRepository {
 }
 
 export default AuthRepository;
-

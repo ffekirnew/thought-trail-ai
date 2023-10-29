@@ -10,18 +10,21 @@ class CreateTagDto implements Dto {
     this.name = name;
     this.userId = userId;
   }
-  
+
   validate(): void {
-    const validator = z.object({ 
-      userId: z.string().min(1, 'User ID is required'),
-      name: z.string().min(1, 'Name is required').regex(/^[A-Za-z]+$/, 'Name must contain only alphabetic characters'),
+    const validator = z.object({
+      userId: z.string().min(1, "User ID is required"),
+      name: z
+        .string()
+        .min(1, "Name is required")
+        .regex(/^[A-Za-z]+$/, "Name must contain only alphabetic characters"),
     });
 
     const validationResult = validator.safeParse(this);
-  
+
     if (validationResult.success === false) {
       throw new Error(validationResult.error.errors[0].message);
-    } 
+    }
   }
 }
 

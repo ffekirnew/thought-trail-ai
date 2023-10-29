@@ -1,6 +1,6 @@
-import jwt from 'jsonwebtoken';
-import UserEntity from '../../domain/entities/user.entity';
-import IJwtGenerator from '../../application/contracts/infrastructure/jwt-generator.contract';
+import jwt from "jsonwebtoken";
+import UserEntity from "../../domain/entities/user.entity";
+import IJwtGenerator from "../../application/contracts/infrastructure/jwt-generator.contract";
 
 class JwtGenerator implements IJwtGenerator {
   private readonly secretKey: string;

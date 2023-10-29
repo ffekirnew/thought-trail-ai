@@ -6,10 +6,10 @@ const JournalsRouter = Router();
 const journalsController = new JournalsController();
 
 JournalsRouter.use(authMiddleware);
-JournalsRouter.post('', journalsController.create);
-JournalsRouter.get('', journalsController.getAll);
-JournalsRouter.get('/:journalId', journalsController.get);
-JournalsRouter.put('/:journalId', journalsController.update);
-JournalsRouter.delete('/:journalId', journalsController.delete);
+JournalsRouter.post("", journalsController.create);
+JournalsRouter.get("", journalsController.getAll);
+JournalsRouter.get("/:journalId", journalsController.get);
+JournalsRouter.put("/:journalId", journalsController.update);
+JournalsRouter.delete("/:journalId", journalsController.delete);
 
 export default JournalsRouter;

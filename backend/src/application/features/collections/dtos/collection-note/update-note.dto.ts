@@ -8,7 +8,12 @@ class UpdateNoteDto implements Dto {
   noteId: string;
   note: CreateNoteDto;
 
-  constructor(userId: string, collectionSlug: string, noteId: string, note: CreateNoteDto) {
+  constructor(
+    userId: string,
+    collectionSlug: string,
+    noteId: string,
+    note: CreateNoteDto,
+  ) {
     this.userId = userId;
     this.collectionSlug = collectionSlug;
     this.noteId = noteId;
@@ -17,14 +22,16 @@ class UpdateNoteDto implements Dto {
 
   validate(): void {
     const validator = z.object({
-      userId: z.string().min(1, {message: 'User ID is required'}),
-      collectionSlug: z.string().min(1, {message: 'Collection ID is required'}),
-      noteId: z.string().min(1, {message: 'Note ID is required'}),
+      userId: z.string().min(1, { message: "User ID is required" }),
+      collectionSlug: z
+        .string()
+        .min(1, { message: "Collection ID is required" }),
+      noteId: z.string().min(1, { message: "Note ID is required" }),
     });
 
     this.note.validate();
     const validationResult = validator.safeParse(this);
-    
+
     if (validationResult.success === false) {
       throw new Error(validationResult.error.message);
     }
@@ -32,4 +39,3 @@ class UpdateNoteDto implements Dto {
 }
 
 export default UpdateNoteDto;
-

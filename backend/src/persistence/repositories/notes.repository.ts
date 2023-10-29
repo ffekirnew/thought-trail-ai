@@ -12,7 +12,10 @@ class NoteRepository implements INotesRepository {
     }
   }
 
-  async getNote(userId: Types.ObjectId, noteId: Types.ObjectId): Promise<NoteEntity | null> {
+  async getNote(
+    userId: Types.ObjectId,
+    noteId: Types.ObjectId,
+  ): Promise<NoteEntity | null> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -37,7 +40,10 @@ class NoteRepository implements INotesRepository {
     });
   }
 
-  async createNote(userId: Types.ObjectId, note: NoteEntity): Promise<Types.ObjectId> {
+  async createNote(
+    userId: Types.ObjectId,
+    note: NoteEntity,
+  ): Promise<Types.ObjectId> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -52,7 +58,10 @@ class NoteRepository implements INotesRepository {
     });
   }
 
-  async deleteNote(userId: Types.ObjectId, noteId: Types.ObjectId): Promise<void> {
+  async deleteNote(
+    userId: Types.ObjectId,
+    noteId: Types.ObjectId,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -69,7 +78,11 @@ class NoteRepository implements INotesRepository {
     });
   }
 
-  async updateNote(userId: Types.ObjectId, noteId: Types.ObjectId, note: NoteEntity): Promise<void> {
+  async updateNote(
+    userId: Types.ObjectId,
+    noteId: Types.ObjectId,
+    note: NoteEntity,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -93,7 +106,7 @@ class NoteRepository implements INotesRepository {
       body: noteDocument.body,
       tags: noteDocument.tags,
       createdAt: noteDocument.createdAt,
-      updatedAt: noteDocument.updatedAt
+      updatedAt: noteDocument.updatedAt,
     });
     return note;
   }
@@ -109,4 +122,3 @@ class NoteRepository implements INotesRepository {
 }
 
 export default NoteRepository;
-

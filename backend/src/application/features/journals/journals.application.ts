@@ -1,15 +1,22 @@
 import { JournalEntity } from "../../../domain/entities";
-import { IJournalsRepository } from "../../contracts/persistence"
+import { IJournalsRepository } from "../../contracts/persistence";
 import { BaseResponse } from "../../responses";
-import { CreateJournalDto, UpdateJournalDto, DeleteJournalDto, GetAllJournalsDto, GetJournalDto, JournalDto } from "./dtos"
+import {
+  CreateJournalDto,
+  UpdateJournalDto,
+  DeleteJournalDto,
+  GetAllJournalsDto,
+  GetJournalDto,
+  JournalDto,
+} from "./dtos";
 import { Types } from "mongoose";
 
 class JournalsApplication {
-  constructor(
-    private readonly journalsRepository: IJournalsRepository,
-  ) {}
+  constructor(private readonly journalsRepository: IJournalsRepository) {}
 
-  create = async (createJournalDto: CreateJournalDto): Promise<BaseResponse<Types.ObjectId>> => {
+  create = async (
+    createJournalDto: CreateJournalDto,
+  ): Promise<BaseResponse<Types.ObjectId>> => {
     try {
       createJournalDto.validate();
       const newJournal = new JournalEntity({
@@ -17,15 +24,25 @@ class JournalsApplication {
         body: createJournalDto.body,
       });
 
-      const id = await this.journalsRepository.createJournal(new Types.ObjectId(createJournalDto.userId), newJournal);
-      return BaseResponse.success<Types.ObjectId>("Journal created successfully.", id);
-
+      const id = await this.journalsRepository.createJournal(
+        new Types.ObjectId(createJournalDto.userId),
+        newJournal,
+      );
+      return BaseResponse.success<Types.ObjectId>(
+        "Journal created successfully.",
+        id,
+      );
     } catch (error) {
-      return BaseResponse.error<Types.ObjectId>("Journal creation failed.", error.message);
+      return BaseResponse.error<Types.ObjectId>(
+        "Journal creation failed.",
+        error.message,
+      );
     }
-  }
+  };
 
-  update = async (updateJournalDto: UpdateJournalDto): Promise<BaseResponse<void>> => {
+  update = async (
+    updateJournalDto: UpdateJournalDto,
+  ): Promise<BaseResponse<void>> => {
     try {
       updateJournalDto.validate();
       const newJournal = new JournalEntity({
@@ -33,46 +50,83 @@ class JournalsApplication {
         body: updateJournalDto.body,
       });
 
-      await this.journalsRepository.updateJournal(new Types.ObjectId(updateJournalDto.userId), new Types.ObjectId(updateJournalDto.journalId), newJournal);
+      await this.journalsRepository.updateJournal(
+        new Types.ObjectId(updateJournalDto.userId),
+        new Types.ObjectId(updateJournalDto.journalId),
+        newJournal,
+      );
       return BaseResponse.success<void>("Journal updation successfully.", null);
     } catch (error) {
-      return BaseResponse.error<void>("Journal updation failed.", error.message);
+      return BaseResponse.error<void>(
+        "Journal updation failed.",
+        error.message,
+      );
     }
-  }
+  };
 
-  delete = async (deleteJournalDto: DeleteJournalDto): Promise<BaseResponse<void>> => {
+  delete = async (
+    deleteJournalDto: DeleteJournalDto,
+  ): Promise<BaseResponse<void>> => {
     try {
       deleteJournalDto.validate();
-      await this.journalsRepository.deleteJournal(new Types.ObjectId(deleteJournalDto.userId), new Types.ObjectId(deleteJournalDto.journalId));
+      await this.journalsRepository.deleteJournal(
+        new Types.ObjectId(deleteJournalDto.userId),
+        new Types.ObjectId(deleteJournalDto.journalId),
+      );
       return BaseResponse.success<void>("Journal deleted successfully.", null);
     } catch (error) {
-      return BaseResponse.error<void>("Journal deletion failed.", error.message);
-    } 
-  }
+      return BaseResponse.error<void>(
+        "Journal deletion failed.",
+        error.message,
+      );
+    }
+  };
 
-  getAll = async (getAllJournalsDto: GetAllJournalsDto): Promise<BaseResponse<JournalDto[]>> => {
+  getAll = async (
+    getAllJournalsDto: GetAllJournalsDto,
+    orderBy: string,
+    ordering: string,
+  ): Promise<BaseResponse<JournalDto[]>> => {
     try {
       getAllJournalsDto.validate();
-      const journals = await this.journalsRepository.getAllJournals(new Types.ObjectId(getAllJournalsDto.userId));
+      const journals = await this.journalsRepository.getAllJournals(
+        new Types.ObjectId(getAllJournalsDto.userId),
+        orderBy,
+        ordering,
+      );
 
       return BaseResponse.success<JournalDto[]>(
         "Journals retrieved successfully.",
-        journals.map(journal => JournalDto.fromEntity(journal))
+        journals.map((journal) => JournalDto.fromEntity(journal)),
       );
     } catch (error) {
-      return BaseResponse.error<JournalDto[]>("Journals could not be retrieved.", error.message);
+      return BaseResponse.error<JournalDto[]>(
+        "Journals could not be retrieved.",
+        error.message,
+      );
     }
-  }
+  };
 
-  get = async (getJournalDto: GetJournalDto): Promise<BaseResponse<JournalDto>> => {
+  get = async (
+    getJournalDto: GetJournalDto,
+  ): Promise<BaseResponse<JournalDto>> => {
     try {
       getJournalDto.validate();
-      const journal = await this.journalsRepository.getJournal(new Types.ObjectId(getJournalDto.userId), new Types.ObjectId(getJournalDto.journalId));
-      return BaseResponse.success<JournalDto>("Journal retrieved successfully.", JournalDto.fromEntity(journal));
+      const journal = await this.journalsRepository.getJournal(
+        new Types.ObjectId(getJournalDto.userId),
+        new Types.ObjectId(getJournalDto.journalId),
+      );
+      return BaseResponse.success<JournalDto>(
+        "Journal retrieved successfully.",
+        JournalDto.fromEntity(journal),
+      );
     } catch (error) {
-      return BaseResponse.error<JournalDto>("Journal could not be retrieved.", error.message);
-    } 
-  }
+      return BaseResponse.error<JournalDto>(
+        "Journal could not be retrieved.",
+        error.message,
+      );
+    }
+  };
 }
 
 export default JournalsApplication;

@@ -17,14 +17,14 @@ class RegisterUserDto extends Dto {
 
   validate(): void {
     const validator = z.object({
-      name: z.string().min(1, 'Name is required'),
-      username: z.string().min(1, 'Username is required'),
-      email: z.string().email('Invalid email address'),
-      password: z.string().min(8, 'Password must be at least 8 characters'),
+      name: z.string().min(1, "Name is required"),
+      username: z.string().min(1, "Username is required"),
+      email: z.string().email("Invalid email address"),
+      password: z.string().min(8, "Password must be at least 8 characters"),
     });
 
     const validationResult = validator.safeParse(this);
-    
+
     if (validationResult.success === false) {
       throw new Error(validationResult.error.message);
     }

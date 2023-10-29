@@ -4,10 +4,8 @@ import { CollectionEntity, NoteEntity } from "../../domain/entities";
 import { UserModel } from "../models";
 import { CollectionsRepository, NotesRepository } from ".";
 
-class CollectionRepository implements ICollectionsRepository { 
-  constructor(
-    private readonly notesRepository: NotesRepository
-  ) {}
+class CollectionRepository implements ICollectionsRepository {
+  constructor(private readonly notesRepository: NotesRepository) {}
 
   private async execute<T>(fn: () => Promise<T>): Promise<T> {
     try {
@@ -17,13 +15,18 @@ class CollectionRepository implements ICollectionsRepository {
     }
   }
 
-  async getCollection(userId: Types.ObjectId, collectionId: Types.ObjectId): Promise<CollectionEntity | null> {
+  async getCollection(
+    userId: Types.ObjectId,
+    collectionId: Types.ObjectId,
+  ): Promise<CollectionEntity | null> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection._id.equals(collectionId));
+      const collection = user.collections.find((collection) =>
+        collection._id.equals(collectionId),
+      );
 
       if (!collection) {
         throw new Error("Collection not found");
@@ -32,13 +35,18 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-  async getCollectionBySlug(userId: Types.ObjectId, collectionSlug: string): Promise<CollectionEntity | null> {
+  async getCollectionBySlug(
+    userId: Types.ObjectId,
+    collectionSlug: string,
+  ): Promise<CollectionEntity | null> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+      const collection = user.collections.find(
+        (collection) => collection.slug == collectionSlug,
+      );
 
       if (!collection) {
         throw new Error("Collection not found");
@@ -53,11 +61,16 @@ class CollectionRepository implements ICollectionsRepository {
       if (!user) {
         throw new Error("User not found");
       }
-      return user.collections.map((collection) => CollectionsRepository.toCollectionEntity(collection));
+      return user.collections.map((collection) =>
+        CollectionsRepository.toCollectionEntity(collection),
+      );
     });
   }
 
-  async createCollection(userId: Types.ObjectId, collection: CollectionEntity): Promise<Types.ObjectId> {
+  async createCollection(
+    userId: Types.ObjectId,
+    collection: CollectionEntity,
+  ): Promise<Types.ObjectId> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
@@ -72,14 +85,19 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-  async deleteCollection(userId: Types.ObjectId, collectionId: Types.ObjectId): Promise<void> {
+  async deleteCollection(
+    userId: Types.ObjectId,
+    collectionId: Types.ObjectId,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
 
-      const collectionIndex = user.collections.findIndex((collection) => collection._id.equals(collectionId));
+      const collectionIndex = user.collections.findIndex((collection) =>
+        collection._id.equals(collectionId),
+      );
       if (collectionIndex === -1) {
         throw new Error("Collection not found");
       }
@@ -89,14 +107,20 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-  async updateCollection(userId: Types.ObjectId, collectionId: Types.ObjectId, collection: CollectionEntity): Promise<void> {
+  async updateCollection(
+    userId: Types.ObjectId,
+    collectionId: Types.ObjectId,
+    collection: CollectionEntity,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
 
-      const collectionIndex = user.collections.findIndex((n) => n._id.equals(collectionId));
+      const collectionIndex = user.collections.findIndex((n) =>
+        n._id.equals(collectionId),
+      );
       if (collectionIndex === -1) {
         throw new Error("Collection not found");
       }
@@ -106,13 +130,19 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-  async addNoteToCollection(userId: Types.ObjectId, collectionSlug: string, note: NoteEntity): Promise<Types.ObjectId> {
+  async addNoteToCollection(
+    userId: Types.ObjectId,
+    collectionSlug: string,
+    note: NoteEntity,
+  ): Promise<Types.ObjectId> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection.slug === collectionSlug);
+      const collection = user.collections.find(
+        (collection) => collection.slug === collectionSlug,
+      );
 
       if (!collection) {
         throw new Error("Collection not found");
@@ -122,15 +152,21 @@ class CollectionRepository implements ICollectionsRepository {
       await user.save();
       return null;
     });
-  } 
+  }
 
-  async getCollectionNote(userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId): Promise<NoteEntity | null> {
+  async getCollectionNote(
+    userId: Types.ObjectId,
+    collectionSlug: string,
+    noteId: Types.ObjectId,
+  ): Promise<NoteEntity | null> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+      const collection = user.collections.find(
+        (collection) => collection.slug == collectionSlug,
+      );
 
       if (!collection) {
         throw new Error("Collection not found");
@@ -145,57 +181,81 @@ class CollectionRepository implements ICollectionsRepository {
     });
   }
 
-  async getCollectionNotes(userId: Types.ObjectId, collectionSlug: string): Promise<NoteEntity[]> {
+  async getCollectionNotes(
+    userId: Types.ObjectId,
+    collectionSlug: string,
+  ): Promise<NoteEntity[]> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+      const collection = user.collections.find(
+        (collection) => collection.slug == collectionSlug,
+      );
 
       if (!collection) {
         throw new Error("Collection not found");
       }
 
-      return collection.notes.map((note) => this.notesRepository.toNoteEntity(note));
+      return collection.notes.map((note) =>
+        this.notesRepository.toNoteEntity(note),
+      );
     });
   }
-    async removeNoteFromCollection(userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId): Promise<void> {
-     return this.execute(async () => {
+  async removeNoteFromCollection(
+    userId: Types.ObjectId,
+    collectionSlug: string,
+    noteId: Types.ObjectId,
+  ): Promise<void> {
+    return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+      const collection = user.collections.find(
+        (collection) => collection.slug == collectionSlug,
+      );
 
       if (!collection) {
         throw new Error("Collection not found");
       }
 
-      const noteIndex = collection.notes.findIndex((note) => note._id.equals(noteId));
-      
+      const noteIndex = collection.notes.findIndex((note) =>
+        note._id.equals(noteId),
+      );
+
       if (noteIndex === -1) {
         throw new Error("Note not found");
       }
 
       collection.notes.splice(noteIndex, 1);
       await user.save();
-      });
-    }
+    });
+  }
 
-    async updateNoteInCollection(userId: Types.ObjectId, collectionSlug: string, noteId: Types.ObjectId, note: NoteEntity): Promise<void> {
+  async updateNoteInCollection(
+    userId: Types.ObjectId,
+    collectionSlug: string,
+    noteId: Types.ObjectId,
+    note: NoteEntity,
+  ): Promise<void> {
     return this.execute(async () => {
       const user = await UserModel.findOne({ _id: userId });
       if (!user) {
         throw new Error("User not found");
       }
-      const collection = user.collections.find((collection) => collection.slug == collectionSlug);
+      const collection = user.collections.find(
+        (collection) => collection.slug == collectionSlug,
+      );
 
       if (!collection) {
         throw new Error("Collection not found");
       }
 
-      const noteIndex = collection.notes.findIndex((note) => note._id.equals(noteId));
+      const noteIndex = collection.notes.findIndex((note) =>
+        note._id.equals(noteId),
+      );
 
       if (noteIndex === -1) {
         throw new Error("Note not found");
@@ -214,7 +274,7 @@ class CollectionRepository implements ICollectionsRepository {
       slug: collectionDocument.slug,
       notes: collectionDocument.notes,
       createdAt: collectionDocument.createdAt,
-      updatedAt: collectionDocument.updatedAt
+      updatedAt: collectionDocument.updatedAt,
     });
     return collection;
   }
@@ -223,11 +283,10 @@ class CollectionRepository implements ICollectionsRepository {
     const collectionDocument: any = {
       name: collection.name,
       description: collection.description,
-      slug: collection.slug
+      slug: collection.slug,
     };
     return collectionDocument;
   }
 }
 
 export default CollectionRepository;
-

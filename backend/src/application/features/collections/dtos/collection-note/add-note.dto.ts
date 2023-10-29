@@ -15,13 +15,15 @@ class AddNoteDto implements Dto {
 
   validate(): void {
     const validator = z.object({
-      userId: z.string().min(1, {message: 'User ID is required'}),
-      collectionSlug: z.string().min(1, {message: 'Collection ID is required'}),
+      userId: z.string().min(1, { message: "User ID is required" }),
+      collectionSlug: z
+        .string()
+        .min(1, { message: "Collection ID is required" }),
     });
 
     this.note.validate();
     const validationResult = validator.safeParse(this);
-    
+
     if (validationResult.success === false) {
       throw new Error(validationResult.error.message);
     }
@@ -29,4 +31,3 @@ class AddNoteDto implements Dto {
 }
 
 export default AddNoteDto;
-

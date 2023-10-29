@@ -7,7 +7,13 @@ class JournalDto {
   createdAt: Date;
   updatedAt: Date;
 
-  constructor(id: string, title: string, body: string, createdAt: Date, updatedAt: Date) {
+  constructor(
+    id: string,
+    title: string,
+    body: string,
+    createdAt: Date,
+    updatedAt: Date,
+  ) {
     this._id = id;
     this.title = title;
     this.body = body;
@@ -16,9 +22,14 @@ class JournalDto {
   }
 
   static fromEntity(journal: JournalEntity) {
-    return new JournalDto(journal._id.toString(), journal.title, journal.body, journal.createdAt, journal.updatedAt);
+    return new JournalDto(
+      journal._id.toString(),
+      journal.title,
+      journal.body,
+      journal.createdAt,
+      journal.updatedAt,
+    );
   }
-
 }
 
 export default JournalDto;

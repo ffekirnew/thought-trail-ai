@@ -10,13 +10,19 @@ export interface ICollectionDocument extends Document {
   updatedAt: Date;
 }
 
-export const collectionSchema = new Schema<ICollectionDocument>({
-  slug: { type: String, required: true },
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-  notes: { type: [noteSchema], default: [] }
-}, { timestamps: true });
+export const collectionSchema = new Schema<ICollectionDocument>(
+  {
+    slug: { type: String, required: true },
+    name: { type: String, required: true },
+    description: { type: String, required: true },
+    notes: { type: [noteSchema], default: [] },
+  },
+  { timestamps: true },
+);
 
-const CollectionModel: Model<ICollectionDocument> = mongoose.model("Collection", collectionSchema);
+const CollectionModel: Model<ICollectionDocument> = mongoose.model(
+  "Collection",
+  collectionSchema,
+);
 
 export default CollectionModel;
