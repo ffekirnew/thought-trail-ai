@@ -1,13 +1,5 @@
-import {
-  VStack,
-  Flex,
-  HStack,
-  Spacer,
-  Button,
-  Skeleton,
-  Text,
-} from "@chakra-ui/react";
-import { BiPlus, BiSolidTrash } from "react-icons/bi";
+import { VStack, Flex, HStack, Button, Skeleton, Text } from "@chakra-ui/react";
+import { BiSolidTrash } from "react-icons/bi";
 import CollectionNoteItemSkeleton from "./CollectionNoteItemSkeleton";
 
 const CollectionDetailSkeleton = () => {

@@ -1,6 +1,5 @@
 import {
   HStack,
-  Checkbox,
   Button,
   Show,
   Spacer,
