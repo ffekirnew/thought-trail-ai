@@ -11,7 +11,6 @@ import {
   BiMessageSquare,
   BiSolidInbox,
   BiSolidDashboard,
-  BiSearch,
 } from "react-icons/bi";
 import SideBarOption from "./SideBarOption";
 
