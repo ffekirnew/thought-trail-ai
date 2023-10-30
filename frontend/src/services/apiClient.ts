@@ -4,7 +4,7 @@ export interface FetchResponse<T> {
   success: boolean;
   message: string;
   data: T;
-  error: any;
+  error: object;
 }
 
 class ApiClient<T> {
@@ -19,12 +19,13 @@ class ApiClient<T> {
     });
   }
 
-  getAll = async () => {
+  getAll = async (query?: object) => {
     return this.axiosInstance
       .get<FetchResponse<T[]>>(this.endpoint, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+        params: query,
       })
       .then((res) => res.data);
   };

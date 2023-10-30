@@ -18,14 +18,29 @@ import JournalListItem from "../../components/second-brain/JournalListItem";
 import JournalListItemSkeleton from "../../components/second-brain/skeletons/JournalListItemSkeleton";
 import { BiGridAlt, BiListOl, BiPlus } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
+import useJournalQueryStore from "../../state/journalQueryStore";
+import { useState } from "react";
 
 const JournalsPage = () => {
   const navigate = useNavigate();
+  const setOrdering = useJournalQueryStore((s) => s.setOrdering);
+  const setOrderBy = useJournalQueryStore((s) => s.setOrderBy);
+  const [orderingName, setOrderingName] = useState<string>("Ordering");
 
   const { data: journals, isLoading } = useGetJournals();
   const journalSkeletons = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
   ];
+
+  const setQueryParameters = (ordering: string, orderBy: string) => {
+    setOrdering(ordering);
+    setOrderBy(orderBy);
+
+    orderBy = orderBy[0] == "c" ? "Created" : "Updated";
+    ordering = ordering[0] == "a" ? "Ascending" : "Descending";
+
+    setOrderingName(`Date ${orderBy}, ${ordering}`);
+  };
 
   const onAddNewJournal = () => {
     navigate(`/everything/journals/new`);
@@ -37,13 +52,21 @@ const JournalsPage = () => {
       <Flex flexWrap={"wrap"} paddingBottom={3} gap={3}>
         <Menu>
           <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-            Order by
+            {orderingName}
           </MenuButton>
           <MenuList>
-            <MenuItem>Date Created, Ascending</MenuItem>
-            <MenuItem>Date Created, Descending</MenuItem>
-            <MenuItem>Date Updated, Ascending</MenuItem>
-            <MenuItem>Date Updated, Descending</MenuItem>
+            <MenuItem onClick={() => setQueryParameters("asc", "createdAt")}>
+              Date Created, Ascending
+            </MenuItem>
+            <MenuItem onClick={() => setQueryParameters("desc", "createdAt")}>
+              Date Created, Descending
+            </MenuItem>
+            <MenuItem onClick={() => setQueryParameters("asc", "updatedAt")}>
+              Date Updated, Ascending
+            </MenuItem>
+            <MenuItem onClick={() => setQueryParameters("desc", "updatedAt")}>
+              Date Updated, Descending
+            </MenuItem>
           </MenuList>
         </Menu>
         <Button
