@@ -75,25 +75,16 @@ const CollectionDetail = ({ collection }: Props) => {
       </Text>
       <Flex flexWrap={"wrap-reverse"} gap={3}>
         <Menu>
-          <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-            Order by
-          </MenuButton>
-          <MenuList>
-            <MenuItem>Date Created</MenuItem>
-            <MenuItem>Date Updated</MenuItem>
-          </MenuList>
-        </Menu>
-        <Menu>
-          <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-            Filter by
-          </MenuButton>
-          <MenuList>
-            <MenuItem>Tag 1</MenuItem>
-            <MenuItem>Tag 2</MenuItem>
-            <MenuItem>Tag 3</MenuItem>
-            <MenuItem>Tag 4</MenuItem>
-          </MenuList>
-        </Menu>
+            <MenuButton as={Button} rightIcon={<BsChevronDown />}>
+              Order by
+            </MenuButton>
+            <MenuList>
+              <MenuItem>Date Created, Ascending</MenuItem>
+              <MenuItem>Date Created, Descending</MenuItem>
+              <MenuItem>Date Updated, Ascending</MenuItem>
+              <MenuItem>Date Updated, Descending</MenuItem>
+            </MenuList>
+          </Menu>
         <Button
           onClick={onAddNoteToCollection}
           variant={"solid"}

@@ -11,6 +11,7 @@ import {
   BiMessageSquare,
   BiSolidInbox,
   BiSolidDashboard,
+  BiSearch,
 } from "react-icons/bi";
 import SideBarOption from "./SideBarOption";
 
@@ -54,6 +55,9 @@ const SideBar = () => {
         <Link to={"/everything/collections"}>
           <SideBarOption text="Collections" icon={<BiSolidInbox />} />
         </Link>
+        {/* <Link to={"/everything/collections"}> */}
+        {/*   <SideBarOption text="Search" icon={<BiSearch />} /> */}
+        {/* </Link> */}
       </VStack>
       <Spacer />
       <SideBarUserComponent />

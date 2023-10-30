@@ -56,7 +56,6 @@ class JournalRepository implements IJournalsRepository {
       }
 
       const journalsFilter = filter(orderBy, ordering);
-      console.log(journalsFilter);
       return user.journals
         .sort(journalsFilter)
         .map((journal) => this.toJournalEntity(journal));
