@@ -6,13 +6,16 @@ import { IJournalDocument } from "../models/journal.model";
 
 export type Ordering = "ascending" | "descending";
 export type OrderBy = "CreatedAt" | "UpdatedAt";
-const filter = (orderBy: string, ordering: string): any => {
-  let orderingType: number = ordering == "ascending" ? 1 : -1;
-
-  if (orderBy === "CreatedAt") {
-    return { createdAt: orderingType };
-  }
-  return { updatedAt: orderingType };
+const order = (
+  journals: JournalEntity[],
+  ordering: string,
+  orderBy: string,
+): any => {
+  const orderings = {
+    asc: (a: JournalEntity, b: JournalEntity) => a[orderBy].getTime() - b[orderBy].getTime(),
+    desc: (a: JournalEntity, b: JournalEntity) => b[orderBy].getTime() - a[orderBy].getTime(),
+  };
+  return journals.sort(orderings[ordering]);
 };
 
 class JournalRepository implements IJournalsRepository {
@@ -55,10 +58,12 @@ class JournalRepository implements IJournalsRepository {
         throw new Error("User not found");
       }
 
-      const journalsFilter = filter(orderBy, ordering);
-      return user.journals
-        .sort(journalsFilter)
-        .map((journal) => this.toJournalEntity(journal));
+      console.log(orderBy, ordering);
+      return order(
+        user.journals.map((journal) => this.toJournalEntity(journal)),
+        ordering,
+        orderBy,
+      );
     });
   }
 

@@ -28,14 +28,17 @@ class JournalsController {
   };
 
   getAll = async (req: Request, res: Response) => {
+    let orderings = new Set(["asc", "desc"]);
+    let orderBys = new Set(["createdAt", "updatedAt"]);
+
     const { userId } = req.body;
     const { orderBy, ordering } = req.query;
     const getAllJournalsDto = new GetAllJournalsDto(userId);
 
     const response = await this.journalsApplication.getAll(
       getAllJournalsDto,
-      orderBy.toString(),
-      ordering.toString(),
+      orderBy != undefined && orderBys.has(orderBy.toString()) ? orderBy.toString() : "createdAt",
+      ordering != undefined && orderings.has(ordering.toString()) ? ordering.toString() : "asc",
     );
     if (response.success) res.status(200).send(response);
     else res.status(400).send(response);
