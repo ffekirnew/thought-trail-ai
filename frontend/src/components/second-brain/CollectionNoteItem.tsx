@@ -36,7 +36,7 @@ const CollectionNoteItem = ({ collectionSlug, note }: Props) => {
         variant={"unstyled"}
         height={"auto"}
         textAlign={"left"}
-        onClick={() => navigate("/everything/journals/" + collectionSlug)}
+        onClick={() => navigate(`/everything/collections/${collectionSlug}/notes/${note._id}`)}
         width={"100%"}
         gap={5}
       >
